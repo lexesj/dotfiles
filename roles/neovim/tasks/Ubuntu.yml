@@ -1,4 +1,5 @@
 ---
 - name: "Ubuntu | Install"
-  ansible.builtin.package:
+  ansible.builtin.apt:
     name: neovim
+  become: true
