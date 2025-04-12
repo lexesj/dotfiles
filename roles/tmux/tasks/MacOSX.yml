@@ -1,4 +1,4 @@
 ---
-- name: "tmux | Install"
+- name: "tmux | MacOSX | Install"
   community.general.homebrew:
     name: tmux
