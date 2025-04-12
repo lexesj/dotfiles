@@ -1,4 +1,4 @@
 ---
-- name: "Chrome | Install"
+- name: "Chrome | MacOSX | Install"
   community.general.homebrew:
     name: google-chrome
