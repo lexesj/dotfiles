@@ -1,4 +1,4 @@
 ---
-- name: "VSCode | MacOSX | Install"
+- name: "MacOSX | Install"
   community.general.homebrew:
     name: visual-studio-code

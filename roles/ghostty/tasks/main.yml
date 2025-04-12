@@ -1,8 +1,8 @@
 ---
-- name: "Ghostty | Checking for Distribution Config: {{ ansible_distribution }}"
+- name: "Checking for Distribution Config: {{ ansible_distribution }}"
   ansible.builtin.stat:
     path: "{{ role_path }}/tasks/{{ ansible_distribution }}.yml"
   register: distribution_config
-- name: "Ghostty | Run tasks: {{ ansible_distribution }}"
+- name: "Run tasks: {{ ansible_distribution }}"
   ansible.builtin.include_tasks: "{{ ansible_distribution }}.yml"
   when: distribution_config.stat.exists
