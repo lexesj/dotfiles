@@ -1,0 +1,4 @@
+---
+- name: "VSCode | Install"
+  community.general.homebrew:
+    name: visual-studio-code

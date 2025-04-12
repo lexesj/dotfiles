@@ -1,4 +1,5 @@
 ---
 default_roles:
-  - zsh
   - ghostty
+  - vscode
+  - zsh
