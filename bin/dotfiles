@@ -42,3 +42,11 @@ case "$os_name" in
     exit 1
     ;;
 esac
+
+if ! [[ -d "$DOTFILES_DIR" ]]; then
+  echo "Cloning dotfiles repository..."
+  git clone --quiet https://github.com/lexesj/dotfiles.git "$DOTFILES_DIR"
+else
+  echo "Updating dotfiles repository..."
+  git  -C "$DOTFILES_DIR" pull --quiet
+fi
