@@ -2,5 +2,6 @@
 default_roles:
   - chrome
   - ghostty
+  - tmux
   - vscode
   - zsh
