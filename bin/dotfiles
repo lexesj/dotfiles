@@ -4,10 +4,29 @@ set -euo pipefail
 
 DOTFILES_DIR="$HOME/.dotfiles"
 
+function detect_os() {
+  if [[ -f /etc/os-release ]]; then
+    source /etc/os-release
+    echo "$ID"
+  else
+    echo "$(uname -s | tr '[:upper:]' '[:lower:]')"
+  fi
+}
+
 function setup_ubuntu() {
-  # TODO: Implement Ubuntu setup.
-  echo "Unsupported OS: Ubuntu"
-  exit 1
+  echo "Setting up Ubuntu..."
+  if ! [[ -x "$(command -v git)" ]]; then
+    echo "Installing git..."
+    sudo apt install git
+  fi
+
+  if ! [[ -x "$(command -v ansible)" ]]; then
+    echo "Installing ansible..."
+    sudo apt update
+    sudo apt install software-properties-common
+    sudo add-apt-repository --yes --update ppa:ansible/ansible
+    sudo apt install ansible -y
+  fi
 }
 
 function setup_macos() {
@@ -28,13 +47,13 @@ function setup_macos() {
   fi
 }
 
-os_name=$(uname -s)
+os_name=$(detect_os)
 echo "Detected OS: $os_name"
 case "$os_name" in
-Ubuntu)
+ubuntu)
   setup_ubuntu
   ;;
-Darwin)
+darwin)
   setup_macos
   ;;
 *)
