@@ -1,3 +1,44 @@
 #!/usr/bin/env bash
 
-echo "Hello world!"
+set -euo pipefail
+
+DOTFILES_DIR="$HOME/.dotfiles"
+
+function setup_ubuntu() {
+  # TODO: Implement Ubuntu setup.
+  echo "Unsupported OS: Ubuntu"
+  exit 1
+}
+
+function setup_macos() {
+  echo "Setting up MacOS..."
+  if ! [[ -x "$(command -v brew)" ]]; then
+    echo "Installing Homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  fi
+
+  if ! [[ -x "$(command -v git)" ]]; then
+    echo "Installing git..."
+    brew install git
+  fi
+
+  if ! [[ -x "$(command -v ansible)" ]]; then
+    echo "Installing ansible..."
+    brew install ansible
+  fi
+}
+
+os_name=$(uname -s)
+echo "Detected OS: $os_name"
+case "$os_name" in
+  Ubuntu)
+    setup_ubuntu
+    ;;
+  Darwin)
+    setup_macos
+    ;;
+  *)
+    echo "Unsupported OS: $os_name"
+    exit 1
+    ;;
+esac
