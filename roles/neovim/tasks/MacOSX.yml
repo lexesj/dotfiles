@@ -1,0 +1,4 @@
+---
+- name: "Neovim | MacOSX | Install"
+  community.general.homebrew:
+    name: tmux
