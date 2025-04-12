@@ -3,6 +3,17 @@
   hosts: localhost
   connection: local
   tasks:
-    - name: Print message
-      ansible.builtin.debug:
-        msg: Hello world
+    - name: "Set roles"
+      ansible.builtin.set_fact:
+        run_roles: "{{ ansible_run_tags != ['all'] and ansible_run_tags or default_roles }}"
+      tags:
+        - always
+    - name: "Run roles"
+      ansible.builtin.include_role:
+        name: "{{ item }}"
+        apply:
+          tags:
+            - "{{ item }}"
+      loop: "{{ run_roles }}"
+      tags:
+        - always
