@@ -1,0 +1,4 @@
+---
+- name: "Raycast | MacOSX | Install"
+  community.general.homebrew:
+    name: raycast
