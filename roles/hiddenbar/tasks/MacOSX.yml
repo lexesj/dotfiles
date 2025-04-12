@@ -1,0 +1,4 @@
+---
+- name: "hiddenbar | MacOSX | Install"
+  community.general.homebrew:
+    name: hiddenbar
