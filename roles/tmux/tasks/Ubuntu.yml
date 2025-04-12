@@ -1,4 +1,4 @@
 ---
-- name: "tmux | Ubuntu | Install"
+- name: "Ubuntu | Install"
   ansible.builtin.package:
     name: tmux
