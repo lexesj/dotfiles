@@ -1,0 +1,4 @@
+---
+- name: "Ghostty | Install"
+  community.general.homebrew:
+    name: ghostty
