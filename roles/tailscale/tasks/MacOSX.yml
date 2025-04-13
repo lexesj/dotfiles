@@ -1,4 +1,4 @@
 ---
 - name: "MacOSX | Install"
-  community.general.homebrew:
+  community.general.homebrew_cask:
     name: tailscale
