@@ -6,6 +6,14 @@
 - name: "Run tasks : {{ ansible_distribution }}"
   ansible.builtin.include_tasks: "{{ ansible_distribution }}.yml"
   when: distribution_config.stat.exists
+- name: "Check Oh My Zsh installation status"
+  ansible.builtin.stat:
+    path: "{{ lookup('ansible.builtin.env', 'ZSH') }}"
+  register: zsh
+- name: "Install Oh My Zsh"
+  ansible.builtin.shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  changed_when: not zsh.stat.exists
+  when: not zsh.stat.exists
 - name: "Copy .zshrc"
   ansible.builtin.copy:
     dest: "{{ ansible_user_dir }}/.zshrc"
