@@ -11,3 +11,8 @@
     dest: "{{ ansible_user_dir }}/.tmux.conf"
     src: ".tmux.conf"
     mode: "u=rw,g=r,o=r"
+- name: "Install Tmux Plugin Manager"
+  ansible.builtin.git:
+    repo: "https://github.com/tmux-plugins/tpm"
+    dest: "{{ ansible_user_dir }}/.tmux/plugins/tpm"
+    version: master
