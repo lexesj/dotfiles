@@ -14,6 +14,11 @@
   ansible.builtin.shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   changed_when: not zsh.stat.exists
   when: not zsh.stat.exists
+- name: "Install zsh-autosuggestions"
+  ansible.builtin.git:
+    repo: "https://github.com/zsh-users/zsh-autosuggestions"
+    dest: "{{ lookup('ansible.builtin.env', 'ZSH_CUSTOM') or ansible_user_dir + '/.oh-my-zsh/custom' }}/plugins/zsh-autosuggestions"
+    version: master
 - name: "Copy .zshrc"
   ansible.builtin.copy:
     dest: "{{ ansible_user_dir }}/.zshrc"
