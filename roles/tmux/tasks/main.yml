@@ -6,3 +6,8 @@
 - name: "Run tasks : {{ ansible_distribution }}"
   ansible.builtin.include_tasks: "{{ ansible_distribution }}.yml"
   when: distribution_config.stat.exists
+- name: Copy config"
+  ansible.builtin.copy:
+    dest: "{{ ansible_user_dir }}/.tmux.conf"
+    src: ".tmux.conf"
+    mode: "u=rw,g=r,o=r"
