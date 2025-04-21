@@ -6,6 +6,7 @@ default_roles:
   - hiddenbar
   - neovim
   - raycast
+  - ripgrep
   - tailscale
   - tmux
   - vscode
