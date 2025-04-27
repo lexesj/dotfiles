@@ -1,0 +1,4 @@
+---
+- name: "MacOSX | Install"
+  community.general.homebrew:
+    name: fnm
