@@ -1,6 +1,7 @@
 ---
 default_roles:
   - chrome
+  - fnm
   - fzf
   - ghostty
   - hiddenbar
@@ -11,3 +12,4 @@ default_roles:
   - tmux
   - vscode
   - zsh
+
