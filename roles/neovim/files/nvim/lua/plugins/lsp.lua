@@ -1,5 +1,3 @@
-local language_servers = { "lua_ls" }
-
 return {
   {
     "williamboman/mason.nvim",
@@ -8,16 +6,16 @@ return {
   {
     "williamboman/mason-lspconfig.nvim",
     opts = {
-      ensure_installed = { unpack(language_servers) }
+      ensure_installed = { "lua_ls", "ts_ls" },
+      handlers = {
+        function(server_name)
+          vim.lsp.enable(server_name)
+        end
+      }
     }
   },
   {
     "neovim/nvim-lspconfig",
-    init = function()
-      for _, server_name in ipairs(language_servers) do
-        vim.lsp.enable(server_name)
-      end
-    end,
     keys = {
       { "gh", vim.lsp.buf.hover, desc = "lsp hover" },
       { "gd", vim.lsp.buf.definition, desc = "lsp go to definition" },
