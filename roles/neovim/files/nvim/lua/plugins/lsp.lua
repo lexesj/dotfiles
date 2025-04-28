@@ -8,8 +8,24 @@ return {
     opts = {
       ensure_installed = { "lua_ls", "ts_ls" },
       handlers = {
-        function(server_name)
-          vim.lsp.enable(server_name)
+        vim.lsp.enable,
+        ["lua_ls"] = function()
+          vim.lsp.enable("lua_ls")
+          vim.lsp.config("lua_ls", {
+            settings = {
+              Lua = {
+                runtime = {
+                  version = "LuaJIT"
+                },
+                workspace = {
+                  checkThirdParty = false,
+                  library = {
+                    vim.env.VIMRUNTIME
+                  }
+                }
+              }
+            }
+          })
         end
       }
     }
@@ -17,11 +33,11 @@ return {
   {
     "neovim/nvim-lspconfig",
     keys = {
-      { "gh", vim.lsp.buf.hover, desc = "lsp hover" },
-      { "gd", vim.lsp.buf.definition, desc = "lsp go to definition" },
-      { "gi", vim.lsp.buf.implementation, desc = "lsp go to implementation" },
-      { "<leader>ca", vim.lsp.buf.code_action, desc = "lsp code action" },
-      { "<leader>cd", vim.diagnostic.open_float, desc = "lsp diagnostics" }
+      { "gh",         vim.lsp.buf.hover,          desc = "lsp hover" },
+      { "gd",         vim.lsp.buf.definition,     desc = "lsp go to definition" },
+      { "gi",         vim.lsp.buf.implementation, desc = "lsp go to implementation" },
+      { "<leader>ca", vim.lsp.buf.code_action,    desc = "lsp code action" },
+      { "<leader>cd", vim.diagnostic.open_float,  desc = "lsp diagnostics" }
     }
   }
 }
