@@ -1,10 +1,10 @@
 return {
   {
-    "mason/mason.nvim",
+    "mason-org/mason.nvim",
     opts = {}
   },
   {
-    "mason/mason-lspconfig.nvim",
+    "mason-org/mason-lspconfig.nvim",
     opts = {}
   },
   {
