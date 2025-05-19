@@ -1,37 +1,15 @@
 return {
   {
-    "williamboman/mason.nvim",
+    "mason/mason.nvim",
     opts = {}
   },
   {
-    "williamboman/mason-lspconfig.nvim",
-    opts = {
-      ensure_installed = { "lua_ls", "ts_ls" },
-      handlers = {
-        vim.lsp.enable,
-        ["lua_ls"] = function()
-          vim.lsp.enable("lua_ls")
-          vim.lsp.config("lua_ls", {
-            settings = {
-              Lua = {
-                runtime = {
-                  version = "LuaJIT"
-                },
-                workspace = {
-                  checkThirdParty = false,
-                  library = {
-                    vim.env.VIMRUNTIME
-                  }
-                }
-              }
-            }
-          })
-        end
-      }
-    }
+    "mason/mason-lspconfig.nvim",
+    opts = {}
   },
   {
     "neovim/nvim-lspconfig",
+    lazy = false,
     keys = {
       { "gh",         vim.lsp.buf.hover,          desc = "lsp hover" },
       { "gd",         vim.lsp.buf.definition,     desc = "lsp go to definition" },
