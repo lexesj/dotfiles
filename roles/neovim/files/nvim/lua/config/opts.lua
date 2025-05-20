@@ -10,3 +10,5 @@ vim.opt.smartindent = true
 vim.opt.clipboard = "unnamedplus"
 
 vim.updatetime = 50
+
+vim.opt.spell = true
