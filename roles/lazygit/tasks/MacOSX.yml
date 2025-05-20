@@ -1,0 +1,7 @@
+---
+- name: "MacOSX | Add tap"
+  community.general.homebrew_tap:
+    name: jesseduffield/lazygit
+- name: "MacOSX | Install"
+  community.general.homebrew:
+    name: jesseduffield/lazygit/lazygit
