@@ -1,4 +1,3 @@
-require("config.auto_format")
 require("config.diagnostic")
 require("config.opts")
 require("config.remap")
