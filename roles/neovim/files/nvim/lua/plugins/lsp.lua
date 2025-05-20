@@ -9,10 +9,6 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
-    lazy = false,
-    keys = {
-      { "gd", vim.lsp.buf.definition, desc = "lsp go to definition" },
-    },
   },
   {
     "folke/lazydev.nvim",
