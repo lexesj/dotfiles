@@ -3,7 +3,6 @@ return {
   name = "catppuccin",
   priority = 1000,
   init = function()
-    vim.cmd.colorscheme "catppuccin"
-  end
+    vim.cmd.colorscheme("catppuccin")
+  end,
 }
-
