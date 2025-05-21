@@ -6,9 +6,10 @@ return {
 		local formatters_by_ft = { lua = { "stylua" } }
 
 		local prettier_supported_file_types =
-			{ "javascript", "javascriptreact", "typescript", "typescriptreact", "css", "html", "json" }
+			{ "javascript", "javascriptreact", "typescript", "typescriptreact", "css", "html", "json", "yaml" }
+
 		for _, file_type in ipairs(prettier_supported_file_types) do
-			formatters_by_ft[file_type] = { "prettier" }
+			formatters_by_ft[file_type] = { "prettierd" }
 		end
 
 		return {
