@@ -1,5 +1,10 @@
 ---
-- name: "Ubuntu | Install"
+- name: "Ubuntu : Install"
   ansible.builtin.apt:
     name: zsh
+  become: true
+- name: "Ubuntu : Set default terminal"
+  ansible.builtin.user:
+    name: "{{ ansible_user_id }}"
+    shell: /usr/bin/zsh
   become: true

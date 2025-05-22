@@ -1,8 +1,8 @@
 ---
-- name: "MacOSX | Install"
+- name: "MacOSX : Install"
   community.general.homebrew:
     name: visual-studio-code
-- name: "MacOSX | Enable key repeating for Vim plugin"
+- name: "MacOSX : Enable key repeating for Vim plugin"
   community.general.osx_defaults:
     domain: com.microsoft.VSCode
     key: ApplePressAndHoldEnabled
