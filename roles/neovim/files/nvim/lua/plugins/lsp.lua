@@ -24,8 +24,15 @@ return {
 	{
 		"saghen/blink.cmp",
 		version = "1.*",
+		---@module 'blink.cmp'
+		---@type blink.cmp.Config
 		opts = {
 			keymap = { preset = "default" },
+			completion = {
+				documentation = { auto_show = true },
+				ghost_text = { enabled = true },
+			},
+			signature = { enabled = true },
 		},
 		opts_extend = { "sources.default" },
 	},
