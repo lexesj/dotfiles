@@ -6,14 +6,8 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
-			{
-				"mason-org/mason.nvim",
-				opts = {},
-			},
-			{
-				"mason-org/mason-lspconfig.nvim",
-				opts = {},
-			},
+			{ "mason-org/mason.nvim", opts = {} },
+			{ "mason-org/mason-lspconfig.nvim", opts = {} },
 		},
 		opts = function()
 			local default_bashls_config = require("lspconfig.configs.bashls").default_config
@@ -46,7 +40,7 @@ return {
 			},
 		},
 	},
-	{},
+	{ "mfussenegger/nvim-ansible" },
 	{
 		"saghen/blink.cmp",
 		version = "1.*",
