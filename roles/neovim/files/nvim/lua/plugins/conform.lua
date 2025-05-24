@@ -3,13 +3,26 @@ return {
 	event = { "BufWritePre" },
 	cmd = { "ConformInfo" },
 	opts = function()
-		local formatters_by_ft = { lua = { "stylua" } }
+		local formatter_file_type_map = {
+			stylua = { "lua" },
+			prettierd = {
+				"javascript",
+				"javascriptreact",
+				"typescript",
+				"typescriptreact",
+				"css",
+				"html",
+				"json",
+				"yaml",
+			},
+			shfmt = { "bash", "sh", "zsh" },
+		}
 
-		local prettier_supported_file_types =
-			{ "javascript", "javascriptreact", "typescript", "typescriptreact", "css", "html", "json", "yaml" }
-
-		for _, file_type in ipairs(prettier_supported_file_types) do
-			formatters_by_ft[file_type] = { "prettierd" }
+		local formatters_by_ft = {}
+		for formatter, file_types in pairs(formatter_file_type_map) do
+			for _, file_type in ipairs(file_types) do
+				formatters_by_ft[file_type] = { formatter }
+			end
 		end
 
 		return {
