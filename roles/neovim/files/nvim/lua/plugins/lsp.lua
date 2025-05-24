@@ -1,3 +1,7 @@
+---@class LspConfigOpts
+---@field servers table<string, vim.lsp.Config>
+---@field diagnostic vim.diagnostic.Opts
+
 return {
 	{
 		"neovim/nvim-lspconfig",
@@ -11,8 +15,26 @@ return {
 				opts = {},
 			},
 		},
-		config = function()
-			vim.diagnostic.config({ virtual_lines = { current_line = true } })
+		opts = function()
+			local default_bashls_config = require("lspconfig.configs.bashls").default_config
+			---@type LspConfigOpts
+			return {
+				servers = {
+					bashls = {
+						filetypes = vim.list_extend(default_bashls_config.filetypes, { "zsh" }),
+					},
+				},
+				diagnostic = {
+					virtual_lines = { current_line = true },
+				},
+			}
+		end,
+		---@param opts LspConfigOpts
+		config = function(_, opts)
+			vim.diagnostic.config(opts.diagnostic)
+			for server, config in pairs(opts.servers) do
+				vim.lsp.config(server, config)
+			end
 		end,
 	},
 	{
@@ -24,6 +46,7 @@ return {
 			},
 		},
 	},
+	{},
 	{
 		"saghen/blink.cmp",
 		version = "1.*",
