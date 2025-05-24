@@ -6,13 +6,13 @@ return {
 		local formatter_file_type_map = {
 			stylua = { "lua" },
 			prettierd = {
-				"javascript",
-				"javascriptreact",
-				"typescript",
-				"typescriptreact",
 				"css",
 				"html",
+				"javascript",
+				"javascriptreact",
 				"json",
+				"typescript",
+				"typescriptreact",
 				"yaml",
 			},
 			shfmt = { "bash", "sh", "zsh" },
