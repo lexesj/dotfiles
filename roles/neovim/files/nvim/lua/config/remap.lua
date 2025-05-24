@@ -9,6 +9,7 @@ vim.keymap.set("n", "<M-t>", "<C-w>+", { desc = "increase split height" })
 vim.keymap.set("n", "<M-s>", "<C-w>-", { desc = "increase split height" })
 
 -- Better movement with text overflow.
+--- @param key "j" | "k"
 local function vertial_move(key)
 	return function()
 		local count = vim.v.count
