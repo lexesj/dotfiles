@@ -11,6 +11,9 @@ return {
 				opts = {},
 			},
 		},
+		config = function()
+			vim.diagnostic.config({ virtual_lines = { current_line = true } })
+		end,
 	},
 	{
 		"folke/lazydev.nvim",
