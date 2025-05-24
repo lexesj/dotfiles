@@ -24,3 +24,7 @@ vim.opt.cursorline = true
 -- Show white space characters.
 vim.opt.list = true
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+
+-- Make splits predictable.
+vim.o.splitright = true
+vim.o.splitbelow = true
