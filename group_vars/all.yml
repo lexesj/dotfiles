@@ -12,4 +12,3 @@ default_roles:
   - tmux
   - vscode
   - zsh
-
