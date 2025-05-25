@@ -14,6 +14,7 @@ return {
 				"typescript",
 				"typescriptreact",
 				"yaml",
+				"yaml.ansible",
 			},
 			shfmt = { "bash", "sh", "zsh" },
 		}
