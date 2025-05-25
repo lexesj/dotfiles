@@ -1,6 +1,7 @@
----@class LspConfigOpts
----@field servers table<string, vim.lsp.Config>
----@field diagnostic vim.diagnostic.Opts
+---@alias LspConfigOpts {
+---  servers: table<string, vim.lsp.Config>,
+---  diagnostic: vim.diagnostic.Opts
+---}
 
 return {
 	{
@@ -54,6 +55,7 @@ return {
 				ghost_text = { enabled = true },
 			},
 			signature = { enabled = true },
+			sources = { default = { "lsp", "path", "snippets", "buffer" } },
 		},
 		opts_extend = { "sources.default" },
 	},
