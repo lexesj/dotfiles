@@ -1,7 +1,4 @@
----@alias LspConfigOpts {
----  servers: table<string, vim.lsp.Config>,
----  diagnostic: vim.diagnostic.Opts
----}
+---@alias LspConfigOpts { servers: table<string, vim.lsp.Config>, diagnostic: vim.diagnostic.Opts }
 
 return {
 	{
