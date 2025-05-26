@@ -1,10 +1,8 @@
+-- Line number settings.
 vim.opt.number = true
 vim.opt.relativenumber = true
 
-vim.opt.expandtab = true
-vim.opt.tabstop = 2
-vim.opt.softtabstop = 2
-vim.opt.shiftwidth = 2
+-- Tab settings.
 vim.opt.smartindent = true
 
 -- Global clipboard.
@@ -12,8 +10,6 @@ vim.opt.clipboard = "unnamedplus"
 
 -- Decrease update time.
 vim.opt.updatetime = 250
-
-vim.opt.spell = true
 
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = "split"
@@ -28,3 +24,6 @@ vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 -- Make splits predictable.
 vim.o.splitright = true
 vim.o.splitbelow = true
+
+-- Enable spell checking.
+vim.opt.spell = true
