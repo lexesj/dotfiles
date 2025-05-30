@@ -42,6 +42,7 @@ return {
 	{ "mfussenegger/nvim-ansible" },
 	{
 		"saghen/blink.cmp",
+		event = "InsertEnter",
 		version = "1.*",
 		---@module 'blink.cmp'
 		---@type blink.cmp.Config
