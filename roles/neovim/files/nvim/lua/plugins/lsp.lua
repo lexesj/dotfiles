@@ -57,4 +57,8 @@ return {
 		},
 		opts_extend = { "sources.default" },
 	},
+	{
+		"j-hui/fidget.nvim",
+		opts = {},
+	},
 }
