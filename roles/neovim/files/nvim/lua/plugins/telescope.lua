@@ -22,6 +22,7 @@ return {
 				{ "<leader>sh", lazy_builtin("help_tags"), desc = "[s]earch [h]elp" },
 				{ "<leader>sk", lazy_builtin("keymaps"), desc = "[s]earch [k]eymaps" },
 				{ "<leader>sf", lazy_builtin("find_files"), desc = "[s]earch [f]iles" },
+				{ "<leader>sp", lazy_builtin("git_files"), desc = "[s]earch [p]roject files" },
 				{ "<leader>ss", lazy_builtin("builtin"), desc = "[s]earch [s]elect telescope" },
 				{ "<leader>sw", lazy_builtin("grep_string"), desc = "[s]earch current [w]ord" },
 				{ "<leader>sg", lazy_builtin("live_grep"), desc = "[s]earch by [g]rep" },
