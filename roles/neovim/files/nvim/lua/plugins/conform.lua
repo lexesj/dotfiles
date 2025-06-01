@@ -30,7 +30,7 @@ return {
 		---@type conform.setupOpts
 		return {
 			formatters_by_ft = formatters_by_ft,
-			format_on_save = { timeout_ms = 2000 },
+			format_on_save = { timeout_ms = 3000 },
 		}
 	end,
 }
