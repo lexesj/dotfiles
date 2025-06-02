@@ -6,9 +6,17 @@
 - name: "Run tasks : {{ ansible_distribution }}"
   ansible.builtin.include_tasks: "{{ ansible_distribution }}.yml"
   when: distribution_config.stat.exists
-- name: "Copy config"
-  ansible.builtin.copy:
-    dest: "{{ ansible_user_dir }}/.config/"
-    src: "nvim"
-    directory_mode: "u=rwx,g=rx,o=rx"
-    mode: "u=rw,g=r,o=r"
+- name: "Check for existing config"
+  ansible.builtin.stat:
+    dest: "{{ ansible_user_dir }}/.config/nvim"
+  register: nvim_config
+- name: "Remove existing config"
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/.config/nvim"
+    state: absent
+  when: not nvim_config.stat.islnk
+- name: "Link config"
+  ansible.builtin.file:
+    src: "{{ role_path }}/files/nvim"
+    dest: "{{ ansible_user_dir }}/.config/nvim"
+    state: link
