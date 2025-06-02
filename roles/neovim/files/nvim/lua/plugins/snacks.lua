@@ -86,6 +86,13 @@ return {
 				end,
 				desc = "[f]ind in [n]eovim config",
 			},
+			{
+				"<leader>fp",
+				function()
+					Snacks.picker.projects()
+				end,
+				desc = "[f]ind [p]rojects",
+			},
 		}
 
 		local search_keymaps = {
