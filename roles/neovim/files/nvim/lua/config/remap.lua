@@ -1,6 +1,6 @@
 vim.g.mapleader = " "
 
-vim.keymap.set("n", "<leader>l", vim.cmd.Lazy, { desc = "open lazy" })
+vim.keymap.set("n", "<leader>l", vim.cmd.Lazy, { desc = "open [l]azy" })
 
 -- Change split size.
 vim.keymap.set("n", "<M-,>", "<C-w>5<", { desc = "increase split width" })
