@@ -6,11 +6,12 @@
 - name: "Run tasks : {{ ansible_distribution }}"
   ansible.builtin.include_tasks: "{{ ansible_distribution }}.yml"
   when: distribution_config.stat.exists
-- name: Copy config"
-  ansible.builtin.copy:
+- name: "Link config"
+  ansible.builtin.file:
+    src: "{{ role_path }}/files/tmux/.tmux.conf"
     dest: "{{ ansible_user_dir }}/.tmux.conf"
-    src: ".tmux.conf"
-    mode: "u=rw,g=r,o=r"
+    state: link
+    force: true
 - name: "Install Tmux Plugin Manager"
   ansible.builtin.git:
     repo: "https://github.com/tmux-plugins/tpm"
