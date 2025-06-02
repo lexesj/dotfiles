@@ -26,11 +26,19 @@ return {
 			end
 		end
 
+		---@param buffer integer Buffer to format.
+		local function format_on_save(buffer)
+			if vim.g.disable_autoformat or vim.b[buffer].disable_autoformat then
+				return
+			end
+			return { timeout_ms = 3000 }
+		end
+
 		---@module 'conform'
 		---@type conform.setupOpts
 		return {
 			formatters_by_ft = formatters_by_ft,
-			format_on_save = { timeout_ms = 3000 },
+			format_on_save = format_on_save,
 		}
 	end,
 }
