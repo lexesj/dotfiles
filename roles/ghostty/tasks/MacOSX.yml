@@ -2,17 +2,9 @@
 - name: "MacOSX : Install"
   community.general.homebrew:
     name: ghostty
-- name: "MacOSX : Check for existing config"
-  ansible.builtin.stat:
-    dest: "{{ ansible_user_dir }}/.config/ghostty"
-  register: ghostty_config
-- name: "MacOSX : Remove existing config"
-  ansible.builtin.file:
-    path: "{{ ansible_user_dir }}/.config/ghostty"
-    state: absent
-  when: not ghostty_config.stat.islnk
 - name: "MacOSX : Link config"
   ansible.builtin.file:
-    src: "{{ role_path }}/files/ghostty"
-    dest: "{{ ansible_user_dir }}/.config/ghostty"
+    src: "{{ role_path }}/files/ghostty/config"
+    dest: "{{ ansible_user_dir }}/.config/ghostty/config"
     state: link
+    force: true
