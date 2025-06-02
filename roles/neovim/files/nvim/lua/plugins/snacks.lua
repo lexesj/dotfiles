@@ -20,29 +20,72 @@ return {
 	},
 	keys = function()
 		local keymaps = {
-			-- LSP.
+			-- Most used.
 			{
-				"grd",
+				"<leader><space>",
 				function()
-					Snacks.picker.lsp_definitions()
+					Snacks.picker.smart()
 				end,
-				desc = "lsp definitions",
+				desc = "[ ] smart find files",
 			},
 			{
-				"grr",
+				"<leader>/",
 				function()
-					Snacks.picker.lsp_references()
+					Snacks.picker.grep()
 				end,
-				desc = "lsp references",
+				desc = "[/] search by grep",
 			},
 			{
-				"gri",
+				"<leader>,",
 				function()
-					Snacks.picker.lsp_implementations()
+					Snacks.picker.buffers()
 				end,
-				desc = "lsp implementations",
+				desc = "[,] search buffers",
+			},
+			{
+				"<leader>:",
+				function()
+					Snacks.picker.command_history()
+				end,
+				desc = "[:] search command history",
+			},
+			{
+				"<leader>n",
+				function()
+					Snacks.picker.notifications()
+				end,
+				desc = "search [n]otification history",
+			},
+			{
+				"<leader>e",
+				function()
+					Snacks.explorer()
+				end,
+				desc = "file [e]explorer",
+			},
+			-- Files.
+			{
+				"<leader>ff",
+				function()
+					Snacks.picker.files()
+				end,
+				desc = "[f]ind [f]iles",
+			},
+			{
+				"<leader>fn",
+				function()
+					Snacks.picker.smart({ cwd = vim.fn.stdpath("config") })
+				end,
+				desc = "[f]ind in [n]eovim config",
 			},
 			-- Search.
+			{
+				"<leader>sc",
+				function()
+					Snacks.picker.command_history()
+				end,
+				desc = "[s]earch [c]ommand history",
+			},
 			{
 				"<leader>sd",
 				function()
@@ -51,18 +94,11 @@ return {
 				desc = "[s]earch [d]iagnostics",
 			},
 			{
-				"<leader>sk",
-				function()
-					Snacks.picker.keymaps()
-				end,
-				desc = "[s]earch [k]eymaps",
-			},
-			{
 				"<leader>sf",
 				function()
 					Snacks.picker.smart()
 				end,
-				desc = "[s]earch [f]iles",
+				desc = "[f]ind [f]iles",
 			},
 			{
 				"<leader>sh",
@@ -72,40 +108,121 @@ return {
 				desc = "[s]earch [h]elp",
 			},
 			{
+				"<leader>sk",
+				function()
+					Snacks.picker.keymaps()
+				end,
+				desc = "[s]earch [k]eymaps",
+			},
+			{
+				"<leader>sp",
+				function()
+					Snacks.picker.pickers()
+				end,
+				desc = "[s]earch [p]ickers",
+			},
+			{
+				"<leader>sq",
+				function()
+					Snacks.picker.qflist()
+				end,
+				desc = "[s]earch [q]uickfix list",
+			},
+			{
+				'<leader>s"',
+				function()
+					Snacks.picker.registers()
+				end,
+				desc = "[s]earch [r]egisters",
+			},
+			-- Grep.
+			{
+				"<leader>sB",
+				function()
+					Snacks.picker.grep_buffers()
+				end,
+				desc = "grep [s]each open [B]uffers",
+			},
+			{
+				"<leader>sb",
+				function()
+					Snacks.picker.lines()
+				end,
+				desc = "[s]earch buffer lines",
+			},
+			{
 				"<leader>sg",
 				function()
 					Snacks.picker.grep()
 				end,
 				desc = "[s]earch by [g]rep",
 			},
+			-- LSP.
+			{
+				"grd",
+				function()
+					Snacks.picker.lsp_definitions()
+				end,
+				desc = "lsp [d]efinitions",
+			},
+			{
+				"gri",
+				function()
+					Snacks.picker.lsp_implementations()
+				end,
+				desc = "lsp [i]mplementations",
+			},
+			{
+				"grr",
+				function()
+					Snacks.picker.lsp_references()
+				end,
+				desc = "lsp [r]eferences",
+			},
 			{
 				"<leader>ss",
 				function()
-					Snacks.picker.pickers()
+					Snacks.picker.lsp_symbols()
 				end,
-				desc = "[s]earch [s]elect pickers",
+				desc = "[s]earch lsp [s]ymbols",
 			},
 			{
-				"<leader>sn",
+				"<leader>sS",
 				function()
-					Snacks.picker.smart({ cwd = vim.fn.stdpath("config") })
+					Snacks.picker.lsp_workspace_symbols()
 				end,
-				desc = "[s]earch [n]eovim config",
+				desc = "[s]earch workspace [S]ymbols",
+			},
+			-- Git.
+			{
+				"<leader>gg",
+				function()
+					Snacks.lazygit()
+				end,
+				desc = "open lazy[g]it",
 			},
 			-- Buffers.
-			{
-				"<leader><space>",
-				function()
-					Snacks.picker.buffers()
-				end,
-				desc = "[ ] find existing buffers",
-			},
 			{
 				"<leader>bd",
 				function()
 					Snacks.bufdelete()
 				end,
 				desc = "[b]uffer [d]elete",
+			},
+			{
+				"<leader>.",
+				function()
+					Snacks.scratch()
+				end,
+				desc = "[.] toggle scratch buffer",
+			},
+			-- Terminal.
+			{
+				"<c-_>",
+				function()
+					Snacks.terminal()
+				end,
+				desc = "[<c-_>] toggle terminal",
 			},
 		}
 
