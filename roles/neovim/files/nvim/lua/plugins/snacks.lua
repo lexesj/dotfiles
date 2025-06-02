@@ -73,6 +73,13 @@ return {
 				desc = "[f]ind [f]iles",
 			},
 			{
+				"<leader>fb",
+				function()
+					Snacks.picker.files()
+				end,
+				desc = "[f]ind files in [b]uffers",
+			},
+			{
 				"<leader>fn",
 				function()
 					Snacks.picker.smart({ cwd = vim.fn.stdpath("config") })
@@ -95,13 +102,6 @@ return {
 					Snacks.picker.diagnostics()
 				end,
 				desc = "[s]earch [d]iagnostics",
-			},
-			{
-				"<leader>sf",
-				function()
-					Snacks.picker.smart()
-				end,
-				desc = "[f]ind [f]iles",
 			},
 			{
 				"<leader>sh",
