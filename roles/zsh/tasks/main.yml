@@ -19,14 +19,24 @@
     repo: "https://github.com/zsh-users/zsh-autosuggestions"
     dest: "{{ lookup('ansible.builtin.env', 'ZSH_CUSTOM') or ansible_user_dir + '/.oh-my-zsh/custom' }}/plugins/zsh-autosuggestions"
     version: master
-- name: "Copy .zshrc"
-  ansible.builtin.copy:
+- name: "Link .zshrc"
+  ansible.builtin.file:
+    src: "{{ role_path }}/files/.zshrc"
     dest: "{{ ansible_user_dir }}/.zshrc"
-    src: ".zshrc"
-    mode: "u=rw,g=r,o=r"
-- name: "Copy config"
-  ansible.builtin.copy:
-    dest: "{{ ansible_user_dir }}/.config/"
-    src: "zsh"
-    directory_mode: "u=rwx,g=rx,o=rx"
-    mode: "u=rw,g=r,o=r"
+    state: link
+    force: true
+- name: "Check for config"
+  ansible.builtin.stat:
+    path: "{{ ansible_user_dir }}/.config/zsh"
+  register: zsh_config
+- name: "Remove existing config"
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/.config/zsh"
+    state: absent
+  when: not zsh_config.stat.islnk
+- name: "Link config"
+  ansible.builtin.file:
+    src: "{{ role_path }}/files/zsh"
+    dest: "{{ ansible_user_dir }}/.config/zsh"
+    state: link
+    force: true
