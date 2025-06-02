@@ -19,8 +19,7 @@ return {
 		statuscolumn = { enabled = true },
 	},
 	keys = function()
-		local keymaps = {
-			-- Most used.
+		local most_used_keymaps = {
 			{
 				"<leader><space>",
 				function()
@@ -63,7 +62,9 @@ return {
 				end,
 				desc = "file [e]explorer",
 			},
-			-- Files.
+		}
+
+		local find_file_keymaps = {
 			{
 				"<leader>ff",
 				function()
@@ -78,7 +79,9 @@ return {
 				end,
 				desc = "[f]ind in [n]eovim config",
 			},
-			-- Search.
+		}
+
+		local search_keymaps = {
 			{
 				"<leader>sc",
 				function()
@@ -157,7 +160,9 @@ return {
 				end,
 				desc = "[s]earch by [g]rep",
 			},
-			-- LSP.
+		}
+
+		local lsp_keymaps = {
 			{
 				"grd",
 				function()
@@ -193,7 +198,9 @@ return {
 				end,
 				desc = "[s]earch workspace [S]ymbols",
 			},
-			-- Git.
+		}
+
+		local git_keymaps = {
 			{
 				"<leader>gg",
 				function()
@@ -201,7 +208,9 @@ return {
 				end,
 				desc = "open lazy[g]it",
 			},
-			-- Buffers.
+		}
+
+		local buffer_keymaps = {
 			{
 				"<leader>bd",
 				function()
@@ -216,7 +225,9 @@ return {
 				end,
 				desc = "[.] toggle scratch buffer",
 			},
-			-- Terminal.
+		}
+
+		local terminal_keymaps = {
 			{
 				"<c-_>",
 				function()
@@ -226,6 +237,16 @@ return {
 			},
 		}
 
+		local keymaps = {}
+
+		vim.list_extend(keymaps, most_used_keymaps)
+		vim.list_extend(keymaps, find_file_keymaps)
+		vim.list_extend(keymaps, search_keymaps)
+		vim.list_extend(keymaps, lsp_keymaps)
+		vim.list_extend(keymaps, git_keymaps)
+		vim.list_extend(keymaps, buffer_keymaps)
+		vim.list_extend(keymaps, terminal_keymaps)
+
 		for _, keymap in ipairs(keymaps) do
 			keymap.desc = "snacks " .. keymap.desc
 		end
@@ -234,13 +255,13 @@ return {
 	end,
 	init = function()
 		vim.api.nvim_create_autocmd("User", {
-			group = vim.api.nvim_create_augroup("snacks-init", { clear = true }),
+			group = vim.api.nvim_create_augroup("snacks-toggles", { clear = true }),
 			pattern = "VeryLazy",
 			callback = function()
 				Snacks.toggle
 					.new({
 						id = "format_on_save",
-						name = "[t]oggle [f]ormat on save (global)",
+						name = "[f]ormat on save (global)",
 						get = function()
 							return not vim.g.disable_autoformat
 						end,
@@ -248,12 +269,12 @@ return {
 							vim.g.disable_autoformat = not state
 						end,
 					})
-					:map("<leader>tf")
+					:map("<leader>uf")
 
 				Snacks.toggle
 					.new({
 						id = "format_on_save_buffer",
-						name = "[t]oggle [f]ormat on save (buffer)",
+						name = "[f]ormat on save (buffer)",
 						get = function()
 							return not vim.b.disable_autoformat
 						end,
@@ -261,7 +282,9 @@ return {
 							vim.b.disable_autoformat = not state
 						end,
 					})
-					:map("<leader>tF")
+					:map("<leader>uF")
+
+				Snacks.toggle.option("spell", { name = "[s]pelling" }):map("<leader>us")
 			end,
 		})
 	end,
