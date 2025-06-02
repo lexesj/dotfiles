@@ -10,7 +10,7 @@ vim.keymap.set("n", "<M-s>", "<C-w>-", { desc = "increase split height" })
 
 -- Better movement with text overflow.
 --- @param key "j" | "k"
-local function vertial_move(key)
+local function vertical_move(key)
 	return function()
 		local count = vim.v.count
 		if count == 0 then
@@ -20,5 +20,5 @@ local function vertial_move(key)
 	end
 end
 
-vim.keymap.set("n", "j", vertial_move("j"), { expr = true, desc = "move vertically down" })
-vim.keymap.set("n", "k", vertial_move("k"), { expr = true, desc = "move vertically up" })
+vim.keymap.set("n", "j", vertical_move("j"), { expr = true, desc = "move vertically down" })
+vim.keymap.set("n", "k", vertical_move("k"), { expr = true, desc = "move vertically up" })
