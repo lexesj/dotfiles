@@ -1,5 +1,6 @@
 return {
 	"kevinhwang91/nvim-ufo",
+	event = { "BufReadPost", "BufWritePost", "BufNewFile" },
 	dependencies = { "kevinhwang91/promise-async" },
 	init = function()
 		vim.o.foldcolumn = "1"
