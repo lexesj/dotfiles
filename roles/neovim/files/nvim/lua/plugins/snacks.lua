@@ -232,4 +232,37 @@ return {
 
 		return keymaps
 	end,
+	init = function()
+		vim.api.nvim_create_autocmd("User", {
+			group = vim.api.nvim_create_augroup("snacks-init", { clear = true }),
+			pattern = "VeryLazy",
+			callback = function()
+				Snacks.toggle
+					.new({
+						id = "format_on_save",
+						name = "[t]oggle [f]ormat on save (global)",
+						get = function()
+							return not vim.g.disable_autoformat
+						end,
+						set = function(state)
+							vim.g.disable_autoformat = not state
+						end,
+					})
+					:map("<leader>tf")
+
+				Snacks.toggle
+					.new({
+						id = "format_on_save_buffer",
+						name = "[t]oggle [f]ormat on save (buffer)",
+						get = function()
+							return not vim.b.disable_autoformat
+						end,
+						set = function(state)
+							vim.b.disable_autoformat = not state
+						end,
+					})
+					:map("<leader>tF")
+			end,
+		})
+	end,
 }
