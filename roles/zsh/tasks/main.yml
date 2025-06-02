@@ -25,7 +25,7 @@
     dest: "{{ ansible_user_dir }}/.zshrc"
     state: link
     force: true
-- name: "Check for config"
+- name: "Check for existing config"
   ansible.builtin.stat:
     path: "{{ ansible_user_dir }}/.config/zsh"
   register: zsh_config
