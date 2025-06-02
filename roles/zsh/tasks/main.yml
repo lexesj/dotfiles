@@ -39,4 +39,3 @@
     src: "{{ role_path }}/files/zsh"
     dest: "{{ ansible_user_dir }}/.config/zsh"
     state: link
-    force: true
