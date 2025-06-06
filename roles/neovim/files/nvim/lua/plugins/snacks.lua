@@ -226,6 +226,13 @@ return {
 				desc = "[b]uffer [d]elete",
 			},
 			{
+				"<leader>bD",
+				function()
+					Snacks.bufdelete.all()
+				end,
+				desc = "[b]uffer [D]elete all",
+			},
+			{
 				"<leader>.",
 				function()
 					Snacks.scratch()
