@@ -276,7 +276,7 @@ return {
 							vim.g.disable_autoformat = not state
 						end,
 					})
-					:map("<leader>uf")
+					:map("<leader>tf")
 
 				Snacks.toggle
 					.new({
@@ -289,7 +289,7 @@ return {
 							vim.b.disable_autoformat = not state
 						end,
 					})
-					:map("<leader>uF")
+					:map("<leader>tF")
 
 				Snacks.toggle.option("spell", { name = "[s]pelling" }):map("<leader>us")
 			end,
