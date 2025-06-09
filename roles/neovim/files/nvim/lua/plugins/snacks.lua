@@ -239,6 +239,13 @@ return {
 				end,
 				desc = "[.] toggle scratch buffer",
 			},
+			{
+				"<leader>z",
+				function()
+					Snacks.zen.zoom()
+				end,
+				desc = "toggle [z]oom",
+			},
 		}
 
 		local terminal_keymaps = {
