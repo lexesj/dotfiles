@@ -43,7 +43,7 @@ return {
 		}
 	end,
 	init = function()
-		vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost", "BufNewFile" }, {
+		vim.api.nvim_create_autocmd({ "BufReadPre", "BufWritePost", "BufNewFile" }, {
 			callback = function()
 				vim.o.formatexpr = "v:lua.require('conform').formatexpr({ timeout_ms = 3000 })"
 			end,
