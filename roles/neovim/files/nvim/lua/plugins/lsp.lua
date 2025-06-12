@@ -39,7 +39,7 @@ return {
 			},
 		},
 	},
-	{ "mfussenegger/nvim-ansible" },
+	{ "mfussenegger/nvim-ansible", ft = "yaml" },
 	{
 		"saghen/blink.cmp",
 		event = "InsertEnter",
