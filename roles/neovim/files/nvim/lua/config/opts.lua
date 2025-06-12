@@ -4,6 +4,8 @@ vim.opt.relativenumber = true
 
 -- Tab settings.
 vim.opt.smartindent = true
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
 
 -- Global clipboard.
 vim.opt.clipboard = "unnamedplus"
