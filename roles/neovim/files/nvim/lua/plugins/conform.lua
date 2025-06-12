@@ -32,7 +32,10 @@ return {
 			if vim.g.disable_autoformat or vim.b[buffer].disable_autoformat then
 				return
 			end
-			return { timeout_ms = 3000 }
+			return {
+				lsp_format = "fallback",
+				timeout_ms = 3000,
+			}
 		end
 
 		---@module 'conform'
