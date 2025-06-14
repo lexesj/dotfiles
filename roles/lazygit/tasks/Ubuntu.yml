@@ -1,0 +1,20 @@
+---
+- name: "Ubuntu : Check for latest version"
+  ansible.builtin.uri:
+    url: https://api.github.com/repos/jesseduffield/lazygit/releases/latest
+  register: latest_version_response
+- name: "Ubuntu : Set latest version"
+  ansible.builtin.set_fact:
+    latest_version: "{{ latest_version_response.json.tag_name | regex_search('v([^v]*)', '\\1') | first }}"
+- name: "Ubuntu : Download latest version"
+  ansible.builtin.get_url:
+    url: "https://github.com/jesseduffield/lazygit/releases/download/v{{ latest_version }}/lazygit_{{ latest_version }}_Linux_x86_64.tar.gz"
+    dest: "/tmp/lazygit.tar.gz"
+    mode: "0644"
+  register: download_result
+- name: "Ubuntu : Extract and install binary"
+  ansible.builtin.unarchive:
+    src: "/tmp/lazygit.tar.gz"
+    dest: "/usr/local/bin"
+    remote_src: true
+  become: true
