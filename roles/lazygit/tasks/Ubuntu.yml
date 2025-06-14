@@ -11,7 +11,6 @@
     url: "https://github.com/jesseduffield/lazygit/releases/download/v{{ latest_version }}/lazygit_{{ latest_version }}_Linux_x86_64.tar.gz"
     dest: "/tmp/lazygit.tar.gz"
     mode: "0644"
-  register: download_result
 - name: "Ubuntu : Extract and install binary"
   ansible.builtin.unarchive:
     src: "/tmp/lazygit.tar.gz"
