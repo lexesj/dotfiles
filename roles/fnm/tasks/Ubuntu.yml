@@ -1,0 +1,20 @@
+---
+- name: "Ubuntu : Check for latest version"
+  ansible.builtin.uri:
+    url: https://api.github.com/repos/Schniz/fnm/releases/latest
+  register: latest_version_response
+- name: "Ubuntu : Set latest version"
+  ansible.builtin.set_fact:
+    latest_version: "{{ latest_version_response.json.tag_name }}"
+- name: "Ubuntu : Download latest version"
+  ansible.builtin.get_url:
+    url: "https://github.com/Schniz/fnm/releases/download/{{ latest_version }}/fnm-linux.zip"
+    dest: "/tmp/fnm-linux.zip"
+    mode: "0644"
+  register: download_result
+- name: "Ubuntu : Extract and install binary"
+  when: download_result.changed
+  ansible.builtin.unarchive:
+    src: "/tmp/fnm-linux.zip"
+    dest: "{{ ansible_user_dir }}/.local/share/fnm"
+    remote_src: true
