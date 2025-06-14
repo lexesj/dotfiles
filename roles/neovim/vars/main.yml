@@ -1,0 +1,2 @@
+---
+neovim_repo_path: "{{ ansible_user_dir }}/.nvim"

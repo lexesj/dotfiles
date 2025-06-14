@@ -1,5 +1,34 @@
 ---
-# - name: "Ubuntu : Install"
-#   community.general.snap:
-#     name: nvim
-#   become: true
+- name: "Ubuntu : Install dependencies"
+  ansible.builtin.apt:
+    pkg:
+      - ninja-build
+      - gettext
+      - cmake
+      - unzip
+      - curl
+  become: true
+- name: "Ubuntu : Clone Neovim repo"
+  ansible.builtin.git:
+    repo: "https://github.com/neovim/neovim"
+    dest: "{{ neovim_repo_path }}"
+    version: stable
+    force: true
+  register: git_clone
+- name: "Ubuntu: Clean, build and install"
+  when: git_clone.changed
+  block:
+    - name: "Ubuntu : Clean-up dependencies"
+      community.general.make:
+        chdir: "{{ neovim_repo_path }}"
+        target: "distclean"
+    - name: "Ubuntu : Build"
+      community.general.make:
+        chdir: "{{ neovim_repo_path }}"
+        params:
+          CMAKE_BUILD_TYPE: Release
+    - name: "Ubuntu : Install"
+      community.general.make:
+        chdir: "{{ neovim_repo_path }}"
+        target: "install"
+      become: true
