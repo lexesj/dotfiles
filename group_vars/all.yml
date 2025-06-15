@@ -10,9 +10,10 @@ default_roles:
   - neovim
   - raycast
   - ripgrep
+  - sesh
   - ssh
   - tailscale
-  - tmux/
+  - tmux
   - unzip
   - vscode
   - zoxide
