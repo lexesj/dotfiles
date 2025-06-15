@@ -4,11 +4,16 @@ default_roles:
   - fnm
   - fzf
   - ghostty
+  - git
   - hiddenbar
+  - lazygit
   - neovim
   - raycast
   - ripgrep
+  - ssh
   - tailscale
-  - tmux
+  - tmux/
+  - unzip
   - vscode
+  - zoxide
   - zsh
