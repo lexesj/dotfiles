@@ -12,6 +12,11 @@
     dest: "/tmp/fnm-linux.zip"
     mode: "0644"
   register: download_result
+- name: "Create fnm directory"
+  ansible.builtin.file:
+    path: "{{ ssh_key_path | dirname }}"
+    state: directory
+    mode: "0755"
 - name: "Ubuntu : Extract and install binary"
   when: download_result.changed
   ansible.builtin.unarchive:

@@ -20,7 +20,7 @@
     - name: "Create ssh directory"
       ansible.builtin.file:
         path: "{{ ssh_key_path | dirname }}"
-        state: "directory"
+        state: directory
         mode: "0755"
     - name: "Generate SSH key"
       community.crypto.openssh_keypair:
