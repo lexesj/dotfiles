@@ -8,6 +8,9 @@ for hook in "${ZSH_CONFIG_HOOKS[@]}"; do
 	if [[ -n $hook ]]; then
 		dir+="/$hook"
 	fi
+	if [[ ! -d "$dir" ]]; then
+		continue
+	fi
 	for file in "$dir"/*.zsh; do
 		source "$file"
 	done
