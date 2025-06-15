@@ -14,7 +14,7 @@
   ansible.builtin.file:
     path: "{{ ansible_user_dir }}/.config/nvim"
     state: absent
-  when: not nvim_config.stat.islnk
+  when: nvim_config.stat.islnk is defined and not nvim_config.stat.islnk
 - name: "Link config"
   ansible.builtin.file:
     src: "{{ role_path }}/files/nvim"
