@@ -1,0 +1,20 @@
+---
+- name: "Ubuntu : Check for latest version"
+  ansible.builtin.uri:
+    url: https://api.github.com/repos/joshmedeski/sesh/releases/latest
+  register: latest_version_response
+- name: "Ubuntu : Set latest version"
+  ansible.builtin.set_fact:
+    latest_version: "{{ latest_version_response.json.tag_name }}"
+- name: "Ubuntu : Download latest version"
+  ansible.builtin.get_url:
+    url: "https://github.com/joshmedeski/sesh/releases/download/{{ latest_version }}/sesh_Linux_x86_64.tar.gz"
+    dest: "/tmp/sesh_Linux_x86_64.tar.gz"
+    mode: "0644"
+  register: download_result
+- name: "Ubuntu : Extract and install binary"
+  ansible.builtin.unarchive:
+    src: "/tmp/sesh_Linux_x86_64.tar.gz"
+    dest: "/usr/local/bin"
+    remote_src: true
+  become: true
