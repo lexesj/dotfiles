@@ -9,11 +9,11 @@
 - name: "Ubuntu : Download latest version"
   ansible.builtin.get_url:
     url: "https://github.com/junegunn/fzf/releases/download/v{{ latest_version }}/fzf-{{ latest_version }}-linux_amd64.tar.gz"
-    dest: "/tmp/fzf.tar.gz"
+    dest: "/tmp/fzf-{{ latest_version }}.tar.gz"
     mode: "0644"
 - name: "Ubuntu : Extract and install binary"
   ansible.builtin.unarchive:
-    src: "/tmp/fzf.tar.gz"
+    src: "/tmp/fzf-{{ latest_version }}.tar.gz"
     dest: "/usr/local/bin"
     remote_src: true
   become: true
