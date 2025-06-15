@@ -9,11 +9,11 @@
 - name: "Ubuntu : Download latest version"
   ansible.builtin.get_url:
     url: "https://github.com/jesseduffield/lazygit/releases/download/v{{ latest_version }}/lazygit_{{ latest_version }}_Linux_x86_64.tar.gz"
-    dest: "/tmp/lazygit.tar.gz"
+    dest: "/tmp/lazygit-{{ latest_version }}.tar.gz"
     mode: "0644"
 - name: "Ubuntu : Extract and install binary"
   ansible.builtin.unarchive:
-    src: "/tmp/lazygit.tar.gz"
+    src: "/tmp/lazygit-{{ latest_version }}.tar.gz"
     dest: "/usr/local/bin"
     remote_src: true
   become: true
