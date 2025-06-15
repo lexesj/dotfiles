@@ -11,7 +11,6 @@
     url: "https://github.com/joshmedeski/sesh/releases/download/{{ latest_version }}/sesh_Linux_x86_64.tar.gz"
     dest: "/tmp/sesh_Linux_x86_64.tar.gz"
     mode: "0644"
-  register: download_result
 - name: "Ubuntu : Extract and install binary"
   ansible.builtin.unarchive:
     src: "/tmp/sesh_Linux_x86_64.tar.gz"
