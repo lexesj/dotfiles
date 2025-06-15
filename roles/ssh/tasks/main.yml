@@ -17,6 +17,11 @@
       ansible.builtin.pause:
         prompt: "SSH key comment [{{ ansible_user_id }}@{{ ansible_hostname }}]"
       register: ssh_key_comment
+    - name: "Create ssh directory"
+      ansible.builtin.file:
+        path: "{{ ssh_key_path | dirname }}"
+        state: "directory"
+        mode: "0755"
     - name: "Generate SSH key"
       community.crypto.openssh_keypair:
         type: "ed25519"
