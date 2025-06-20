@@ -3,6 +3,7 @@
 return {
 	{
 		"neovim/nvim-lspconfig",
+		version = "*",
 		event = { "BufReadPre", "BufWritePost", "BufNewFile" },
 		dependencies = {
 			{ "mason-org/mason.nvim", cmd = "Mason", opts = {} },
