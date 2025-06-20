@@ -1,0 +1,5 @@
+---
+- name: "Ubuntu : Install"
+  ansible.builtin.apt:
+    name: tldr
+  become: true
