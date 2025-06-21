@@ -14,15 +14,20 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Setup lazy.nvim
+-- Add LazyFile custom event.
+local Event = require("lazy.core.handler.event")
+Event.mappings.LazyFile = { id = "LazyFile", event = { "BufReadPre", "BufWritePost", "BufNewFile" } }
+Event.mappings["User LazyFile"] = Event.mappings.LazyFile
+
+-- Setup lazy.nvim.
 require("lazy").setup({
 	spec = {
-		-- import your plugins
+		-- import your plugins.
 		{ import = "plugins" },
 	},
 	-- Configure any other settings here. See the documentation for more details.
 	-- colorscheme that will be used when installing plugins.
 	install = { colorscheme = { "catppuccin" } },
-	-- automatically check for plugin updates
+	-- automatically check for plugin updates.
 	checker = { enabled = true, notify = false },
 })

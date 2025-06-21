@@ -1,6 +1,6 @@
 return {
 	"kevinhwang91/nvim-ufo",
-	event = { "BufReadPre", "BufWritePost", "BufNewFile" },
+	event = "LazyFile",
 	dependencies = { "kevinhwang91/promise-async" },
 	init = function()
 		vim.o.foldcolumn = "1"
