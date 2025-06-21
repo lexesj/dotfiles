@@ -12,7 +12,7 @@
     dest: "/tmp/fnm-{{ latest_version }}-linux.zip"
     mode: "0644"
   register: download_result
-- name: "Ubuntu: Create fnm directory"
+- name: "Ubuntu : Create fnm directory"
   ansible.builtin.file:
     path: "{{ fnm_path }}"
     state: directory
