@@ -15,7 +15,7 @@
     version: stable
     force: true
   register: git_clone
-- name: "Ubuntu: Clean, build and install"
+- name: "Ubuntu : Clean, build and install"
   when: git_clone.changed
   block:
     - name: "Ubuntu : Clean-up dependencies"
