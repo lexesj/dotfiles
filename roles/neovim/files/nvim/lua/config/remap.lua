@@ -22,3 +22,6 @@ end
 
 vim.keymap.set("n", "j", vertical_move("j"), { expr = true, desc = "move vertically down" })
 vim.keymap.set("n", "k", vertical_move("k"), { expr = true, desc = "move vertically up" })
+
+-- Clear highlights on search when pressing <Esc> in normal mode
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
