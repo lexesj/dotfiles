@@ -44,6 +44,7 @@ return {
 		---@module 'blink.cmp'
 		---@type blink.cmp.Config
 		opts = {
+			cmdline = { enabled = true },
 			keymap = { preset = "default" },
 			completion = {
 				documentation = { auto_show = true },
