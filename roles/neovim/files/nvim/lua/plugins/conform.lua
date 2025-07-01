@@ -11,11 +11,12 @@ return {
 				"javascript",
 				"javascriptreact",
 				"json",
+				"jsonc",
+				"markdown",
 				"typescript",
 				"typescriptreact",
 				"yaml",
 				"yaml.ansible",
-				"markdown",
 			},
 			shfmt = { "bash", "sh", "zsh" },
 		}
