@@ -6,8 +6,8 @@ return {
 		version = "*",
 		event = "LazyFile",
 		dependencies = {
-			{ "mason-org/mason.nvim", cmd = "Mason", opts = {} },
-			{ "mason-org/mason-lspconfig.nvim", opts = {} },
+			"mason-org/mason.nvim",
+			"mason-org/mason-lspconfig.nvim",
 		},
 		opts = function()
 			local default_bashls_config = require("lspconfig.configs.bashls").default_config
@@ -32,11 +32,14 @@ return {
 		end,
 	},
 	{
-		"folke/lazydev.nvim",
-		ft = "lua",
+		"mason-org/mason.nvim",
+		cmd = "Mason",
 		opts = {},
 	},
-	{ "mfussenegger/nvim-ansible", ft = "yaml" },
+	{
+		"mason-org/mason-lspconfig.nvim",
+		opts = {},
+	},
 	{
 		"saghen/blink.cmp",
 		event = "InsertEnter",
