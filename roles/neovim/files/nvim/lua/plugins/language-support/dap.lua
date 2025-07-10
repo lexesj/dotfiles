@@ -4,8 +4,6 @@ return {
 		depdendencies = {
 			"rcarriga/nvim-dap-ui",
 			"theHamsta/nvim-dap-virtual-text",
-			"jay-babu/mason-nvim-dap.nvim",
-			"nvim-lua/plenary.nvim",
 		},
 		keys = function()
 			-- stylua: ignore
@@ -36,8 +34,6 @@ return {
 		end,
 		config = function()
 			vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
-			local vscode = require("dap.ext.vscode")
-			vscode.json_decode = vim.json.decode
 		end,
 	},
 	{
