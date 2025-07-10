@@ -1,10 +1,7 @@
 return {
 	{
 		"mfussenegger/nvim-dap",
-		depdendencies = {
-			"rcarriga/nvim-dap-ui",
-			"theHamsta/nvim-dap-virtual-text",
-		},
+		depdendencies = { "rcarriga/nvim-dap-ui" },
 		keys = function()
 			-- stylua: ignore
 			local keymaps = {
@@ -35,11 +32,6 @@ return {
 		config = function()
 			vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
 		end,
-	},
-	{
-		"theHamsta/nvim-dap-virtual-text",
-		lazy = true,
-		opts = {},
 	},
 	{
 		"rcarriga/nvim-dap-ui",
