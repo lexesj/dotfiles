@@ -3,6 +3,7 @@ return {
 	ft = { "typescript", "javascript", "typescriptreact", "javascriptreact" },
 	config = function(plugin)
 		local dap = require("dap")
+		local vscode = require("dap.ext.vscode")
 		local adapters = { "node", "chrome" }
 
 		for _, adapter in pairs(adapters) do
@@ -27,11 +28,10 @@ return {
 					cb(native_adapter)
 				end
 			end
-		end
 
-		local vscode = require("dap.ext.vscode")
-		vscode.type_to_filetypes["node"] = plugin.ft
-		vscode.type_to_filetypes["pwa-node"] = plugin.ft
+			vscode.type_to_filetypes[adapter] = plugin.ft
+			vscode.type_to_filetypes["pwa-" .. adapter] = plugin.ft
+		end
 
 		for _, language in pairs(plugin.ft) do
 			dap.configurations[language] = {
