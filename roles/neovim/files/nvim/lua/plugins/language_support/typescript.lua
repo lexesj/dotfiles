@@ -69,12 +69,16 @@ return {
 					request = "attach",
 					name = "Attach to debugger",
 					protocol = "inspector",
+					smartStep = true,
+					skipFiles = { "<node_internals>/**", "**/node_modules/**" },
 					cwd = "${workspaceFolder}",
 				},
 				{
 					type = "chrome",
 					request = "attach",
 					name = "Attach to debugger (browser)",
+					smartStep = true,
+					skipFiles = { "<node_internals>/**", "**/node_modules/**" },
 					port = 9229,
 				},
 			}
