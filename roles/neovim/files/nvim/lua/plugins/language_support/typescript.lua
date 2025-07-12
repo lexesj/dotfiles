@@ -44,12 +44,14 @@ return {
 				},
 				{
 					type = "node",
-					request = "attach",
+					request = "launch",
 					name = "Debug test file (Jest)",
+					autoAttachChildProcesses = true,
+					skipFiles = { "<node_internals>/**", "**/node_modules/**" },
 					program = "${workspaceFolder}/node_modules/jest/bin/jest.js",
-					args = { "--verbose", "-i", "--no-cache", "--testPathPattern", "${fileBasename}" },
+					args = { "--runInBand", "--testPathPattern", "${fileBasename}" },
+					smartStep = true,
 					console = "integratedTerminal",
-					internalConsoleOptions = "neverOpen",
 					cwd = "${workspaceFolder}",
 				},
 				{
