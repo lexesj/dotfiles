@@ -4,10 +4,6 @@ return {
 	config = function(plugin)
 		local dap = require("dap")
 
-		local vscode = require("dap.ext.vscode")
-		vscode.type_to_filetypes["node"] = plugin.ft
-		vscode.type_to_filetypes["pwa-node"] = plugin.ft
-
 		dap.adapters["pwa-node"] = {
 			type = "server",
 			host = "localhost",
@@ -18,17 +14,33 @@ return {
 			},
 		}
 
+		dap.adapters["node"] = function(cb, config)
+			if config.type == "node" then
+				config.type = "pwa-node"
+			end
+			local native_adapter = dap.adapters["pwa-node"]
+			if type(native_adapter) == "function" then
+				native_adapter(cb, config)
+			else
+				cb(native_adapter)
+			end
+		end
+
+		local vscode = require("dap.ext.vscode")
+		vscode.type_to_filetypes["node"] = plugin.ft
+		vscode.type_to_filetypes["pwa-node"] = plugin.ft
+
 		for _, language in ipairs(plugin.ft) do
 			dap.configurations[language] = {
 				{
-					type = "pwa-node",
+					type = "node",
 					request = "launch",
 					name = "Launch file",
 					program = "${file}",
 					cwd = "${workspaceFolder}",
 				},
 				{
-					type = "pwa-node",
+					type = "node",
 					request = "attach",
 					name = "Attach",
 					protocol = "inspector",
