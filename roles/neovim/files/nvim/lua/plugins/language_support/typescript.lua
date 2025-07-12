@@ -46,7 +46,7 @@ return {
 					type = "node",
 					request = "attach",
 					name = "Debug test file (Jest)",
-					program = "${workspaceRoot}/node_modules/jest/bin/jest.js",
+					program = "${workspaceFolder}/node_modules/jest/bin/jest.js",
 					args = { "--verbose", "-i", "--no-cache", "--testPathPattern", "${fileBasename}" },
 					console = "integratedTerminal",
 					internalConsoleOptions = "neverOpen",
