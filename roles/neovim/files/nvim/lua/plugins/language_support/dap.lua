@@ -1,7 +1,7 @@
 return {
 	{
 		"mfussenegger/nvim-dap",
-		depdendencies = { "rcarriga/nvim-dap-ui" },
+		dependencies = { "rcarriga/nvim-dap-ui" },
 		keys = function()
 			-- stylua: ignore
 			local keymaps = {
