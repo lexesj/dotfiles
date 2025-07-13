@@ -21,11 +21,21 @@ return {
 					},
 				},
 			},
+			sources = {
+				explorer = {
+					layout = {
+						layout = {
+							position = "right",
+						},
+					},
+				},
+			},
 		},
 		quickfile = { enabled = true },
 		scope = { enabled = true },
 		scroll = { enabled = true },
 		statuscolumn = { enabled = true },
+		explorer = { enabled = true },
 	},
 	keys = function()
 		-- stylua: ignore
