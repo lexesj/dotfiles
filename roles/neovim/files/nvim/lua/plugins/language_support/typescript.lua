@@ -55,6 +55,16 @@ return {
 				{
 					type = "node",
 					request = "launch",
+					name = "Debug test file (Mocha)",
+					skipFiles = { "<node_internals>/**", "**/node_modules/**" },
+					program = "${workspaceFolder}/node_modules/mocha/bin/mocha.js",
+					args = { "--grep", "${fileBasename}" },
+					console = "integratedTerminal",
+					cwd = "${workspaceFolder}",
+				},
+				{
+					type = "node",
+					request = "launch",
 					name = "Debug test file (Vitest)",
 					skipFiles = { "<node_internals>/**", "**/node_modules/**" },
 					program = "${workspaceFolder}/node_modules/vitest/vitest.mjs",
