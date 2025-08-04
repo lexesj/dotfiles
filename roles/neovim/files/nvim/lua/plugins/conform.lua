@@ -33,9 +33,10 @@ return {
 		end
 
 		local formatter_file_type_map = {
-			stylua = { "lua" },
-			shfmt = { "bash", "sh", "zsh" },
 			prettierd = { "yaml" },
+			ruff = { "python" },
+			shfmt = { "bash", "sh", "zsh" },
+			stylua = { "lua" },
 		}
 
 		for formatter, file_types in pairs(formatter_file_type_map) do
