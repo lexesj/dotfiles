@@ -27,14 +27,15 @@ return {
 			"jsonc",
 		}
 
-		local formatters_by_ft = {}
+		local formatters_by_ft = {
+			python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
+		}
 		for _, file_type in ipairs(prettier_or_biome_filetypes) do
 			formatters_by_ft[file_type] = prettier_or_biome
 		end
 
 		local formatter_file_type_map = {
 			prettierd = { "yaml" },
-			ruff = { "python" },
 			shfmt = { "bash", "sh", "zsh" },
 			stylua = { "lua" },
 		}
