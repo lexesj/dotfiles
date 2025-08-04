@@ -1,0 +1,4 @@
+---
+- name: "MacOSX : Install pipx"
+  community.general.homebrew:
+    name: pipx
