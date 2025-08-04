@@ -47,6 +47,11 @@ function setup_macos() {
   fi
 }
 
+function setup_ansible_galaxy() {
+  echo "Setting up Ansible Galaxy roles..."
+  ansible-galaxy install -r "$DOTFILES_DIR/requirements.yml"
+}
+
 os_name=$(detect_os)
 echo "Detected OS: $os_name"
 case "$os_name" in
@@ -70,4 +75,5 @@ else
   git -C "$DOTFILES_DIR" pull --quiet
 fi
 
+setup_ansible_galaxy
 ansible-playbook "$DOTFILES_DIR/main.yml" "$@"
