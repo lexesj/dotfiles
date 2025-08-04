@@ -10,11 +10,3 @@
   community.general.pipx:
     executable: pipx
     name: uv
-- name: "Install ruff"
-  community.general.pipx:
-    executable: pipx
-    name: ruff
-- name: "Install ty"
-  community.general.pipx:
-    executable: pipx
-    name: ty
