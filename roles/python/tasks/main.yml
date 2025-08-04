@@ -6,7 +6,15 @@
 - name: "Run tasks : {{ ansible_distribution }}"
   ansible.builtin.include_tasks: "{{ ansible_distribution }}.yml"
   when: distribution_config.stat.exists
-- name: "Install poetry"
+- name: "Install uv"
   community.general.pipx:
-    name: poetry
     executable: pipx
+    name: uv
+- name: "Install ruff"
+  community.general.pipx:
+    executable: pipx
+    name: ruff
+- name: "Install ty"
+  community.general.pipx:
+    executable: pipx
+    name: ty
