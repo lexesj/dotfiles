@@ -35,7 +35,7 @@ return {
 		end
 
 		local formatter_file_type_map = {
-			prettierd = { "yaml" },
+			prettierd = { "yaml", "markdown" },
 			shfmt = { "bash", "sh", "zsh" },
 			stylua = { "lua" },
 		}
