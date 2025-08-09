@@ -32,15 +32,6 @@ return {
 		end,
 	},
 	{
-		"mason-org/mason.nvim",
-		cmd = "Mason",
-		opts = {},
-	},
-	{
-		"mason-org/mason-lspconfig.nvim",
-		opts = {},
-	},
-	{
 		"saghen/blink.cmp",
 		event = "InsertEnter",
 		version = "1.*",
