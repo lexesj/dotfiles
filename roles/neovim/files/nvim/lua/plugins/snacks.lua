@@ -88,7 +88,7 @@ return {
 		-- stylua: ignore
 		local buffer_keymaps = {
 			{ "<leader>bd", function() Snacks.bufdelete() end, desc = "[b]uffer [d]elete", },
-			{ "<leader>bD", function() Snacks.bufdelete.all() end, desc = "[b]uffer [D]elete all", },
+			{ "<leader>bD", function() Snacks.bufdelete.other() end, desc = "[b]uffer [D]elete other", },
 			{ "<leader>.", function() Snacks.scratch() end, desc = "[.] toggle scratch buffer", },
 			{ "<leader>z", function() Snacks.zen.zoom() end, desc = "toggle [z]oom", },
 		}
