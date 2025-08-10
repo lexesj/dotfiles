@@ -6,10 +6,13 @@ default_roles:
   - ghostty
   - git
   - hiddenbar
+  - karabiner
   - lazygit
   - neovim
+  - python
   - raycast
   - ripgrep
+  - scroll_reverser
   - sesh
   - ssh
   - tailscale
