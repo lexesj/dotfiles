@@ -15,5 +15,6 @@ return {
 				markdown = { "markdownlint-cli2" },
 			},
 		},
+		ft = { "markdown" },
 	},
 }
