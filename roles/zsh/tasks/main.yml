@@ -19,12 +19,6 @@
     repo: "https://github.com/zsh-users/zsh-autosuggestions"
     dest: "{{ lookup('ansible.builtin.env', 'ZSH_CUSTOM') or ansible_user_dir + '/.oh-my-zsh/custom' }}/plugins/zsh-autosuggestions"
     version: master
-- name: "Link .zshrc"
-  ansible.builtin.file:
-    src: "{{ role_path }}/files/.zshrc"
-    dest: "{{ ansible_user_dir }}/.zshrc"
-    state: link
-    force: true
 - name: "Check for existing config"
   ansible.builtin.stat:
     path: "{{ ansible_user_dir }}/.config/zsh"
@@ -44,3 +38,17 @@
     src: "{{ role_path }}/files/zsh"
     dest: "{{ ansible_user_dir }}/.config/zsh"
     state: link
+- name: "Touch .zshrc"
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/.zshrc"
+    state: touch
+    mode: "0644"
+- name: "Insert / update sourcing of .zshrc"
+  ansible.builtin.blockinfile:
+    path: "{{ ansible_user_dir }}/.zshrc"
+    append_newline: true
+    prepend_newline: true
+    block: |
+      if [[ -f {{ ansible_user_dir }}/.config/zsh/.zshrc ]]; then
+        source {{ ansible_user_dir }}/.config/zsh/.zshrc
+      fi
