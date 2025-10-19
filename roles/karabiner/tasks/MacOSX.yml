@@ -1,13 +1,19 @@
 ---
+- name: "MacOSX : Check if karabiner-elements is installed"
+  ansible.builtin.command: command -v karabiner_cli
+  register: karabiner_cli_command_check
+  changed_when: false
+  failed_when: false
 - name: "MacOSX : Prompt for sudo password"
   ansible.builtin.pause:
     prompt: "Password"
-    echo: no
+    echo: false
+  when: karabiner_cli_command_check.rc != 0
   register: sudo_password
 - name: "MacOSX : Install"
   community.general.homebrew_cask:
     name: karabiner-elements
-    sudo_password: "{{ sudo_password.user_input }}"
+    sudo_password: "{{ sudo_password.user_input | default('') }}"
 - name: "MacOSX : Create config directory"
   ansible.builtin.file:
     path: "{{ ansible_user_dir }}/.config"
