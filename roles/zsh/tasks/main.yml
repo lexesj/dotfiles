@@ -43,6 +43,8 @@
     path: "{{ ansible_user_dir }}/.zshrc"
     state: touch
     mode: "0644"
+    modification_time: preserve
+    access_time: preserve
 - name: "Insert / update sourcing of .zshrc"
   ansible.builtin.blockinfile:
     path: "{{ ansible_user_dir }}/.zshrc"
