@@ -11,7 +11,7 @@
     path: "{{ lookup('ansible.builtin.env', 'ZSH') }}"
   register: zsh
 - name: "Install Oh My Zsh"
-  ansible.builtin.shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  ansible.builtin.shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc
   changed_when: not zsh.stat.exists
   when: not zsh.stat.exists
 - name: "Install zsh-autosuggestions"
