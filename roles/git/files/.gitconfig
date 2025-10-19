@@ -1,9 +1,9 @@
 [user]
-  name = Lexes Jan Mantiquilla
-  email = mantiquillal@gmail.com
+	name = Lexes Jan Mantiquilla
+	email = mantiquillal@gmail.com
 [core]
-  longpaths = true
-  autocrlf = false
-  editor = nvim
+	longpaths = true
+	autocrlf = false
+	editor = nvim
 [push]
-  autoSetupRemote = true
+	autoSetupRemote = true
