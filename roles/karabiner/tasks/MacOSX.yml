@@ -1,7 +1,13 @@
 ---
+- name: "MacOSX : Prompt for sudo password"
+  ansible.builtin.pause:
+    prompt: "Password"
+    echo: no
+  register: sudo_password
 - name: "MacOSX : Install"
   community.general.homebrew_cask:
     name: karabiner-elements
+    sudo_password: "{{ sudo_password.user_input }}"
 - name: "MacOSX : Create config directory"
   ansible.builtin.file:
     path: "{{ ansible_user_dir }}/.config"
