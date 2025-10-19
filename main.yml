@@ -5,7 +5,7 @@
   tasks:
     - name: "Set roles"
       ansible.builtin.set_fact:
-        run_roles: "{{ ansible_run_tags != ['all'] and ansible_run_tags or default_roles }}"
+        run_roles: "{{ 'all' not in ansible_run_tags and ansible_run_tags or default_roles }}"
       tags:
         - always
     - name: "Run roles"
