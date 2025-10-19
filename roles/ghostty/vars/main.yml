@@ -1,0 +1,2 @@
+---
+ghostty_config_path: "{{ ansible_user_dir }}/.config/ghostty"
