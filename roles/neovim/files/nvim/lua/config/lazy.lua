@@ -14,21 +14,37 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Add LazyFile custom event.
-local Event = require("lazy.core.handler.event")
-Event.mappings.LazyFile = { id = "LazyFile", event = { "BufReadPre", "BufWritePost", "BufNewFile" } }
-Event.mappings["User LazyFile"] = Event.mappings.LazyFile
-
--- Setup lazy.nvim.
 require("lazy").setup({
 	spec = {
-		-- import your plugins.
+		-- add LazyVim and import its plugins
+		{ "LazyVim/LazyVim", import = "lazyvim.plugins" },
+		-- import/override with your plugins
 		{ import = "plugins" },
-		{ import = "plugins.language_support" },
 	},
-	-- Configure any other settings here. See the documentation for more details.
-	-- colorscheme that will be used when installing plugins.
-	install = { colorscheme = { "catppuccin" } },
-	-- automatically check for plugin updates.
-	checker = { enabled = true, notify = false },
+	defaults = {
+		-- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
+		-- If you know what you're doing, you can set this to `true` to have all your custom plugins lazy-loaded by default.
+		lazy = false,
+		-- It's recommended to leave version=false for now, since a lot the plugin that support versioning,
+		-- have outdated releases, which may break your Neovim install.
+		version = false, -- always use the latest git commit
+		-- version = "*", -- try installing the latest stable version for plugins that support semver
+	},
+	install = { colorscheme = { "tokyonight", "habamax" } },
+	checker = { enabled = true }, -- automatically check for plugin updates
+	performance = {
+		rtp = {
+			-- disable some rtp plugins
+			disabled_plugins = {
+				"gzip",
+				-- "matchit",
+				-- "matchparen",
+				-- "netrwPlugin",
+				"tarPlugin",
+				"tohtml",
+				"tutor",
+				"zipPlugin",
+			},
+		},
+	},
 })
