@@ -8,7 +8,7 @@
   when: distribution_config.stat.exists
 - name: "Check Oh My Zsh installation status"
   ansible.builtin.stat:
-    path: "{{ lookup('ansible.builtin.env', 'ZSH') }}"
+    path: "{{ lookup('ansible.builtin.env', 'ZSH') or ansible_user_dir + '/.oh-my-zsh' }}"
   register: zsh
 - name: "Install Oh My Zsh"
   ansible.builtin.shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc
@@ -38,13 +38,21 @@
     src: "{{ role_path }}/files/zsh"
     dest: "{{ ansible_user_dir }}/.config/zsh"
     state: link
-- name: "Touch .zshrc"
+- name: "Get status of .zshrc"
+  ansible.builtin.stat:
+    path: "~/.zshrc"
+  register: zshrc
+- name: "Remove .zshrc if it is a link"
   ansible.builtin.file:
-    path: "{{ ansible_user_dir }}/.zshrc"
-    state: touch
+    path: "~/.zshrc"
+    state: absent
+  when: zshrc.stat.islnk is defined and zshrc.stat.islnk
+- name: "Ensure .zshrc exists"
+  ansible.builtin.copy:
+    content: ""
+    dest: "{{ ansible_user_dir }}/.zshrc"
+    force: no
     mode: "0644"
-    modification_time: preserve
-    access_time: preserve
 - name: "Insert / update sourcing of .zshrc"
   ansible.builtin.blockinfile:
     path: "{{ ansible_user_dir }}/.zshrc"
