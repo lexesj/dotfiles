@@ -6,15 +6,24 @@ return {
 		opts.servers.bashls = {
 			filetypes = vim.list_extend(default_bashls_config.filetypes or {}, { "zsh" }),
 		}
-		-- Apply to ALL servers
-		opts.servers["*"] = {
-			keys = {
-				-- Disable lazyvim default keymaps for LSP
-				{ "gd", false },
-				{ "gr", false },
-				{ "gI", false },
-				{ "gy", false },
-			},
+
+		local disabled_default_keys = {
+			{ "gd", false },
+			{ "gr", false },
+			{ "gI", false },
+			{ "gy", false },
 		}
+
+		-- stylua: ignore
+		local lsp_keymaps = {
+			{ "grd", function() Snacks.picker.lsp_definitions() end, desc = "lsp [d]efinitions", },
+			{ "gri", function() Snacks.picker.lsp_implementations() end, desc = "lsp [i]mplementations", },
+			{ "grr", function() Snacks.picker.lsp_references() end, desc = "lsp [r]eferences", },
+		}
+
+		local keys = vim.list_extend(disabled_default_keys, lsp_keymaps)
+
+		-- Apply to ALL servers
+		opts.servers["*"] = { keys = keys }
 	end,
 }
