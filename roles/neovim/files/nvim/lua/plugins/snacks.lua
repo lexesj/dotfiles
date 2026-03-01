@@ -4,6 +4,14 @@ return {
 	---@type snacks.Config
 	opts = {
 		picker = {
+			sources = {
+				files = {
+					hidden = true,
+				},
+				explorer = {
+					hidden = true,
+				},
+			},
 			win = {
 				input = {
 					keys = {
