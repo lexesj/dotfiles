@@ -5,6 +5,6 @@
   become: true
 - name: "Ubuntu : Set default terminal"
   ansible.builtin.user:
-    name: "{{ ansible_user_id }}"
+    name: "{{ ansible_facts['user_id'] }}"
     shell: /usr/bin/zsh
   become: true

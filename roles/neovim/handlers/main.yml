@@ -1,0 +1,17 @@
+---
+- name: "Ubuntu : Clean, build and install"
+  block:
+    - name: "Ubuntu : Clean-up dependencies"
+      community.general.make:
+        chdir: "{{ neovim_repo_path }}"
+        target: "distclean"
+    - name: "Ubuntu : Build"
+      community.general.make:
+        chdir: "{{ neovim_repo_path }}"
+        params:
+          CMAKE_BUILD_TYPE: Release
+    - name: "Ubuntu : Install"
+      community.general.make:
+        chdir: "{{ neovim_repo_path }}"
+        target: "install"
+      become: true
