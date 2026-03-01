@@ -1,11 +1,11 @@
 ---
-- name: "Check for distribution config : {{ ansible_distribution }}"
+- name: "Check for distribution config : {{ ansible_facts['distribution'] }}"
   ansible.builtin.stat:
-    path: "{{ role_path }}/tasks/{{ ansible_distribution }}.yml"
-  register: distribution_config
-- name: "Run tasks : {{ ansible_distribution }}"
-  ansible.builtin.include_tasks: "{{ ansible_distribution }}.yml"
-  when: distribution_config.stat.exists
+    path: "{{ role_path }}/tasks/{{ ansible_facts['distribution'] }}.yml"
+  register: ssh_distribution_config
+- name: "Run tasks : {{ ansible_facts['distribution'] }}"
+  ansible.builtin.include_tasks: "{{ ansible_facts['distribution'] }}.yml"
+  when: ssh_distribution_config.stat.exists
 - name: "Check for SSH key"
   ansible.builtin.stat:
     path: "{{ ssh_key_path }}"
@@ -15,7 +15,7 @@
   block:
     - name: "Prompt for a SSH key comment"
       ansible.builtin.pause:
-        prompt: "SSH key comment [{{ ansible_user_id }}@{{ ansible_hostname }}]"
+        prompt: "SSH key comment [{{ ansible_facts['user_id'] }}@{{ ansible_facts['hostname'] }}]"
       register: ssh_key_comment
     - name: "Create ssh directory"
       ansible.builtin.file:
@@ -26,7 +26,7 @@
       community.crypto.openssh_keypair:
         type: "ed25519"
         path: "{{ ssh_key_path }}"
-        comment: "{{ ssh_key_comment.user_input | default(ansible_user_id + '@' + ansible_hostname, true) }}"
+        comment: "{{ ssh_key_comment.user_input | default(ansible_facts['user_id'] + '@' + ansible_facts['hostname'], true) }}"
     - name: "Print generated SSH public key"
       ansible.builtin.debug:
         msg: "{{ lookup('ansible.builtin.file', '{{ ssh_key_path }}.pub') }}"

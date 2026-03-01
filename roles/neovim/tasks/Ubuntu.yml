@@ -14,21 +14,5 @@
     dest: "{{ neovim_repo_path }}"
     version: stable
     force: true
-  register: git_clone
-- name: "Ubuntu : Clean, build and install"
-  when: git_clone.changed
-  block:
-    - name: "Ubuntu : Clean-up dependencies"
-      community.general.make:
-        chdir: "{{ neovim_repo_path }}"
-        target: "distclean"
-    - name: "Ubuntu : Build"
-      community.general.make:
-        chdir: "{{ neovim_repo_path }}"
-        params:
-          CMAKE_BUILD_TYPE: Release
-    - name: "Ubuntu : Install"
-      community.general.make:
-        chdir: "{{ neovim_repo_path }}"
-        target: "install"
-      become: true
+  register: neovim_git_clone
+  notify: "Ubuntu : Clean, build and install"

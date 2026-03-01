@@ -2,16 +2,16 @@
 - name: "Ubuntu : Check for latest version"
   ansible.builtin.uri:
     url: https://api.github.com/repos/Schniz/fnm/releases/latest
-  register: latest_version_response
+  register: fnm_latest_version_response
 - name: "Ubuntu : Set latest version"
   ansible.builtin.set_fact:
-    latest_version: "{{ latest_version_response.json.tag_name }}"
+    fnm_latest_version: "{{ fnm_latest_version_response.json.tag_name }}"
 - name: "Ubuntu : Download latest version"
   ansible.builtin.get_url:
-    url: "https://github.com/Schniz/fnm/releases/download/{{ latest_version }}/fnm-linux.zip"
-    dest: "/tmp/fnm-{{ latest_version }}-linux.zip"
+    url: "https://github.com/Schniz/fnm/releases/download/{{ fnm_latest_version }}/fnm-linux.zip"
+    dest: "/tmp/fnm-{{ fnm_latest_version }}-linux.zip"
     mode: "0644"
-  register: download_result
+  register: fnm_download_result
 - name: "Ubuntu : Create fnm directory"
   ansible.builtin.file:
     path: "{{ fnm_path }}"
@@ -22,8 +22,8 @@
     path: "{{ fnm_path }}/fnm"
   register: fnm_stat
 - name: "Ubuntu : Extract and install binary"
-  when: not fnm_stat.stat.exists or download_result.changed
+  when: not fnm_stat.stat.exists or fnm_download_result.changed
   ansible.builtin.unarchive:
-    src: "/tmp/fnm-{{ latest_version }}-linux.zip"
+    src: "/tmp/fnm-{{ fnm_latest_version }}-linux.zip"
     dest: "{{ fnm_path }}"
     remote_src: true

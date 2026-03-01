@@ -1,14 +1,14 @@
 ---
-- name: "Check for distribution config : {{ ansible_distribution }}"
+- name: "Check for distribution config : {{ ansible_facts['distribution'] }}"
   ansible.builtin.stat:
-    path: "{{ role_path }}/tasks/{{ ansible_distribution }}.yml"
-  register: distribution_config
-- name: "Run tasks : {{ ansible_distribution }}"
-  ansible.builtin.include_tasks: "{{ ansible_distribution }}.yml"
-  when: distribution_config.stat.exists
+    path: "{{ role_path }}/tasks/{{ ansible_facts['distribution'] }}.yml"
+  register: git_distribution_config
+- name: "Run tasks : {{ ansible_facts['distribution'] }}"
+  ansible.builtin.include_tasks: "{{ ansible_facts['distribution'] }}.yml"
+  when: git_distribution_config.stat.exists
 - name: "Link .gitconfig"
   ansible.builtin.file:
     src: "{{ role_path }}/files/.gitconfig"
-    dest: "{{ ansible_user_dir }}/.gitconfig"
+    dest: "{{ ansible_facts['user_dir'] }}/.gitconfig"
     state: link
     force: true

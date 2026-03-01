@@ -2,18 +2,18 @@
 - name: "Ubuntu : Check for latest version"
   ansible.builtin.uri:
     url: https://api.github.com/repos/junegunn/fzf/releases/latest
-  register: latest_version_response
+  register: fzf_latest_version_response
 - name: "Ubuntu : Set latest version"
   ansible.builtin.set_fact:
-    latest_version: "{{ latest_version_response.json.tag_name | regex_search('v([^v]*)', '\\1') | first }}"
+    fzf_latest_version: "{{ fzf_latest_version_response.json.tag_name | regex_search('v([^v]*)', '\\1') | first }}"
 - name: "Ubuntu : Download latest version"
   ansible.builtin.get_url:
-    url: "https://github.com/junegunn/fzf/releases/download/v{{ latest_version }}/fzf-{{ latest_version }}-linux_amd64.tar.gz"
-    dest: "/tmp/fzf-{{ latest_version }}.tar.gz"
+    url: "https://github.com/junegunn/fzf/releases/download/v{{ fzf_latest_version }}/fzf-{{ fzf_latest_version }}-linux_amd64.tar.gz"
+    dest: "/tmp/fzf-{{ fzf_latest_version }}.tar.gz"
     mode: "0644"
 - name: "Ubuntu : Extract and install binary"
   ansible.builtin.unarchive:
-    src: "/tmp/fzf-{{ latest_version }}.tar.gz"
+    src: "/tmp/fzf-{{ fzf_latest_version }}.tar.gz"
     dest: "/usr/local/bin"
     remote_src: true
   become: true

@@ -9,19 +9,19 @@
     prompt: "Password"
     echo: false
   when: karabiner_cli_command_check.rc != 0
-  register: sudo_password
+  register: karabiner_sudo_password
 - name: "MacOSX : Install"
   community.general.homebrew_cask:
     name: karabiner-elements
-    sudo_password: "{{ sudo_password.user_input | default('') }}"
+    sudo_password: "{{ karabiner_sudo_password.user_input | default('') }}"
 - name: "MacOSX : Create config directory"
   ansible.builtin.file:
-    path: "{{ ansible_user_dir }}/.config"
+    path: "{{ ansible_facts['user_dir'] }}/.config"
     state: directory
     mode: "0755"
 - name: "MacOSX : Link config"
   ansible.builtin.file:
     src: "{{ role_path }}/files/karabiner"
-    dest: "{{ ansible_user_dir }}/.config/karabiner"
+    dest: "{{ ansible_facts['user_dir'] }}/.config/karabiner"
     state: link
     force: true
