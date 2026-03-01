@@ -1,0 +1,11 @@
+---
+- name: "Ubuntu : Clean, build and install"
+  ansible.builtin.shell: |
+    make distclean
+    make CMAKE_BUILD_TYPE=Release
+    make install
+  args:
+    chdir: "{{ neovim_repo_path }}"
+    executable: /bin/bash
+  become: true
+  changed_when: true

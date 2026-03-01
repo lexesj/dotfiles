@@ -1,2 +1,2 @@
 ---
-fnm_path: "{{ ansible_user_dir }}/.local/share/fnm"
+fnm_path: "{{ ansible_facts['user_dir'] }}/.local/share/fnm"
