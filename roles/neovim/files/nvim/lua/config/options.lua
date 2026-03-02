@@ -29,3 +29,6 @@ vim.o.splitbelow = true
 
 -- Enable spell checking.
 vim.opt.spell = true
+
+-- Override default LazyVim no-wrap.
+vim.opt.wrap = true
