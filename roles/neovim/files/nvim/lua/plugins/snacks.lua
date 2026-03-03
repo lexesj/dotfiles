@@ -23,6 +23,13 @@ return {
 				},
 			},
 		},
+		input = {
+			win = {
+				keys = {
+					n_ctrl_c = { "<C-c>", { "cmp_close", "stopinsert" }, mode = { "i" }, expr = true },
+				},
+			},
+		},
 	},
 	keys = {
 		-- stylua: ignore
