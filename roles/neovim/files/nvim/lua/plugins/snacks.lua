@@ -24,4 +24,8 @@ return {
 			},
 		},
 	},
+	keys = {
+		-- stylua: ignore
+		{ "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
+	},
 }
