@@ -7,3 +7,15 @@
 - name: "Run tasks : {{ ansible_facts['distribution'] }}"
   ansible.builtin.include_tasks: "{{ ansible_facts['distribution'] }}.yml"
   when: lazygit_distribution_config.stat.exists
+
+- name: "Create lazygit config directory"
+  ansible.builtin.file:
+    path: "{{ lazygit_config_path }}"
+    state: directory
+    mode: "0755"
+- name: "Link config"
+  ansible.builtin.file:
+    src: "{{ role_path }}/files/lazygit/config.yml"
+    dest: "{{ lazygit_config_path }}/config.yml"
+    state: link
+    force: true
