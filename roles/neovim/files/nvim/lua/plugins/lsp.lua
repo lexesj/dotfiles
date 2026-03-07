@@ -1,6 +1,5 @@
 return {
 	"neovim/nvim-lspconfig",
-	opts_extend = { "servers.bashls.filetypes" },
 	---@module 'lazyvim.plugins.lsp'
 	---@type PluginLspOpts
 	opts = {
