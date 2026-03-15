@@ -13,8 +13,10 @@ if ! command -v chezmoi &> /dev/null; then
         fi
         brew install chezmoi
     elif [ "$OS" == "linux" ]; then
-        echo "Installing chezmoi to /usr/local/bin..."
-        sudo sh -c "$(curl -fsLS get.chezmoi.io)" -- -b /usr/local/bin
+        mkdir -p "$HOME/.local/bin"
+        echo "Installing chezmoi to $HOME/.local/bin..."
+        sh -c "$(curl -fsLS get.chezmoi.io)" -- -b "$HOME/.local/bin"
+        export PATH="$HOME/.local/bin:$PATH"
     else
         echo "Unsupported OS: $OS"
         exit 1
