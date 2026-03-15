@@ -23,6 +23,7 @@
 
     # macOS GUI Applications (Casks)
     darwin = [
+        "docker",
         "firefox",
         "ghostty",
         "google-chrome",
