@@ -45,9 +45,6 @@
         "git",
         "build-essential",
         "zsh",
-        "ninja-build",
-        "gettext",
-        "cmake",
         "tldr", # apt name for tlrc/tldr
     ]
 
