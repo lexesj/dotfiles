@@ -26,7 +26,7 @@ fi
 echo "Initializing chezmoi from GitHub repository..."
 chezmoi init https://github.com/lexesj/dotfiles.git --branch lexes/migrate-to-chezmoi
 
-echo "Applying configuration..."
-chezmoi apply
+echo "Updating and applying configuration..."
+chezmoi update
 
 echo "Setup complete!"
