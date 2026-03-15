@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# .tmux.conf hash: {{ include (joinPath .chezmoi.sourceDir "dot_tmux.conf") | sha256sum }}
+
+if [ -f "$HOME/.tmux/plugins/tpm/tpm" ]; then
+	echo "Installing tmux plugins..."
+	# Start tmux server in background if not running
+	tmux start-server
+	# Install plugins
+	"$HOME/.tmux/plugins/tpm/bin/install_plugins"
+fi

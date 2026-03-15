@@ -8,6 +8,11 @@
     url = "https://github.com/zsh-users/zsh-autosuggestions.git"
     refreshPeriod = "168h"
 
+[".tmux/plugins/tpm"]
+    type = "git-repo"
+    url = "https://github.com/tmux-plugins/tpm"
+    refreshPeriod = "168h"
+
 {{ if eq .chezmoi.os "linux" -}}
 {{ $fzfVersion := (gitHubLatestRelease "junegunn/fzf").TagName | trimPrefix "v" -}}
 [".local/bin/fzf"]
