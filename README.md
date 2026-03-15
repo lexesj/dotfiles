@@ -7,7 +7,7 @@ Stores my configs and setup for my developer environments.
 To set up your environment on a new machine, run the following command:
 
 ```bash
-bash -c "$(curl -fsLS https://raw.githubusercontent.com/lexesj/dotfiles/lexes/migrate-to-chezmoi/bin/setup)"
+bash -c "$(curl -fsLS https://raw.githubusercontent.com/lexesj/dotfiles/main/bin/setup)"
 ```
 
 This script will:
