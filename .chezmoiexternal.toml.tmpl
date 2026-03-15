@@ -9,32 +9,35 @@
     refreshPeriod = "168h"
 
 {{ if eq .chezmoi.os "linux" -}}
-[".local/bin/fnm"]
-    type = "archive-file"
-    url = "https://github.com/Schniz/fnm/releases/latest/download/fnm-linux.zip"
-    path = "fnm"
-    executable = true
-
+{{ $fzfVersion := (gitHubLatestRelease "junegunn/fzf").TagName | trimPrefix "v" -}}
 [".local/bin/fzf"]
     type = "archive-file"
-    url = "https://github.com/junegunn/fzf/releases/latest/download/fzf-{{ .chezmoi.os }}_{{ .chezmoi.arch }}.tar.gz"
+    url = "https://github.com/junegunn/fzf/releases/download/v{{ $fzfVersion }}/fzf-{{ $fzfVersion }}-{{ .chezmoi.os }}_{{ .chezmoi.arch }}.tar.gz"
     path = "fzf"
     executable = true
 
+[".local/bin/fnm"]
+    type = "archive-file"
+    url = "https://github.com/Schniz/fnm/releases/latest/download/fnm-{{ if eq .chezmoi.arch "amd64" }}linux{{ else }}{{ .chezmoi.arch }}{{ end }}.zip"
+    path = "fnm"
+    executable = true
+
+{{ $lazygitVersion := (gitHubLatestRelease "jesseduffield/lazygit").TagName | trimPrefix "v" -}}
 [".local/bin/lazygit"]
     type = "archive-file"
-    url = "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_{{ .chezmoi.os | title }}_{{ if eq .chezmoi.arch "amd64" }}x86_64{{ else }}{{ .chezmoi.arch }}{{ end }}.tar.gz"
+    url = "https://github.com/jesseduffield/lazygit/releases/download/v{{ $lazygitVersion }}/lazygit_{{ $lazygitVersion }}_{{ .chezmoi.os | title }}_{{ if eq .chezmoi.arch "amd64" }}x86_64{{ else }}{{ .chezmoi.arch }}{{ end }}.tar.gz"
     path = "lazygit"
     executable = true
 
+{{ $seshVersion := (gitHubLatestRelease "joshmedeski/sesh").TagName | trimPrefix "v" -}}
 [".local/bin/sesh"]
     type = "archive-file"
-    url = "https://github.com/joshmedeski/sesh/releases/latest/download/sesh_{{ .chezmoi.os | title }}_{{ if eq .chezmoi.arch "amd64" }}x86_64{{ else }}{{ .chezmoi.arch }}{{ end }}.tar.gz"
+    url = "https://github.com/joshmedeski/sesh/releases/download/v{{ $seshVersion }}/sesh_{{ .chezmoi.os | title }}_{{ if eq .chezmoi.arch "amd64" }}x86_64{{ else }}{{ .chezmoi.arch }}{{ end }}.tar.gz"
     path = "sesh"
     executable = true
 
 [".local/bin/nvim"]
     type = "archive-file"
-    url = "https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz"
-    path = "nvim-linux-x86_64/bin/nvim"
+    url = "https://github.com/neovim/neovim/releases/latest/download/nvim-linux-{{ if eq .chezmoi.arch "amd64" }}x86_64{{ else }}{{ .chezmoi.arch }}{{ end }}.tar.gz"
+    path = "nvim-linux-{{ if eq .chezmoi.arch "amd64" }}x86_64{{ else }}{{ .chezmoi.arch }}{{ end }}/bin/nvim"
 {{- end }}
