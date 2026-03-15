@@ -3,6 +3,6 @@
 # .Brewfile hash: {{ include "dot_Brewfile.tmpl" | sha256sum }}
 
 if command -v brew &> /dev/null; then
-    echo "Updating Brew bundle..."
-    brew bundle --global
+	echo "Updating Brew bundle..."
+	brew bundle --global
 fi
