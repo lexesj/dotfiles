@@ -20,4 +20,5 @@ if [ ! -f "$SSH_KEY" ]; then
 	echo "Public key (copy this to GitHub/GitLab):"
 	cat "${SSH_KEY}.pub"
 	echo "--------------------------------------------------------"
+	read -p "Press Enter to continue..."
 fi
