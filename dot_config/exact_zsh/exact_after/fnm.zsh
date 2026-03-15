@@ -7,5 +7,5 @@ if [[ -d "$fnm_path" ]]; then
 fi
 
 if [[ -x "$(command -v fnm)" ]]; then
-	eval "$(fnm env --use-on-cd --shell zsh)"
+	eval "$(fnm env --use-on-cd --shell zsh --version-file-strategy recursive)"
 fi
