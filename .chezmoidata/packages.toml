@@ -40,8 +40,6 @@
 
     # Linux-specific packages (Apt)
     linux = [
-        "unzip",
-        "curl",
         "git",
         "build-essential",
         "zsh",
