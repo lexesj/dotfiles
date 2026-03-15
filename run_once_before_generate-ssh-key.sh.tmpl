@@ -4,13 +4,16 @@ set -euo pipefail
 
 SSH_KEY="$HOME/.ssh/id_ed25519"
 
-{{- $ssh_comment := promptStringOnce . "ssh_comment" "SSH key comment" (printf "%s@%s" .chezmoi.username .chezmoi.hostname) }}
-
 if [ ! -f "$SSH_KEY" ]; then
-	echo "Generating new SSH key with comment: {{ $ssh_comment }}"
+	DEFAULT_COMMENT="{{ .chezmoi.username }}@{{ .chezmoi.hostname }}"
+	echo -n "SSH key comment [$DEFAULT_COMMENT]: "
+	read -r SSH_COMMENT
+	SSH_COMMENT=${SSH_COMMENT:-$DEFAULT_COMMENT}
+
+	echo "Generating new SSH key with comment: $SSH_COMMENT"
 	mkdir -p "$HOME/.ssh"
 	chmod 700 "$HOME/.ssh"
-	ssh-keygen -t ed25519 -C "{{ $ssh_comment }}" -f "$SSH_KEY" -N ""
+	ssh-keygen -t ed25519 -C "$SSH_COMMENT" -f "$SSH_KEY" -N ""
 
 	echo "--------------------------------------------------------"
 	echo "SSH key generated successfully!"
