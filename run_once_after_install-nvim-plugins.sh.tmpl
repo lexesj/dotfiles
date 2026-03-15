@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# .config/nvim hash: {{ (glob (joinPath .chezmoi.sourceDir "dot_config/exact_nvim/**")) | sha256sum }}
-
 if command -v nvim &> /dev/null; then
 	echo "Installing Neovim plugins..."
 	nvim --headless "+Lazy! sync" +qa
