@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# Define markers for the managed block
+MARKER_BEGIN="# BEGIN CHEZMOI MANAGED BLOCK"
+MARKER_END="# END CHEZMOI MANAGED BLOCK"
+
+# Define the content for the managed block
+# Use standard shell logic for OS detection
+OS=$(uname | tr '[:upper:]' '[:lower:]')
+ZSHRC_CONTENT=""
+if [[ "$OS" == "darwin" ]]; then
+	ZSHRC_CONTENT+='eval "$(/opt/homebrew/bin/brew shellenv)"
+'
+fi
+
+ZSHRC_CONTENT+='
+# Source your custom zsh config
+if [[ -f "$HOME/.config/zsh/.zshrc" ]]; then
+	source "$HOME/.config/zsh/.zshrc"
+fi'
+
+ZSHRC="$HOME/.zshrc"
+
+# Ensure .zshrc exists
+touch "$ZSHRC"
+
+# Create the full block to be inserted
+FULL_BLOCK="$MARKER_BEGIN
+$ZSHRC_CONTENT
+$MARKER_END"
+
+# Export variables for perl to use
+export MARKER_BEGIN MARKER_END FULL_BLOCK
+
+# Use perl for cross-platform block replacement
+if grep -q "$MARKER_BEGIN" "$ZSHRC"; then
+	echo "Updating existing chezmoi block in .zshrc..."
+	# Replace everything between the markers, including the markers themselves
+	perl -i -0777 -pe 's/\Q$ENV{MARKER_BEGIN}\E.*?\Q$ENV{MARKER_END}\E/$ENV{FULL_BLOCK}/s' "$ZSHRC"
+else
+	echo "Appending new chezmoi block to .zshrc..."
+	# Append the block to the end of the file
+	{
+		echo ""
+		echo "$FULL_BLOCK"
+	} >> "$ZSHRC"
+fi
+
+chmod 644 "$ZSHRC"
