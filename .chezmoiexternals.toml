@@ -1,3 +1,13 @@
+[".oh-my-zsh"]
+    type = "git-repo"
+    url = "https://github.com/ohmyzsh/ohmyzsh.git"
+    refreshPeriod = "168h"
+
+[".oh-my-zsh/custom/plugins/zsh-autosuggestions"]
+    type = "git-repo"
+    url = "https://github.com/zsh-users/zsh-autosuggestions.git"
+    refreshPeriod = "168h"
+
 {{ if eq .chezmoi.os "linux" -}}
 [".local/bin/fnm"]
     type = "archive-file"
