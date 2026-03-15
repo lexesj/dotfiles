@@ -2,15 +2,27 @@
 
 set -euo pipefail
 
+OS="$(uname -s | tr '[:upper:]' '[:lower:]')"
+
 if ! command -v chezmoi &> /dev/null; then
     echo "Installing chezmoi..."
-    sh -c "$(curl -fsSL https://chezmoi.io/get)" -- -b "$HOME/.local/bin"
-    export PATH="$HOME/.local/bin:$PATH"
+    if [ "$OS" == "darwin" ]; then
+        if ! command -v brew &> /dev/null; then
+            echo "Homebrew is required on macOS. Please install it first: https://brew.sh/"
+            exit 1
+        fi
+        brew install chezmoi
+    elif [ "$OS" == "linux" ]; then
+        echo "Installing chezmoi to /usr/local/bin..."
+        sudo sh -c "$(curl -fsLS get.chezmoi.io)" -- -b /usr/local/bin
+    else
+        echo "Unsupported OS: $OS"
+        exit 1
+    fi
 fi
 
-echo "Initializing chezmoi from $(pwd)..."
-# Use the current directory as the source for chezmoi
-chezmoi init --source="$(pwd)"
+echo "Initializing chezmoi from GitHub repository..."
+chezmoi init https://github.com/lexesj/dotfiles.git
 
 echo "Applying configuration..."
 chezmoi apply
