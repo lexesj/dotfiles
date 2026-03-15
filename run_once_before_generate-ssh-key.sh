@@ -5,7 +5,7 @@ set -euo pipefail
 SSH_KEY="$HOME/.ssh/id_ed25519"
 
 if [ ! -f "$SSH_KEY" ]; then
-	DEFAULT_COMMENT="{{ .chezmoi.username }}@{{ .chezmoi.hostname }}"
+	DEFAULT_COMMENT="$(whoami)@$(hostname)"
 	echo -n "SSH key comment [$DEFAULT_COMMENT]: "
 	read -r SSH_COMMENT
 	SSH_COMMENT=${SSH_COMMENT:-$DEFAULT_COMMENT}
