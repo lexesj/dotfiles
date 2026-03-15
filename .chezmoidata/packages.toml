@@ -1,0 +1,54 @@
+[packages]
+    # Packages for both macOS (Brew) and Linux (Apt)
+    # Note: On Linux, some of these might be installed via other means (externals)
+    # but we'll try to use apt for as many as possible.
+    common = [
+        "pipx",
+        "ripgrep",
+        "tmux",
+        "zoxide",
+    ]
+
+    # Homebrew-only (common CLI tools not available/preferred via apt on Linux)
+    brew_only = [
+        "fnm",
+        "fzf",
+        "gh",
+        "git-delta",
+        "lazygit",
+        "neovim",
+        "sesh",
+        "tlrc",
+    ]
+
+    # macOS GUI Applications (Casks)
+    darwin = [
+        "docker",
+        "firefox",
+        "ghostty",
+        "google-chrome",
+        "hiddenbar",
+        "karabiner-elements",
+        "nordvpn",
+        "qbittorrent",
+        "raycast",
+        "scroll-reverser",
+        "tailscale-app",
+        "visual-studio-code",
+        "vlc",
+        "zoom",
+    ]
+
+    # Linux-specific packages (Apt)
+    linux = [
+        "unzip",
+        "git",
+        "build-essential",
+        "zsh",
+        "tldr", # apt name for tlrc/tldr
+    ]
+
+    # Python packages (Pipx)
+    python = [
+        "uv",
+    ]

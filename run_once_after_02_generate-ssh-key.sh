@@ -1,0 +1,24 @@
+#!/bin/bash
+
+set -euo pipefail
+
+SSH_KEY="$HOME/.ssh/id_ed25519"
+
+if [ ! -f "$SSH_KEY" ]; then
+	DEFAULT_COMMENT="$(whoami)@$(hostname)"
+	echo -n "SSH key comment [$DEFAULT_COMMENT]: "
+	read -r SSH_COMMENT
+	SSH_COMMENT=${SSH_COMMENT:-$DEFAULT_COMMENT}
+
+	echo "Generating new SSH key with comment: $SSH_COMMENT"
+	mkdir -p "$HOME/.ssh"
+	chmod 700 "$HOME/.ssh"
+	ssh-keygen -t ed25519 -C "$SSH_COMMENT" -f "$SSH_KEY" -N ""
+
+	echo "--------------------------------------------------------"
+	echo "SSH key generated successfully!"
+	echo "Public key (copy this to GitHub/GitLab):"
+	cat "${SSH_KEY}.pub"
+	echo "--------------------------------------------------------"
+	read -p "Press Enter to continue..."
+fi

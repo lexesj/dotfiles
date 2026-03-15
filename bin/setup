@@ -1,0 +1,32 @@
+#!/bin/bash
+
+set -euo pipefail
+
+OS="$(uname -s | tr '[:upper:]' '[:lower:]')"
+
+if ! command -v chezmoi &> /dev/null; then
+    echo "Installing chezmoi..."
+    if [ "$OS" == "darwin" ]; then
+        if ! command -v brew &> /dev/null; then
+            echo "Homebrew is required on macOS. Please install it first: https://brew.sh/"
+            exit 1
+        fi
+        brew install chezmoi
+    elif [ "$OS" == "linux" ]; then
+        mkdir -p "$HOME/.local/bin"
+        echo "Installing chezmoi to $HOME/.local/bin..."
+        sh -c "$(curl -fsLS get.chezmoi.io)" -- -b "$HOME/.local/bin"
+        export PATH="$HOME/.local/bin:$PATH"
+    else
+        echo "Unsupported OS: $OS"
+        exit 1
+    fi
+fi
+
+echo "Initializing chezmoi from GitHub repository..."
+chezmoi init https://github.com/lexesj/dotfiles.git --branch lexes/migrate-to-chezmoi
+
+echo "Updating and applying configuration..."
+chezmoi update
+
+echo "Setup complete!"
