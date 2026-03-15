@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Define the block we want to ensure is in .zshrc
+ZSHRC_BLOCK='
+# Added by chezmoi
+{{ if eq .chezmoi.os "darwin" -}}
+eval "$(/opt/homebrew/bin/brew shellenv)"
+{{- end }}
+
+# Source your custom zsh config
+if [[ -f "$HOME/.config/zsh/.zshrc" ]]; then
+	source "$HOME/.config/zsh/.zshrc"
+fi
+'
+
+# Check if the block is already in .zshrc
+if ! grep -q "Added by chezmoi" "$HOME/.zshrc" 2>/dev/null; then
+	echo "Appending chezmoi block to .zshrc..."
+	echo "$ZSHRC_BLOCK" >> "$HOME/.zshrc"
+else
+	echo "chezmoi block already exists in .zshrc."
+fi
