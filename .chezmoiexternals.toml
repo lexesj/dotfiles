@@ -22,4 +22,9 @@
     url = "https://github.com/joshmedeski/sesh/releases/latest/download/sesh_{{ .chezmoi.os | title }}_{{ if eq .chezmoi.arch "amd64" }}x86_64{{ else }}{{ .chezmoi.arch }}{{ end }}.tar.gz"
     path = "sesh"
     executable = true
+
+[".local/bin/nvim"]
+    type = "archive-file"
+    url = "https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz"
+    path = "nvim-linux-x86_64/bin/nvim"
 {{- end }}
