@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# .zshrc hash: {{ if stat (joinPath .chezmoi.homeDir ".zshrc") }}{{ include (joinPath .chezmoi.homeDir ".zshrc") | sha256sum }}{{ else }}none{{ end }}
+
 # Define markers for the managed block
 MARKER_BEGIN="# BEGIN CHEZMOI MANAGED BLOCK"
 MARKER_END="# END CHEZMOI MANAGED BLOCK"
