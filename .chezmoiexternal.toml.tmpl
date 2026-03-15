@@ -37,7 +37,7 @@
     executable = true
 
 [".local/bin/nvim"]
-    type = "archive-file"
-    url = "https://github.com/neovim/neovim/releases/latest/download/nvim-linux-{{ if eq .chezmoi.arch "amd64" }}x86_64{{ else }}{{ .chezmoi.arch }}{{ end }}.tar.gz"
-    path = "nvim-linux-{{ if eq .chezmoi.arch "amd64" }}x86_64{{ else }}{{ .chezmoi.arch }}{{ end }}/bin/nvim"
+    type = "file"
+    url = "https://github.com/neovim/neovim/releases/latest/download/nvim-linux-{{ if eq .chezmoi.arch "amd64" }}x86_64{{ else }}{{ .chezmoi.arch }}{{ end }}.appimage"
+    executable = true
 {{- end }}
