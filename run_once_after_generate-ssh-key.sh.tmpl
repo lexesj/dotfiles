@@ -1,0 +1,20 @@
+#!/bin/bash
+
+set -euo pipefail
+
+SSH_KEY="$HOME/.ssh/id_ed25519"
+
+{{- $ssh_comment := promptStringOnce . "ssh_comment" "SSH key comment" (printf "%s@%s" .chezmoi.username .chezmoi.hostname) }}
+
+if [ ! -f "$SSH_KEY" ]; then
+	echo "Generating new SSH key with comment: {{ $ssh_comment }}"
+	mkdir -p "$HOME/.ssh"
+	chmod 700 "$HOME/.ssh"
+	ssh-keygen -t ed25519 -C "{{ $ssh_comment }}" -f "$SSH_KEY" -N ""
+
+	echo "--------------------------------------------------------"
+	echo "SSH key generated successfully!"
+	echo "Public key (copy this to GitHub/GitLab):"
+	cat "${SSH_KEY}.pub"
+	echo "--------------------------------------------------------"
+fi
