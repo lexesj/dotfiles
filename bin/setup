@@ -1,0 +1,18 @@
+#!/bin/bash
+
+set -euo pipefail
+
+if ! command -v chezmoi &> /dev/null; then
+    echo "Installing chezmoi..."
+    sh -c "$(curl -fsSL https://chezmoi.io/get)" -- -b "$HOME/.local/bin"
+    export PATH="$HOME/.local/bin:$PATH"
+fi
+
+echo "Initializing chezmoi from $(pwd)..."
+# Use the current directory as the source for chezmoi
+chezmoi init --source="$(pwd)"
+
+echo "Applying configuration..."
+chezmoi apply
+
+echo "Setup complete!"

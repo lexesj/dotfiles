@@ -1,2 +1,4 @@
 .ansible
 .vscode
+.chezmoistate.db
+.chezmoidata.toml

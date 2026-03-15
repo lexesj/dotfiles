@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# .Brewfile hash: {{ include "dot_Brewfile.tmpl" | sha256sum }}
+
+if command -v brew &> /dev/null; then
+    echo "Updating Brew bundle..."
+    brew bundle --global --file=$HOME/.Brewfile
+fi

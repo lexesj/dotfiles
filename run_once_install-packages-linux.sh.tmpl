@@ -1,0 +1,8 @@
+#!/bin/bash
+
+{{ if eq .chezmoi.os "linux" -}}
+# This script will run on Linux
+# Update apt and install essential packages
+sudo apt update
+sudo apt install -y unzip curl git build-essential
+{{- end }}

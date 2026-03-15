@@ -1,0 +1,25 @@
+{{ if eq .chezmoi.os "linux" -}}
+[".local/bin/fnm"]
+    type = "archive-file"
+    url = "https://github.com/Schniz/fnm/releases/latest/download/fnm-linux.zip"
+    path = "fnm"
+    executable = true
+
+[".local/bin/fzf"]
+    type = "archive-file"
+    url = "https://github.com/junegunn/fzf/releases/latest/download/fzf-{{ .chezmoi.os }}_{{ .chezmoi.arch }}.tar.gz"
+    path = "fzf"
+    executable = true
+
+[".local/bin/lazygit"]
+    type = "archive-file"
+    url = "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_{{ .chezmoi.os | title }}_{{ if eq .chezmoi.arch "amd64" }}x86_64{{ else }}{{ .chezmoi.arch }}{{ end }}.tar.gz"
+    path = "lazygit"
+    executable = true
+
+[".local/bin/sesh"]
+    type = "archive-file"
+    url = "https://github.com/joshmedeski/sesh/releases/latest/download/sesh_{{ .chezmoi.os | title }}_{{ if eq .chezmoi.arch "amd64" }}x86_64{{ else }}{{ .chezmoi.arch }}{{ end }}.tar.gz"
+    path = "sesh"
+    executable = true
+{{- end }}

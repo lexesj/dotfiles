@@ -1,11 +1,24 @@
 # dotfiles
 
-Stores my configs and setup for my developer environments.
+Stores my configs and setup for my developer environments, now managed with **chezmoi**.
 
 ## Usage
 
-Run the following to run `dotfiles` script. This will also add the `dotfiles` script into your `$PATH` after installation and can be used to trigger the ansible playbook to keep the developer environment up to date.
+Run the following to set up your environment:
 
 ```bash
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/lexesj/dotfiles/main/bin/dotfiles)"
+./bin/setup
 ```
+
+This will:
+- Install `chezmoi` if it's not already installed.
+- Initialize `chezmoi` using the current directory as the source.
+- Apply the configuration, which includes:
+    - Installing Homebrew packages and casks on macOS.
+    - Downloading and installing essential binaries on Linux (Ubuntu).
+    - Linking and templating your configuration files (Neovim, Zsh, Git, etc.).
+
+## Requirements
+- `curl`
+- `git`
+- `brew` (for macOS)

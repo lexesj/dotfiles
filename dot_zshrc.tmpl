@@ -1,0 +1,10 @@
+# .zshrc
+{{ if eq .chezmoi.os "darwin" -}}
+# macOS specifics
+eval "$(/opt/homebrew/bin/brew shellenv)"
+{{- end }}
+
+# Source your custom zsh config
+if [[ -f "$HOME/.config/zsh/.zshrc" ]]; then
+    source "$HOME/.config/zsh/.zshrc"
+fi
