@@ -24,7 +24,7 @@ if ! command -v chezmoi &> /dev/null; then
 fi
 
 echo "Initializing chezmoi from GitHub repository..."
-chezmoi init https://github.com/lexesj/dotfiles.git
+chezmoi init https://github.com/lexesj/dotfiles.git --branch lexes/migrate-to-chezmoi
 
 echo "Applying configuration..."
 chezmoi apply
