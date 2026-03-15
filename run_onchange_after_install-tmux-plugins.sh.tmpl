@@ -7,4 +7,7 @@ TPM_DIR="$HOME/.tmux/plugins/tpm"
 if [[ -d "$TPM_DIR" ]]; then
 	echo "Installing tmux plugins..."
 	"$TPM_DIR/bin/install_plugins"
+else
+	echo "tmux plugin manager (tpm) not found at $TPM_DIR. Skipping tmux plugin installation."
+	return 1
 fi
