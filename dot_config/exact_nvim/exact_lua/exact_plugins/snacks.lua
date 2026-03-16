@@ -34,6 +34,6 @@ return {
 	-- stylua: ignore
 	keys = {
 		{ "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
-		{ "<leader>bD", function() Snacks.bufdelete() end, desc = "Delete other buffers", },
+		{ "<leader>bD", function() Snacks.bufdelete.other() end, desc = "Delete other buffers", },
 	},
 }
