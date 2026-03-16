@@ -1,4 +1,5 @@
 bin/
+scripts/
 
 # Git repo files.
 LICENSE
@@ -15,7 +16,17 @@ README.md
 
 # Personal configs.
 .gitconfig
+
+{{ if ne .chezmoi.os "linux" }}
+# Bash configs.
+run_onchange_setup-bashrc.sh
+.config/bash/
+{{ end }}
+
 {{ else }}
+# Work scripts.
+run_onchange_setup-bashrc.sh
+
 # Work configs.
 .claude/
 .config/bash/
