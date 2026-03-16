@@ -21,11 +21,13 @@ url = "https://github.com/junegunn/fzf/releases/download/v{{ $fzfVersion }}/fzf-
 path = "fzf"
     executable = true
 
+{{ if not .is_work -}}
 [".local/bin/fnm"]
 type = "archive-file"
 url = "https://github.com/Schniz/fnm/releases/latest/download/fnm-{{ if eq .chezmoi.arch "amd64" }}linux{{ else }}{{ .chezmoi.arch }}{{ end }}.zip"
 path = "fnm"
     executable = true
+{{- end }}
 
 {{ $lazygitVersion := (gitHubLatestRelease "jesseduffield/lazygit").TagName | trimPrefix "v" -}}
 [".local/bin/lazygit"]

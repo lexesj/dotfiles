@@ -1,8 +1,0 @@
-bin/
-
-# Git repo files.
-LICENSE
-README.md
-
-# Neovim files.
-.config/nvim/lazy-lock.json

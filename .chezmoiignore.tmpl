@@ -1,0 +1,17 @@
+bin/
+
+# Git repo files.
+LICENSE
+README.md
+
+# Neovim files.
+.config/nvim/lazy-lock.json
+
+{{ if .is_work }}
+# Scripts.
+run_once_after_00-setup-node.sh
+run_once_after_02_generate-ssh-key.sh
+
+# Git config.
+dot_gitconfig.tmpl
+{{ end }}
