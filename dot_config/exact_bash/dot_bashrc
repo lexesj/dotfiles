@@ -1,0 +1,12 @@
+# Claude code.
+export CLAUDE_CODE_EFFORT_LEVEL=high
+export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1
+
+# Vim.
+export EDITOR=nvim
+set -o vi
+
+# Zoxide.
+if [[ -x $(command -v zoxide) ]]; then
+    eval "$(zoxide init --cmd cd bash)"
+fi

@@ -8,17 +8,16 @@ README.md
 .config/nvim/lazy-lock.json
 
 {{ if .is_work }}
-# Scripts.
+# Personal scripts.
 00-setup-node.sh
 02-generate-ssh-key.sh
 01-install-python-packages.sh
 
-# Git config.
+# Personal configs.
 .gitconfig
 {{ else }}
-# Work claude config.
+# Work configs.
 .claude/
-
-# Work nvim plugins config.
+.config/bash/
 .config/nvim/lua/plugins/stripe/
 {{ end }}
