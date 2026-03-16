@@ -7,15 +7,7 @@ MARKER_BEGIN="# BEGIN CHEZMOI MANAGED BLOCK"
 MARKER_END="# END CHEZMOI MANAGED BLOCK"
 
 # Define the content for the managed block
-# Use standard shell logic for OS detection
-OS=$(uname | tr '[:upper:]' '[:lower:]')
-ZSHRC_CONTENT=""
-if [[ "$OS" == "darwin" ]]; then
-	ZSHRC_CONTENT+='eval "$(/opt/homebrew/bin/brew shellenv)"
-'
-fi
-
-ZSHRC_CONTENT+='
+ZSHRC_CONTENT='
 if [[ -f "$HOME/.config/zsh/.zshrc" ]]; then
 	source "$HOME/.config/zsh/.zshrc"
 fi'
