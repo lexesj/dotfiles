@@ -30,9 +30,9 @@ personal = [
 
 # Linux packages (apt install)
 [packages.linux]
-common = ["build-essential", "fd-find", "git", "tldr", "unzip", "zsh"]
+common = ["fd-find", "unzip"]
 work = []
-personal = []
+personal = ["build-essential", "tldr", "zsh"]
 
 # Python packages (pipx install)
 [packages.python]
