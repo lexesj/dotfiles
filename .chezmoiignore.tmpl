@@ -19,13 +19,13 @@ README.md
 
 {{ if ne .chezmoi.os "linux" }}
 # Bash configs.
-run_onchange_setup-bashrc.sh
+setup-bashrc.sh
 .config/bash/
 {{ end }}
 
 {{ else }}
 # Work scripts.
-run_onchange_setup-bashrc.sh
+setup-bashrc.sh
 
 # Work configs.
 .claude/
