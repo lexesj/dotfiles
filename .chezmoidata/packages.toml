@@ -3,6 +3,7 @@
     # Note: On Linux, some of these might be installed via other means (externals)
     # but we'll try to use apt for as many as possible.
     common = [
+        "git-delta",
         "pipx",
         "ripgrep",
         "tmux",
@@ -11,10 +12,10 @@
 
     # Homebrew-only (common CLI tools not available/preferred via apt on Linux)
     brew_only = [
+        "fd",
         "fnm",
         "fzf",
         "gh",
-        "git-delta",
         "lazygit",
         "neovim",
         "sesh",
@@ -41,11 +42,12 @@
 
     # Linux-specific packages (Apt)
     linux = [
-        "unzip",
-        "git",
         "build-essential",
-        "zsh",
+        "fd-find", # apt name of fd
+        "git",
         "tldr", # apt name for tlrc/tldr
+        "unzip",
+        "zsh",
     ]
 
     # Python packages (Pipx)
