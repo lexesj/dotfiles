@@ -31,8 +31,9 @@ return {
 			},
 		},
 	},
+	-- stylua: ignore
 	keys = {
-		-- stylua: ignore
 		{ "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
+		{ "<leader>bD", function() Snacks.bufdelete() end, desc = "Delete other buffers", },
 	},
 }
