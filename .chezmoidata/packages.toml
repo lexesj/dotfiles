@@ -1,63 +1,41 @@
 [packages]
-    # Tools shared across ALL operating systems (CLI only)
-    universal = [
-        "git-delta",
-        "pipx",
-        "ripgrep",
-        "tmux",
-        "zoxide",
-    ]
+# Tools shared across ALL operating systems (CLI only)
+[packages.universal]
+common = ["git-delta", "ripgrep", "tmux", "zoxide"]
+work = []
+personal = ["pipx"]
 
-    [packages.darwin]
-        # CLI tools (brew install)
-        [packages.darwin.brew]
-            common = [
-                "fd",
-                "fnm",
-                "fzf",
-                "gh",
-                "lazygit",
-                "neovim",
-                "sesh",
-                "tlrc",
-            ]
-            work = []
-            personal = []
+# macOS CLI tools (brew install)
+[packages.darwin.brew]
+common = ["fd", "fzf", "gh", "lazygit", "neovim", "sesh"]
+work = []
+personal = ["fnm", "tlrc"]
 
-        # GUI apps (brew install --cask)
-        [packages.darwin.cask]
-            common = [
-                "docker",
-                "ghostty",
-                "google-chrome",
-                "raycast",
-                "tailscale-app",
-                "visual-studio-code",
-                "zoom",
-            ]
-            work = []
-            personal = [
-                "firefox",
-                "hiddenbar",
-                "karabiner-elements",
-                "nordvpn",
-                "qbittorrent",
-                "scroll-reverser",
-                "vlc",
-            ]
+# macOS GUI apps (brew install --cask)
+[packages.darwin.cask]
+common = ["ghostty", "raycast", "scroll-reverser"]
+work = []
+personal = [
+    "docker-desktop",
+    "firefox",
+    "google-chrome",
+    "hiddenbar",
+    "karabiner-elements",
+    "nordvpn",
+    "tailscale-app",
+    "visual-studio-code",
+    "vlc",
+    "zoom",
+]
 
-    [packages.linux]
-        # apt install
-        common = [
-            "build-essential",
-            "fd-find",
-            "git",
-            "tldr",
-            "unzip",
-            "zsh",
-        ]
-        work = []
-        personal = []
+# Linux packages (apt install)
+[packages.linux]
+common = ["build-essential", "fd-find", "git", "tldr", "unzip", "zsh"]
+work = []
+personal = []
 
-    [packages.python]
-        common = ["uv"]
+# Python packages (pipx install)
+[packages.python]
+common = []
+work = []
+personal = ["uv"]
