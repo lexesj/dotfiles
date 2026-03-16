@@ -27,16 +27,15 @@
         # GUI apps (brew install --cask)
         [packages.darwin.cask]
             common = [
+                "docker",
                 "ghostty",
                 "google-chrome",
                 "raycast",
                 "tailscale-app",
                 "visual-studio-code",
-            ]
-            work = [
-                "docker",
                 "zoom",
             ]
+            work = []
             personal = [
                 "firefox",
                 "hiddenbar",

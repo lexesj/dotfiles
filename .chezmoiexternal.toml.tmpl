@@ -1,48 +1,48 @@
 [".oh-my-zsh"]
-    type = "git-repo"
-    url = "https://github.com/ohmyzsh/ohmyzsh.git"
-    refreshPeriod = "168h"
+type = "git-repo"
+url = "https://github.com/ohmyzsh/ohmyzsh.git"
+refreshPeriod = "168h"
 
 [".oh-my-zsh/custom/plugins/zsh-autosuggestions"]
-    type = "git-repo"
-    url = "https://github.com/zsh-users/zsh-autosuggestions.git"
-    refreshPeriod = "168h"
+type = "git-repo"
+url = "https://github.com/zsh-users/zsh-autosuggestions.git"
+refreshPeriod = "168h"
 
 [".tmux/plugins/tpm"]
-    type = "git-repo"
-    url = "https://github.com/tmux-plugins/tpm"
-    refreshPeriod = "168h"
+type = "git-repo"
+url = "https://github.com/tmux-plugins/tpm"
+refreshPeriod = "168h"
 
 {{ if eq .chezmoi.os "linux" -}}
 {{ $fzfVersion := (gitHubLatestRelease "junegunn/fzf").TagName | trimPrefix "v" -}}
 [".local/bin/fzf"]
-    type = "archive-file"
-    url = "https://github.com/junegunn/fzf/releases/download/v{{ $fzfVersion }}/fzf-{{ $fzfVersion }}-{{ .chezmoi.os }}_{{ .chezmoi.arch }}.tar.gz"
-    path = "fzf"
+type = "archive-file"
+url = "https://github.com/junegunn/fzf/releases/download/v{{ $fzfVersion }}/fzf-{{ $fzfVersion }}-{{ .chezmoi.os }}_{{ .chezmoi.arch }}.tar.gz"
+path = "fzf"
     executable = true
 
 [".local/bin/fnm"]
-    type = "archive-file"
-    url = "https://github.com/Schniz/fnm/releases/latest/download/fnm-{{ if eq .chezmoi.arch "amd64" }}linux{{ else }}{{ .chezmoi.arch }}{{ end }}.zip"
-    path = "fnm"
+type = "archive-file"
+url = "https://github.com/Schniz/fnm/releases/latest/download/fnm-{{ if eq .chezmoi.arch "amd64" }}linux{{ else }}{{ .chezmoi.arch }}{{ end }}.zip"
+path = "fnm"
     executable = true
 
 {{ $lazygitVersion := (gitHubLatestRelease "jesseduffield/lazygit").TagName | trimPrefix "v" -}}
 [".local/bin/lazygit"]
-    type = "archive-file"
-    url = "https://github.com/jesseduffield/lazygit/releases/download/v{{ $lazygitVersion }}/lazygit_{{ $lazygitVersion }}_{{ .chezmoi.os | title }}_{{ if eq .chezmoi.arch "amd64" }}x86_64{{ else }}{{ .chezmoi.arch }}{{ end }}.tar.gz"
-    path = "lazygit"
-    executable = true
+type = "archive-file"
+url = "https://github.com/jesseduffield/lazygit/releases/download/v{{ $lazygitVersion }}/lazygit_{{ $lazygitVersion }}_{{ .chezmoi.os | title }}_{{ if eq .chezmoi.arch "amd64" }}x86_64{{ else }}{{ .chezmoi.arch }}{{ end }}.tar.gz"
+path = "lazygit"
+executable = true
 
 {{ $seshVersion := (gitHubLatestRelease "joshmedeski/sesh").TagName | trimPrefix "v" -}}
 [".local/bin/sesh"]
-    type = "archive-file"
-    url = "https://github.com/joshmedeski/sesh/releases/download/v{{ $seshVersion }}/sesh_{{ .chezmoi.os | title }}_{{ if eq .chezmoi.arch "amd64" }}x86_64{{ else }}{{ .chezmoi.arch }}{{ end }}.tar.gz"
-    path = "sesh"
-    executable = true
+type = "archive-file"
+url = "https://github.com/joshmedeski/sesh/releases/download/v{{ $seshVersion }}/sesh_{{ .chezmoi.os | title }}_{{ if eq .chezmoi.arch "amd64" }}x86_64{{ else }}{{ .chezmoi.arch }}{{ end }}.tar.gz"
+path = "sesh"
+executable = true
 
 [".local/bin/nvim"]
-    type = "file"
-    url = "https://github.com/neovim/neovim/releases/latest/download/nvim-linux-{{ if eq .chezmoi.arch "amd64" }}x86_64{{ else }}{{ .chezmoi.arch }}{{ end }}.appimage"
-    executable = true
+type = "file"
+url = "https://github.com/neovim/neovim/releases/latest/download/nvim-linux-{{ if eq .chezmoi.arch "amd64" }}x86_64{{ else }}{{ .chezmoi.arch }}{{ end }}.appimage"
+executable = true
 {{- end }}
