@@ -1,8 +1,6 @@
 [packages]
-    # Packages for both macOS (Brew) and Linux (Apt)
-    # Note: On Linux, some of these might be installed via other means (externals)
-    # but we'll try to use apt for as many as possible.
-    common = [
+    # Tools shared across ALL operating systems (CLI only)
+    universal = [
         "git-delta",
         "pipx",
         "ripgrep",
@@ -10,47 +8,57 @@
         "zoxide",
     ]
 
-    # Homebrew-only (common CLI tools not available/preferred via apt on Linux)
-    brew_only = [
-        "fd",
-        "fnm",
-        "fzf",
-        "gh",
-        "lazygit",
-        "neovim",
-        "sesh",
-        "tlrc",
-    ]
+    [packages.darwin]
+        # CLI tools (brew install)
+        [packages.darwin.brew]
+            common = [
+                "fd",
+                "fnm",
+                "fzf",
+                "gh",
+                "lazygit",
+                "neovim",
+                "sesh",
+                "tlrc",
+            ]
+            work = []
+            personal = []
 
-    # macOS GUI Applications (Casks)
-    darwin = [
-        "docker",
-        "firefox",
-        "ghostty",
-        "google-chrome",
-        "hiddenbar",
-        "karabiner-elements",
-        "nordvpn",
-        "qbittorrent",
-        "raycast",
-        "scroll-reverser",
-        "tailscale-app",
-        "visual-studio-code",
-        "vlc",
-        "zoom",
-    ]
+        # GUI apps (brew install --cask)
+        [packages.darwin.cask]
+            common = [
+                "ghostty",
+                "google-chrome",
+                "raycast",
+                "tailscale-app",
+                "visual-studio-code",
+            ]
+            work = [
+                "docker",
+                "zoom",
+            ]
+            personal = [
+                "firefox",
+                "hiddenbar",
+                "karabiner-elements",
+                "nordvpn",
+                "qbittorrent",
+                "scroll-reverser",
+                "vlc",
+            ]
 
-    # Linux-specific packages (Apt)
-    linux = [
-        "build-essential",
-        "fd-find", # apt name of fd
-        "git",
-        "tldr", # apt name for tlrc/tldr
-        "unzip",
-        "zsh",
-    ]
+    [packages.linux]
+        # apt install
+        common = [
+            "build-essential",
+            "fd-find",
+            "git",
+            "tldr",
+            "unzip",
+            "zsh",
+        ]
+        work = []
+        personal = []
 
-    # Python packages (Pipx)
-    python = [
-        "uv",
-    ]
+    [packages.python]
+        common = ["uv"]

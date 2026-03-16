@@ -2,7 +2,12 @@
 
 {{ if eq .chezmoi.os "linux" -}}
 sudo apt update
-sudo apt install -y {{ range .packages.common }}{{ . }} {{ end }} {{ range .packages.linux }}{{ . }} {{ end }}
+sudo apt install -y {{ range .packages.universal }}{{ . }} {{ end }} {{ range .packages.linux.common }}{{ . }} {{ end }}
+{{ if .is_work -}}
+sudo apt install -y {{ range .packages.linux.work }}{{ . }} {{ end }}
+{{ else -}}
+sudo apt install -y {{ range .packages.linux.personal }}{{ . }} {{ end }}
+{{ end -}}
 
 # Set zsh as default shell if it's not already
 if [[ "$SHELL" != "$(which zsh)" ]]; then
@@ -14,15 +19,38 @@ fi
 {{ if eq .chezmoi.os "darwin" -}}
 if command -v brew &> /dev/null; then
 	brew bundle --file=/dev/stdin <<-EOF
-		{{ range .packages.common -}}
+		# Universal CLI
+		{{ range .packages.universal -}}
 		brew {{ . | quote }}
 		{{ end }}
-		{{ range .packages.brew_only -}}
+
+		# macOS CLI
+		{{ range .packages.darwin.brew.common -}}
 		brew {{ . | quote }}
 		{{ end }}
-		{{ range .packages.darwin -}}
+
+		# macOS GUI
+		{{ range .packages.darwin.cask.common -}}
 		cask {{ . | quote }}
 		{{ end }}
+
+		{{ if .is_work -}}
+		# Work Packages
+		{{ range .packages.darwin.brew.work -}}
+		brew {{ . | quote }}
+		{{ end }}
+		{{ range .packages.darwin.cask.work -}}
+		cask {{ . | quote }}
+		{{ end }}
+		{{ else -}}
+		# Personal Packages
+		{{ range .packages.darwin.brew.personal -}}
+		brew {{ . | quote }}
+		{{ end }}
+		{{ range .packages.darwin.cask.personal -}}
+		cask {{ . | quote }}
+		{{ end }}
+		{{ end -}}
 	EOF
 fi
 {{ end -}}

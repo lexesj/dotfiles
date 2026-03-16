@@ -1,16 +1,7 @@
 #!/bin/bash
 
 if command -v pipx &> /dev/null; then
-	echo "Installing Python packages via pipx..."
-	{{ range .packages.python -}}
-		if ! pipx list --short | grep -q "^{{ . }} "; then
-			echo "Installing {{ . }}..."
-			pipx install {{ . }}
-		else
-			echo "{{ . }} already installed, upgrading..."
-			pipx upgrade {{ . }}
-		fi
-	{{ end -}}
-else
-	echo "pipx not found, skipping Python package installation."
+	{{ range .packages.python.common -}}
+	pipx install {{ . | quote }} --force
+	{{ end }}
 fi
