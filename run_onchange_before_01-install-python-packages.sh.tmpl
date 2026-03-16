@@ -1,6 +1,7 @@
 #!/bin/bash
 
 if command -v pipx &> /dev/null; then
+	echo "Installing Python packages with pipx..."
 	{{ range .packages.python.common -}}
 	pipx install {{ . | quote }} --force
 	{{ end }}
