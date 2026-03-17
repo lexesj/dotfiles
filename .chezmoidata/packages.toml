@@ -16,7 +16,6 @@ personal = ["fnm", "tlrc"]
 common = ["ghostty", "raycast", "scroll-reverser"]
 work = []
 personal = [
-    "docker-desktop",
     "firefox",
     "google-chrome",
     "hiddenbar",
