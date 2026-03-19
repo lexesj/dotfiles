@@ -1,3 +1,4 @@
 theme = Catppuccin Macchiato
 window-save-state = always
 term = xterm-256color
+clipboard-read = allow
