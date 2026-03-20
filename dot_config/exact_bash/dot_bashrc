@@ -1,3 +1,12 @@
+# Path.
+add_to_path() {
+    export PATH="${1}:${PATH//$1:/}"
+}
+
+if [[ -d "$HOME/.local/bin" ]]; then
+    add_to_path "$HOME/.local/bin"
+fi
+
 # Claude code.
 export ANTHROPIC_MODEL=opus[1m]
 export CLAUDE_CODE_EFFORT_LEVEL=high
