@@ -19,7 +19,6 @@ return {
 		---@type PluginLspOpts
 		opts = {
 			servers = {
-				eslint = { mason = false },
 				ruff = { mason = false },
 				stripe_autogen = {},
 				stripe_checkmate = {},
