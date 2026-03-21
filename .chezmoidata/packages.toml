@@ -9,7 +9,7 @@ personal = ["pipx"]
 [packages.darwin.brew]
 common = ["fd", "fzf", "gh", "lazygit", "neovim", "sesh"]
 work = []
-personal = ["fnm", "tlrc"]
+personal = ["fnm", "gemini-cli", "tlrc"]
 
 # macOS GUI apps (brew install --cask)
 [packages.darwin.cask]
