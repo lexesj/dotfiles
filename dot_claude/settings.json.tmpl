@@ -1,5 +1,7 @@
 {
+{{- if .is_work }}
   "effortLevel": "high",
+{{- end }}
   "statusLine": {
     "type": "command",
     "command": "bash ~/.claude/statusline-command.sh"
