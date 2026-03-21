@@ -3,13 +3,13 @@
 [packages.universal]
 common = ["git-delta", "ripgrep", "tmux", "zoxide"]
 work = []
-personal = ["mise"]
+personal = []
 
 # macOS CLI tools (brew install)
 [packages.darwin.brew]
 common = ["fd", "fzf", "gh", "lazygit", "neovim", "sesh"]
 work = []
-personal = ["gemini-cli", "tlrc"]
+personal = ["gemini-cli", "tlrc", "mise"]
 
 # macOS GUI apps (brew install --cask)
 [packages.darwin.cask]

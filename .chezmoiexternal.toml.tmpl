@@ -21,14 +21,6 @@ url = "https://github.com/junegunn/fzf/releases/download/v{{ $fzfVersion }}/fzf-
 path = "fzf"
     executable = true
 
-{{ if not .is_work -}}
-[".local/bin/fnm"]
-type = "archive-file"
-url = "https://github.com/Schniz/fnm/releases/latest/download/fnm-{{ if eq .chezmoi.arch "amd64" }}linux{{ else }}{{ .chezmoi.arch }}{{ end }}.zip"
-path = "fnm"
-    executable = true
-{{- end }}
-
 {{ $lazygitVersion := (gitHubLatestRelease "jesseduffield/lazygit").TagName | trimPrefix "v" -}}
 [".local/bin/lazygit"]
 type = "archive-file"
@@ -47,4 +39,12 @@ executable = true
 type = "file"
 url = "https://github.com/neovim/neovim/releases/latest/download/nvim-linux-{{ if eq .chezmoi.arch "amd64" }}x86_64{{ else }}{{ .chezmoi.arch }}{{ end }}.appimage"
 executable = true
+
+{{ if not .is_work -}}
+{{ $miseVersion := (gitHubLatestRelease "jdx/mise").TagName | trimPrefix "v" -}}
+[".local/bin/mise"]
+type = "file"
+url = "https://github.com/jdx/mise/releases/download/v{{ $miseVersion }}/mise-v{{ $miseVersion }}-linux-{{ if eq .chezmoi.arch "amd64" }}x64{{ else }}{{ .chezmoi.arch }}{{ end }}"
+executable = true
+{{- end }}
 {{- end }}
