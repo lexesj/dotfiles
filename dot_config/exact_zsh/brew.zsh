@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
 
 if command -v brew &>/dev/null; then
-	eval "$(/opt/homebrew/bin/brew shellenv)"
+	eval "$(brew shellenv)"
 fi
