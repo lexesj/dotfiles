@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # manage_block target_file content [marker_begin] [marker_end]
 manage_block() {
