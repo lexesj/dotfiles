@@ -3,13 +3,13 @@
 [packages.universal]
 common = ["git-delta", "ripgrep", "tmux", "zoxide"]
 work = []
-personal = ["pipx"]
+personal = ["mise"]
 
 # macOS CLI tools (brew install)
 [packages.darwin.brew]
 common = ["fd", "fzf", "gh", "lazygit", "neovim", "sesh"]
 work = []
-personal = ["fnm", "gemini-cli", "tlrc"]
+personal = ["gemini-cli", "tlrc"]
 
 # macOS GUI apps (brew install --cask)
 [packages.darwin.cask]
@@ -33,9 +33,3 @@ personal = [
 common = ["fd-find", "unzip"]
 work = []
 personal = ["build-essential", "tldr", "zsh"]
-
-# Python packages (pipx install)
-[packages.python]
-common = []
-work = []
-personal = ["uv"]

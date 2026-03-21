@@ -10,12 +10,13 @@ README.md
 
 {{ if .is_work }}
 # Personal scripts.
-00-setup-node.sh
+00-mise-install.sh
 02-generate-ssh-key.sh
-01-install-python-packages.sh
 
 # Personal configs.
 .gitconfig
+.config/mise/
+.config/zsh/after/mise.zsh
 
 {{ if ne .chezmoi.os "linux" }}
 # Bash configs.
