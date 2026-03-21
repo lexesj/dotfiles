@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
 
-if [[ -x "$(command -v fzf)" ]]; then
+if command -v fzf &>/dev/null; then
 	source <(fzf --zsh)
 fi

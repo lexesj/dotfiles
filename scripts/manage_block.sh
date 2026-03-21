@@ -44,7 +44,7 @@ $marker_end"
 		{
 			echo ""
 			echo "$full_block"
-		} >> "$target_file"
+		} >>"$target_file"
 	fi
 
 	chmod 644 "$target_file"
