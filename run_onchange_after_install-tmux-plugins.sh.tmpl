@@ -11,5 +11,5 @@ if [[ -d "$HOME/.tmux/plugins/tpm" ]]; then
 	echo "Installing tmux plugins..."
 	"$HOME/.tmux/plugins/tpm/bin/install_plugins"
 else
-	echo "tmux plugin manager (tpm) not found at $TPM_DIR. Skipping tmux plugin installation."
+	echo "tmux plugin manager (tpm) not found at $TMUX_PLUGIN_MANAGER_PATH/tpm. Skipping tmux plugin installation."
 fi
