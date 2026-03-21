@@ -1,6 +1,8 @@
 {
 {{- if .is_work }}
   "effortLevel": "high",
+{{- else }}
+  "model": "opusplan",
 {{- end }}
   "statusLine": {
     "type": "command",
