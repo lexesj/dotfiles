@@ -14,37 +14,40 @@ url = "https://github.com/tmux-plugins/tpm"
 refreshPeriod = "168h"
 
 {{ if eq .chezmoi.os "linux" -}}
+{{- $arch := ternary "x86_64" .chezmoi.arch (eq .chezmoi.arch "amd64") -}}
+
 {{ $fzfVersion := (gitHubLatestRelease "junegunn/fzf").TagName | trimPrefix "v" -}}
 [".local/bin/fzf"]
 type = "archive-file"
 url = "https://github.com/junegunn/fzf/releases/download/v{{ $fzfVersion }}/fzf-{{ $fzfVersion }}-{{ .chezmoi.os }}_{{ .chezmoi.arch }}.tar.gz"
 path = "fzf"
-    executable = true
+executable = true
 
 {{ $lazygitVersion := (gitHubLatestRelease "jesseduffield/lazygit").TagName | trimPrefix "v" -}}
 [".local/bin/lazygit"]
 type = "archive-file"
-url = "https://github.com/jesseduffield/lazygit/releases/download/v{{ $lazygitVersion }}/lazygit_{{ $lazygitVersion }}_{{ .chezmoi.os | title }}_{{ if eq .chezmoi.arch "amd64" }}x86_64{{ else }}{{ .chezmoi.arch }}{{ end }}.tar.gz"
+url = "https://github.com/jesseduffield/lazygit/releases/download/v{{ $lazygitVersion }}/lazygit_{{ $lazygitVersion }}_{{ .chezmoi.os | title }}_{{ $arch }}.tar.gz"
 path = "lazygit"
 executable = true
 
 {{ $seshVersion := (gitHubLatestRelease "joshmedeski/sesh").TagName | trimPrefix "v" -}}
 [".local/bin/sesh"]
 type = "archive-file"
-url = "https://github.com/joshmedeski/sesh/releases/download/v{{ $seshVersion }}/sesh_{{ .chezmoi.os | title }}_{{ if eq .chezmoi.arch "amd64" }}x86_64{{ else }}{{ .chezmoi.arch }}{{ end }}.tar.gz"
+url = "https://github.com/joshmedeski/sesh/releases/download/v{{ $seshVersion }}/sesh_{{ .chezmoi.os | title }}_{{ $arch }}.tar.gz"
 path = "sesh"
 executable = true
 
 [".local/bin/nvim"]
 type = "file"
-url = "https://github.com/neovim/neovim/releases/latest/download/nvim-linux-{{ if eq .chezmoi.arch "amd64" }}x86_64{{ else }}{{ .chezmoi.arch }}{{ end }}.appimage"
+url = "https://github.com/neovim/neovim/releases/latest/download/nvim-linux-{{ $arch }}.appimage"
 executable = true
 
 {{ if not .is_work -}}
 {{ $miseVersion := (gitHubLatestRelease "jdx/mise").TagName | trimPrefix "v" -}}
+{{ $archMise := ternary "x64" .chezmoi.arch (eq .chezmoi.arch "amd64") -}}
 [".local/bin/mise"]
 type = "file"
-url = "https://github.com/jdx/mise/releases/download/v{{ $miseVersion }}/mise-v{{ $miseVersion }}-linux-{{ if eq .chezmoi.arch "amd64" }}x64{{ else }}{{ .chezmoi.arch }}{{ end }}"
+url = "https://github.com/jdx/mise/releases/download/v{{ $miseVersion }}/mise-v{{ $miseVersion }}-linux-{{ $archMise }}"
 executable = true
 {{- end }}
 {{- end }}

@@ -1,8 +1,10 @@
 git:
-{{ if .is_work }}  fetchAll: false
-{{ end }}  pagers:
+{{- if .is_work }}
+  fetchAll: false
+{{- end }}
+  pagers:
     - colorArg: always
       pager: delta --paging=never --dark
-{{ if .is_work }}
+{{- if .is_work }}
 disableStartupPopups: true
-{{ end }}
+{{- end }}
