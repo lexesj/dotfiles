@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# mise.toml hash: {{ include "dot_config/exact_mise/config.toml.tmpl" | sha256sum }}
+# mise.toml hash: {{ include "dot_config/exact_mise/config.toml" | sha256sum }}
 
 if command -v mise &>/dev/null; then
   echo "Installing tools with mise..."
