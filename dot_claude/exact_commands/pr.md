@@ -37,17 +37,15 @@ Then run the following commands in parallel to understand what changed (substitu
 
 ### 4. Generate the PR description
 
-Use the template from `.github/PULL_REQUEST_TEMPLATE.md` (if it exists) and fill it in following the user's style from past PRs:
+Read the PR template from `.github/PULL_REQUEST_TEMPLATE.md` in the current repo and fill it in, following the user's style from past PRs found in step 3.
 
 **Style conventions:**
 
 - Title format: `[Project/Feature Name] Short description`.
-- Notify: `cc @<org>/<codeowner-team>` on separate lines, then `r?` for reviewer assignment left blank for the user to fill.
-- Summary: Clear bullet points describing each change, each ending with a period. No HTML comments kept.
-- Motivation: Links JIRA tickets using `Closes [KEY-123](https://jira.corp.stripe.com/browse/KEY-123)` or `Relates to [KEY-456](...)` format.
+- Notify: `cc @<org>/<codeowner-team>` on separate lines, then `r?` on its own line for reviewer assignment left blank for the user to fill.
+- Summary and motivation: Combined into one section. Clear bullet points describing each change, each ending with a period. Links JIRA tickets using `Closes [KEY-123](https://jira.corp.stripe.com/browse/KEY-123)` or `Relates to [KEY-456](...)` format.
 - Test plan: Honest checkbox state based on whether tests were actually added/modified.
-- Rollout/revert: Keeps the default "Safe to revert unless specified otherwise".
-- Monitoring: Leaves checkboxes unchecked for the user to fill, or checks "no runtime impact" for config-only changes.
+- Rollout/revert: Keeps the default "Safe to revert." unless there are specific rollout steps needed.
 - For visual changes, includes Before/After screenshots section.
 
 **Important rules:**
