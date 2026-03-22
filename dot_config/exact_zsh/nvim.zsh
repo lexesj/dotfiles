@@ -1,22 +1,6 @@
-# Path.
-add_to_path() {
-	export PATH="${1}:${PATH//$1:/}"
-}
+#!/usr/bin/env zsh
 
-if [[ -d "$HOME/.local/bin" ]]; then
-	add_to_path "$HOME/.local/bin"
-fi
-
-# Claude code.
-export ANTHROPIC_MODEL=opus[1m]
-export CLAUDE_CODE_EFFORT_LEVEL=high
-export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1
-
-# Vim.
-export EDITOR=nvim
-set -o vi
-
-# Neovim helpers.
+# Empty the nvim LSP log file.
 nvim-clear-lsp-log() {
 	local log="${XDG_STATE_HOME:-$HOME/.local/state}/nvim/lsp.log"
 	if [[ -f "$log" ]]; then
@@ -27,6 +11,7 @@ nvim-clear-lsp-log() {
 	fi
 }
 
+# Delete all nvim swap files.
 nvim-clear-swap() {
 	local swap_dir="${XDG_STATE_HOME:-$HOME/.local/state}/nvim/swap"
 	if [[ -d "$swap_dir" ]]; then
@@ -37,8 +22,3 @@ nvim-clear-swap() {
 		echo "No swap directory found at $swap_dir"
 	fi
 }
-
-# Zoxide.
-if [[ -x $(command -v zoxide) ]]; then
-	eval "$(zoxide init --cmd cd bash)"
-fi
