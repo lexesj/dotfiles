@@ -1,5 +1,3 @@
-#!/usr/bin/env zsh
-
 if command -v sesh &>/dev/null; then
 	function sesh-sessions() {
 		{

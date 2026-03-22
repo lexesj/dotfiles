@@ -1,5 +1,12 @@
-#!/usr/bin/env zsh
+# Source shared shell config (functions, variables, PATH).
+SHELL_CONFIG_DIR="$HOME/.config/shell"
+if [[ -d "$SHELL_CONFIG_DIR" ]]; then
+	for file in "$SHELL_CONFIG_DIR"/*.sh; do
+		source "$file"
+	done
+fi
 
+# Source zsh-specific config (before → root → after hooks).
 ZSH_CONFIG_DIR="$HOME/.config/zsh"
 ZSH_CONFIG_HOOKS=("before" "" "after")
 

@@ -1,44 +1,15 @@
-# Path.
-add_to_path() {
-	export PATH="${1}:${PATH//$1:/}"
-}
-
-if [[ -d "$HOME/.local/bin" ]]; then
-	add_to_path "$HOME/.local/bin"
+# Source shared shell config (functions, variables, PATH).
+SHELL_CONFIG_DIR="$HOME/.config/shell"
+if [[ -d "$SHELL_CONFIG_DIR" ]]; then
+	for file in "$SHELL_CONFIG_DIR"/*.sh; do
+		source "$file"
+	done
 fi
 
-# Claude code.
-export ANTHROPIC_MODEL=opus[1m]
-export CLAUDE_CODE_EFFORT_LEVEL=high
-export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1
-
-# Vim.
-export EDITOR=nvim
+# Vi mode.
 set -o vi
 
-# Neovim helpers.
-nvim-clear-lsp-log() {
-	local log="${XDG_STATE_HOME:-$HOME/.local/state}/nvim/lsp.log"
-	if [[ -f "$log" ]]; then
-		: >"$log"
-		echo "Cleared $log"
-	else
-		echo "No lsp.log found at $log"
-	fi
-}
-
-nvim-clear-swap() {
-	local swap_dir="${XDG_STATE_HOME:-$HOME/.local/state}/nvim/swap"
-	if [[ -d "$swap_dir" ]]; then
-		local count=$(find "$swap_dir" -type f | wc -l | tr -d ' ')
-		rm -f "$swap_dir"/*
-		echo "Deleted $count swap file(s) from $swap_dir"
-	else
-		echo "No swap directory found at $swap_dir"
-	fi
-}
-
 # Zoxide.
-if [[ -x $(command -v zoxide) ]]; then
+if command -v zoxide &>/dev/null; then
 	eval "$(zoxide init --cmd cd bash)"
 fi

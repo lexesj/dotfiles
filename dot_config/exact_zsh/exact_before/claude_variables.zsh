@@ -1,5 +1,0 @@
-#!/usr/bin/env zsh
-
-export ANTHROPIC_MODEL=opus[1m]
-export CLAUDE_CODE_EFFORT_LEVEL=high
-export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1
