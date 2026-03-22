@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# chezmoi:template:left-delimiter="# {{" right-delimiter="}}"
+# chezmoi:template:left-delimiter="# {{"
 
 # Read JSON input
 input=$(cat)
@@ -43,7 +43,7 @@ if [ -n "$used" ]; then
     printf " | Context: %s %d%% (%s/%dK tokens)" "$bar" "$used_int" "$tokens_display" "$((context_size / 1000))"
 fi
 
-# {{ if not .is_work }}
+# {{- if not .is_work }}
 # Show Claude.ai subscription rate limits (non-work profile only)
 five_pct=$(echo "$input" | jq -r '.rate_limits.five_hour.used_percentage // empty')
 five_resets=$(echo "$input" | jq -r '.rate_limits.five_hour.resets_at // empty')
@@ -84,6 +84,6 @@ if [ -n "$week_pct" ]; then
     rate_out="$rate_out$week_label"
 fi
 [ -n "$rate_out" ] && printf " | Limits: %s" "$rate_out"
-# {{ end }}
+# {{- end }}
 
 printf "\n"

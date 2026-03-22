@@ -25,36 +25,36 @@ fi
 {{ if eq .chezmoi.os "darwin" -}}
 if command -v brew &>/dev/null; then
 	brew bundle --file=/dev/stdin <<-EOF
-{{ range .packages.universal.common -}}
+		{{ range .packages.universal.common -}}
 		brew {{ . | quote }}
-{{ end -}}
-{{ range .packages.darwin.brew.common -}}
+		{{ end -}}
+		{{ range .packages.darwin.brew.common -}}
 		brew {{ . | quote }}
-{{ end -}}
-{{ range .packages.darwin.cask.common -}}
+		{{ end -}}
+		{{ range .packages.darwin.cask.common -}}
 		cask {{ . | quote }}
-{{ end -}}
-{{ if .is_work -}}
-{{ range .packages.universal.work -}}
+		{{ end -}}
+		{{ if .is_work -}}
+		{{   range .packages.universal.work -}}
 		brew {{ . | quote }}
-{{ end -}}
-{{ range .packages.darwin.brew.work -}}
+		{{   end -}}
+		{{   range .packages.darwin.brew.work -}}
 		brew {{ . | quote }}
-{{ end -}}
-{{ range .packages.darwin.cask.work -}}
+		{{   end -}}
+		{{   range .packages.darwin.cask.work -}}
 		cask {{ . | quote }}
-{{ end -}}
-{{ else -}}
-{{ range .packages.universal.personal -}}
+		{{   end -}}
+		{{ else -}}
+		{{   range .packages.universal.personal -}}
 		brew {{ . | quote }}
-{{ end -}}
-{{ range .packages.darwin.brew.personal -}}
+		{{   end -}}
+		{{   range .packages.darwin.brew.personal -}}
 		brew {{ . | quote }}
-{{ end -}}
-{{ range .packages.darwin.cask.personal -}}
+		{{   end -}}
+		{{   range .packages.darwin.cask.personal -}}
 		cask {{ . | quote }}
-{{ end -}}
-{{ end -}}
+		{{   end -}}
+		{{ end -}}
 	EOF
 fi
 {{ end -}}
