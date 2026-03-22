@@ -10,14 +10,23 @@ You are generating a pull request description for the current user in the curren
 
 ### 1. Gather context about the current branch
 
-First, determine the default branch (`main` or `master`) by running `git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'`.
+First, determine the **base branch** — the branch this PR will merge into:
 
-Then run the following commands in parallel to understand what changed (substitute `<default>` with the default branch):
+1. Get the current branch name: `git rev-parse --abbrev-ref HEAD`.
+2. Determine the default branch: `git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'`.
+3. Check for a parent feature branch (branch-of-a-branch):
+   - Run `git rev-parse --abbrev-ref @{upstream} 2>/dev/null` to get the tracking upstream.
+   - Strip the `origin/` prefix to get the upstream branch name.
+   - If the upstream branch exists and is **not** the default branch (`main`/`master`), use it as the base branch — this is a branch-of-a-branch scenario and the PR targets the parent feature branch.
+   - Otherwise, fall back to the default branch as the base.
 
-- `git rev-parse --abbrev-ref HEAD` — get the current branch name.
-- `git log <default>..HEAD --oneline` — get commits on this branch.
-- `git diff <default>...HEAD --stat` — get a summary of changed files.
-- `git diff <default>...HEAD` — get the full diff (read carefully).
+Then run the following commands in parallel to understand what changed (substitute `<base>` with the base branch determined above):
+
+- `git log <base>..HEAD --oneline` — get commits on this branch.
+- `git diff <base>...HEAD --stat` — get a summary of changed files.
+- `git diff <base>...HEAD` — get the full diff (read carefully).
+
+**Note:** When this is a branch-of-a-branch, mention in the generated PR description that the target merge branch is `<base>` (not the default branch).
 
 ### 2. Identify the JIRA project and find relevant tickets
 
