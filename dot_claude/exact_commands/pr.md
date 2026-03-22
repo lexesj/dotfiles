@@ -32,8 +32,8 @@ Then run the following commands in parallel to understand what changed (substitu
 
 - Identify the main directories touched from the diff stat.
 - Use the `code_get_pull_request` and `code_get_branch_info` Toolshed MCP tools to find recent merged PRs by the current user that touched similar directories.
-- From those PRs, note which teams were notified and who reviewed/approved them.
-- Use those teams and reviewers to populate the Notify section.
+- From those PRs, note which teams were cc'd and who reviewed/approved them.
+- Use those teams and reviewers to populate the `cc` and `r?` lines in the description.
 
 ### 4. Generate the PR description
 
@@ -42,8 +42,8 @@ Read the PR template from `.github/PULL_REQUEST_TEMPLATE.md` in the current repo
 **Style conventions:**
 
 - Title format: `[Project/Feature Name] Short description`.
-- Notify: `cc @<org>/<codeowner-team>` on separate lines, then `r?` on its own line for reviewer assignment left blank for the user to fill.
-- Summary and motivation: Combined into one section. Clear bullet points describing each change, each ending with a period. Links JIRA tickets using `Closes [KEY-123](https://jira.corp.stripe.com/browse/KEY-123)` or `Relates to [KEY-456](...)` format.
+- Reviewers: Place `cc @<org>/<codeowner-team>` and `r?` on its own line at the top of the Summary and motivation section, before the description text.
+- Summary and motivation: A single combined section. Clear bullet points describing each change, each ending with a period. Links JIRA tickets using `Closes [KEY-123](https://jira.corp.stripe.com/browse/KEY-123)` or `Relates to [KEY-456](...)` format.
 - Test plan: Honest checkbox state based on whether tests were actually added/modified.
 - Rollout/revert: Keeps the default "Safe to revert." unless there are specific rollout steps needed.
 - For visual changes, includes Before/After screenshots section.
