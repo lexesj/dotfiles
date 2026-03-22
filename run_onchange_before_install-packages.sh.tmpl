@@ -6,21 +6,21 @@ sudo apt install -y \
 	{{ range .packages.universal.common -}}{{ . }} {{ end -}}
 	{{ range .packages.linux.common -}}{{ . }} {{ end -}}
 	{{ if .is_work -}}
-	{{ range .packages.universal.work -}}{{ . }} {{ end -}}
-	{{ range .packages.linux.work -}}{{ . }} {{ end -}}
+	{{   range .packages.universal.work -}}{{ . }} {{ end -}}
+	{{   range .packages.linux.work -}}{{ . }} {{ end -}}
 	{{ else -}}
-	{{ range .packages.universal.personal -}}{{ . }} {{ end -}}
-	{{ range .packages.linux.personal -}}{{ . }} {{ end -}}
+	{{   range .packages.universal.personal -}}{{ . }} {{ end -}}
+	{{   range .packages.linux.personal -}}{{ . }} {{ end -}}
 	{{ end }}
 
-{{ if not .is_work -}}
+{{    if .is_personal -}}
 # Set zsh as default shell if it's not already
 if [[ "$SHELL" != "$(command -v zsh)" ]]; then
 	echo "Changing default shell to zsh..."
 	sudo chsh -s "$(command -v zsh)" "$USER"
 fi
-{{ end -}}
-{{ end -}}
+{{-   end -}}
+{{- end -}}
 
 {{ if eq .chezmoi.os "darwin" -}}
 if command -v brew &>/dev/null; then
@@ -54,7 +54,7 @@ if command -v brew &>/dev/null; then
 		{{   range .packages.darwin.cask.personal -}}
 		cask {{ . | quote }}
 		{{   end -}}
-		{{ end -}}
+		{{ end }}
 	EOF
 fi
 {{ end -}}

@@ -43,7 +43,7 @@ if [ -n "$used" ]; then
     printf " | Context: %s %d%% (%s/%dK tokens)" "$bar" "$used_int" "$tokens_display" "$((context_size / 1000))"
 fi
 
-# {{- if not .is_work }}
+# {{- if .is_personal }}
 # Show Claude.ai subscription rate limits (non-work profile only)
 five_pct=$(echo "$input" | jq -r '.rate_limits.five_hour.used_percentage // empty')
 five_resets=$(echo "$input" | jq -r '.rate_limits.five_hour.resets_at // empty')
