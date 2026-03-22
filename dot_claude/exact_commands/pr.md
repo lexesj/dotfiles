@@ -23,9 +23,9 @@ Then run the following commands in parallel to understand what changed (substitu
 
 - Look at the branch name and commit messages for JIRA ticket keys (e.g. `PROJ-123`).
 - Use `org_info_get_current_user` to get the current username.
-- Search JIRA using the `search_jira` tool for tickets assigned to the current user that are in progress or recently updated, using queries like:
-  - `assignee = <username> AND status = "In Progress" ORDER BY updated DESC`
-  - If the branch name or commits mention a project key, also search: `project = <KEY> AND assignee = <username> AND status != Done ORDER BY updated DESC`
+- Search JIRA using the `search_jira` tool for tickets assigned to or reported by the current user that are in progress or recently updated, using queries like:
+  - `(assignee = <username> OR reporter = <username>) AND status = "In Progress" ORDER BY updated DESC`
+  - If the branch name or commits mention a project key, also search: `project = <KEY> AND (assignee = <username> OR reporter = <username>) AND status != Done ORDER BY updated DESC`
 - From the results, identify which tickets are relevant to the changes in this branch.
 
 ### 3. Determine reviewers from past PRs
