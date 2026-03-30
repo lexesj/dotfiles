@@ -1,3 +1,5 @@
+# vim: set ft=bash :
+
 # Source shared shell config (functions, variables, PATH).
 SHELL_CONFIG_DIR="$HOME/.config/shell"
 if [[ -d "$SHELL_CONFIG_DIR" ]]; then
