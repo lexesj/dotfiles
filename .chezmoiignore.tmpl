@@ -10,7 +10,7 @@ CLAUDE.md
 # Neovim files.
 .config/nvim/lazy-lock.json
 
-{{ if .is_work }}
+{{- if .is_work }}
 # Personal scripts.
 install-mise.sh
 generate-ssh-key.sh
@@ -20,14 +20,14 @@ generate-ssh-key.sh
 .config/mise/
 .config/zsh/after/mise.zsh
 
-{{ if ne .chezmoi.os "linux" }}
+{{- if ne .chezmoi.os "linux" }}
 # Bash configs.
 setup-bashrc.sh
 .config/bash/
-{{ end }}
-{{ end }}
+{{- end }}
+{{- end }}
 
-{{ if .is_personal }}
+{{- if .is_personal }}
 # Work scripts.
 setup-bashrc.sh
 
@@ -36,4 +36,4 @@ setup-bashrc.sh
 .config/bash/
 .config/nvim/lua/plugins/stripe/
 .local/bin/git
-{{ end }}
+{{- end }}
