@@ -5,6 +5,7 @@ scripts/
 LICENSE
 README.md
 CLAUDE.md
+.node-version
 
 # Neovim files.
 .config/nvim/lazy-lock.json
@@ -24,8 +25,9 @@ generate-ssh-key.sh
 setup-bashrc.sh
 .config/bash/
 {{ end }}
+{{ end }}
 
-{{ else }}
+{{ if .is_personal }}
 # Work scripts.
 setup-bashrc.sh
 

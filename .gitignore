@@ -1,3 +1,4 @@
 .vscode
 .chezmoistate.db
 .chezmoidata.toml
+.node-version
