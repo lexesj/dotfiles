@@ -22,8 +22,10 @@ if command -v zoxide &>/dev/null; then
 fi
 
 # gitfs.
-
 function setup_git() {
 	pay gitfs profile dashboard-frontend
-	pay gitfs add lib/compliance_hub
+	pay gitfs add \
+		pay-server/frontend/data-manage \
+		pay-server/lib/compliance_hub \
+		pay-server/openapi
 }
