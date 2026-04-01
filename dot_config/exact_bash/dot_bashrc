@@ -25,7 +25,12 @@ fi
 function setup_git() {
 	pay gitfs profile dashboard-frontend
 	pay gitfs add \
+		pay-server/api/lib \
 		pay-server/frontend/data-manage \
+		pay-server/lib/api_core/test \
+		pay-server/lib/bapling_routing \
 		pay-server/lib/compliance_hub \
-		pay-server/openapi
+		pay-server/lib/permission/lockfiles \
+		pay-server/openapi \
+		pay-server/stripe_frontend/config
 }
