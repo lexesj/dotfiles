@@ -21,3 +21,13 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 		vim.schedule(edit_watch)
 	end,
 })
+
+-- Ensure diff mode has wrapping enabled.
+vim.api.nvim_create_autocmd("OptionSet", {
+	pattern = "diff",
+	callback = function()
+		if vim.v.option_new == "1" then
+			vim.opt_local.wrap = true
+		end
+	end,
+})
