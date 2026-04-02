@@ -33,4 +33,5 @@ function setup_git() {
 		pay-server/lib/permission/lockfiles \
 		pay-server/openapi \
 		pay-server/stripe_frontend/config
+	pay gitfs watch
 }
