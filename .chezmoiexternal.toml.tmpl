@@ -39,9 +39,7 @@ executable = true
 
 [".local/bin/nvim"]
 type = "file"
-# url = "https://github.com/neovim/neovim/releases/latest/download/nvim-linux-{{ $arch }}.appimage"
-# Pin to 0.11.7 until 0.12.0 is stable.
-url = "https://github.com/neovim/neovim/releases/download/v0.11.7/nvim-linux-{{ $arch }}.appimage"
+url = "https://github.com/neovim/neovim/releases/latest/download/nvim-linux-{{ $arch }}.appimage"
 executable = true
 
 {{- if eq .chezmoi.os "linux" -}}
