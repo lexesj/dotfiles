@@ -8,7 +8,8 @@ sudo apt install -y \
 	{{ if .is_work -}}
 	{{   range .packages.universal.work -}}{{ . }} {{ end -}}
 	{{   range .packages.linux.work -}}{{ . }} {{ end -}}
-	{{ else -}}
+	{{ end -}}
+	{{ if .is_personal -}}
 	{{   range .packages.universal.personal -}}{{ . }} {{ end -}}
 	{{   range .packages.linux.personal -}}{{ . }} {{ end -}}
 	{{ end }}
@@ -44,7 +45,8 @@ if command -v brew &>/dev/null; then
 		{{   range .packages.darwin.cask.work -}}
 		cask {{ . | quote }}
 		{{   end -}}
-		{{ else -}}
+		{{ end -}}
+		{{ if .is_personal -}}
 		{{   range .packages.universal.personal -}}
 		brew {{ . | quote }}
 		{{   end -}}
