@@ -13,7 +13,6 @@ sudo apt install -y \
 	{{   range .packages.universal.personal -}}{{ . }} {{ end -}}
 	{{   range .packages.linux.personal -}}{{ . }} {{ end -}}
 	{{ end }}
-
 {{- end -}}
 
 {{ if eq .chezmoi.os "darwin" -}}
