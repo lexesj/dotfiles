@@ -29,8 +29,12 @@ return {
 				stripe_typescript_native = {},
 			},
 			setup = {
-				-- disable vtsls in favour of stripe_typescript_native.
+				-- disable vtsls and tsgo in favour of stripe_typescript_native.
 				vtsls = function()
+					local skip_setup = require("stripe_utils").is_remote_devbox()
+					return skip_setup
+				end,
+				tsgo = function()
 					local skip_setup = require("stripe_utils").is_remote_devbox()
 					return skip_setup
 				end,

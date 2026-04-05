@@ -29,3 +29,6 @@ vim.o.splitbelow = true
 
 -- Override default LazyVim no-wrap.
 vim.opt.wrap = true
+
+-- JavaScript / TypeScript settings.
+vim.g.lazyvim_ts_lsp = "tsgo"
