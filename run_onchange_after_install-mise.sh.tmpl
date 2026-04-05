@@ -2,7 +2,9 @@
 
 # mise.toml hash: {{ include "dot_config/exact_mise/config.toml" | sha256sum }}
 
+{{ if .is_personal -}}
 if command -v mise &>/dev/null; then
   echo "Installing tools with mise..."
   mise install --yes
 fi
+{{- end }}

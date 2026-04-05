@@ -2,6 +2,7 @@
 
 # .bashrc hash: {{ if stat (joinPath .chezmoi.homeDir ".bashrc") }}{{ include (joinPath .chezmoi.homeDir ".bashrc") | sha256sum }}{{ else }}none{{ end }}
 
+{{ if and .is_work (eq .chezmoi.os "linux") -}}
 source "{{ .chezmoi.sourceDir }}/scripts/manage_block.sh"
 
 BASHRC_CONTENT='if [[ -f "$HOME/.config/bash/.bashrc" ]]; then
@@ -9,3 +10,4 @@ BASHRC_CONTENT='if [[ -f "$HOME/.config/bash/.bashrc" ]]; then
 fi'
 
 manage_block "$HOME/.bashrc" "$BASHRC_CONTENT"
+{{- end }}

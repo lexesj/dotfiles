@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+{{ if .is_personal -}}
 set -euo pipefail
 
 SSH_KEY="$HOME/.ssh/id_ed25519"
@@ -22,3 +23,4 @@ if [ ! -f "$SSH_KEY" ]; then
 	echo "--------------------------------------------------------"
 	read -p "Press Enter to continue..."
 fi
+{{- end }}
