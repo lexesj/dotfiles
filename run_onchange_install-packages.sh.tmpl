@@ -14,13 +14,6 @@ sudo apt install -y \
 	{{   range .packages.linux.personal -}}{{ . }} {{ end -}}
 	{{ end }}
 
-{{    if .is_personal -}}
-# Set zsh as default shell if it's not already
-if [[ "$SHELL" != "$(command -v zsh)" ]]; then
-	echo "Changing default shell to zsh..."
-	sudo chsh -s "$(command -v zsh)" "$USER"
-fi
-{{-   end -}}
 {{- end -}}
 
 {{ if eq .chezmoi.os "darwin" -}}
