@@ -16,7 +16,6 @@ personal = ["gemini-cli", "tlrc", "mise"]
 common = ["ghostty", "raycast", "scroll-reverser"]
 work = []
 personal = [
-    "claude-code",
     "firefox",
     "google-chrome",
     "hiddenbar",
