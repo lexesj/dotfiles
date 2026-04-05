@@ -42,12 +42,10 @@ type = "file"
 url = "https://github.com/neovim/neovim/releases/latest/download/nvim-linux-{{ $arch }}.appimage"
 executable = true
 
-{{- if eq .chezmoi.os "linux" -}}
 {{- $miseVersion := (gitHubLatestRelease "jdx/mise").TagName | trimPrefix "v" -}}
 {{- $archMise := ternary "x64" .chezmoi.arch (eq .chezmoi.arch "amd64") }}
 [".local/bin/mise"]
 type = "file"
 url = "https://github.com/jdx/mise/releases/download/v{{ $miseVersion }}/mise-v{{ $miseVersion }}-linux-{{ $archMise }}"
 executable = true
-{{- end }}
 {{- end }}
