@@ -7,9 +7,3 @@ export EDITOR="nvim"
 
 # Node.
 export NODE_COMPILE_CACHE="$HOME/.cache/nodejs-compile-cache"
-
-{{- if .is_work }}
-# Claude Code.
-export ANTHROPIC_MODEL="opus[1m]"
-export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1
-{{- end }}
