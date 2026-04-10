@@ -40,7 +40,7 @@ if [ -n "$used" ]; then
     fi
 
     # Display with percentage and token count
-    printf " | Context: %s %d%% (%s/%dK tokens)" "$bar" "$used_int" "$tokens_display" "$((context_size / 1000))"
+    printf "\nContext: %s %d%% (%s/%dK tokens)" "$bar" "$used_int" "$tokens_display" "$((context_size / 1000))"
 fi
 
 # {{- if .is_personal }}
@@ -83,7 +83,7 @@ if [ -n "$week_pct" ]; then
     [ -n "$rate_out" ] && rate_out="$rate_out "
     rate_out="$rate_out$week_label"
 fi
-[ -n "$rate_out" ] && printf " | Limits: %s" "$rate_out"
+[ -n "$rate_out" ] && printf "\nLimits: %s" "$rate_out"
 # {{- end }}
 
 printf "\n"
