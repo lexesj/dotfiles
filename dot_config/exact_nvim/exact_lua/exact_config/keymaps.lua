@@ -19,3 +19,6 @@ vim.keymap.set("n", "<leader>fr", function()
 	vim.fn.setreg("+", path)
 	vim.notify("Copied relative path: " .. path)
 end, { desc = "Copy Relative File Path" })
+
+-- Enter normal mode in terminal mode.
+vim.keymap.set("t", "<M-n>", [[<C-\><C-n>]], { desc = "Enter Normal Mode" })
