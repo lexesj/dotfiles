@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+source "{{ .chezmoi.sourceDir }}/scripts/manage_block.sh"
+
+TARGET_FILE="$HOME/.codex/config.toml"
+mkdir -p "$(dirname "$TARGET_FILE")"
+touch "$TARGET_FILE"
+
+perl -i -0pe '
+	s{
+		^\[tui\]\n
+		(?:
+			(?!^\[[^\]]+\]$).*\n?
+		)*
+	}{}gmsx
+' "$TARGET_FILE"
+
+TUI_CONTENT='[tui]
+status_line = ["model-with-reasoning", "current-dir", "context-usage", "five-hour-limit", "weekly-limit"]'
+
+manage_block \
+	"$TARGET_FILE" \
+	"$TUI_CONTENT" \
+	"# BEGIN CHEZMOI MANAGED BLOCK: codex-tui" \
+	"# END CHEZMOI MANAGED BLOCK: codex-tui"
