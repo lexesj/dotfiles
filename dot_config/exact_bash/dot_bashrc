@@ -35,3 +35,19 @@ function setup_git() {
 		pay-server/stripe_frontend/config
 	pay gitfs watch
 }
+
+# sesh.
+if command -v sesh &>/dev/null; then
+	function sesh-sessions() {
+		{
+			exec </dev/tty
+			exec <&1
+			local session
+			session=$(sesh list --tmux --config --zoxide --hide-duplicates | fzf --height 40% --reverse --border-label ' sesh ' --border --prompt '⚡  ')
+			[[ -z "$session" ]] && return
+			sesh connect "$session"
+		}
+	}
+
+	bind -x '"\es": sesh-sessions'
+fi
