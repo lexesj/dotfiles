@@ -1,8 +1,8 @@
--- Change split size.
-vim.keymap.set("n", "<M-,>", "<C-w>5<", { desc = "increase split width" })
-vim.keymap.set("n", "<M-.>", "<C-w>5>", { desc = "decrease split width" })
-vim.keymap.set("n", "<M-t>", "<C-w>+", { desc = "increase split height" })
-vim.keymap.set("n", "<M-s>", "<C-w>-", { desc = "decrease split height" })
+-- Resize windows using Alt + hjkl
+vim.keymap.set("n", "<M-k>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
+vim.keymap.set("n", "<M-j>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
+vim.keymap.set("n", "<M-h>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
+vim.keymap.set("n", "<M-l>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
 
 -- Better navigation.
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Scroll up and center" })
