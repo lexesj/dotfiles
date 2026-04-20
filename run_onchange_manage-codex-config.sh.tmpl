@@ -6,6 +6,22 @@ TARGET_FILE="$HOME/.codex/config.toml"
 mkdir -p "$(dirname "$TARGET_FILE")"
 touch "$TARGET_FILE"
 
+{{ if .is_work -}}
+# Keep a single top-level reasoning setting and force it for work machines.
+perl -i -0pe '
+	s/^model_reasoning_effort\s*=.*\n+//mg;
+	$_ = qq{model_reasoning_effort = "high"\n\n} . $_;
+' "$TARGET_FILE"
+{{ end -}}
+
+{{ if .is_personal -}}
+# Remove any stale top-level reasoning setting on personal machines.
+perl -i -0pe '
+	s/^model_reasoning_effort\s*=.*\n+//mg;
+' "$TARGET_FILE"
+{{ end -}}
+
+# Clear any existing [tui] section before re-adding the managed version below.
 perl -i -0pe '
 	s{
 		^\[tui\]\n
