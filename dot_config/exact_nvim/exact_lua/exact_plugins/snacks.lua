@@ -30,13 +30,6 @@ return {
 				},
 			},
 		},
-		terminal = {
-			win = {
-				keys = {
-					term_normal = { "<C-[>", "<C-\\><C-n>", mode = "t", desc = "Exit terminal" },
-				},
-			},
-		},
 	},
 	-- stylua: ignore
 	keys = {
