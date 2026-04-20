@@ -19,7 +19,7 @@ $marker_end"
 	export MARKER_END="$marker_end"
 	export FULL_BLOCK="$full_block"
 
-	if grep -q "$marker_begin" "$target_file"; then
+	if grep -q "$marker_begin" "$target_file" && grep -q "$marker_end" "$target_file"; then
 		echo "Updating existing chezmoi block in $target_file..."
 		# Replace everything between the markers, including the markers themselves
 		# Using perl substr to avoid regex interpolation in the replacement string
@@ -39,6 +39,18 @@ $marker_end"
 			}
 		' "$target_file"
 	else
+		# Strip any orphaned begin marker before appending a fresh block
+		if grep -q "$marker_begin" "$target_file"; then
+			export MARKER_BEGIN="$marker_begin"
+			perl -i -0777 -pe '
+				BEGIN { $begin = $ENV{MARKER_BEGIN}; }
+				$start = index($_, $begin);
+				if ($start != -1) {
+					$start-- if $start > 0 && substr($_, $start - 1, 1) eq "\n";
+					substr($_, $start, length($begin) + 1) = "";
+				}
+			' "$target_file"
+		fi
 		echo "Appending new chezmoi block to $target_file..."
 		# Append the block to the end of the file
 		{

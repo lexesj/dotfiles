@@ -21,16 +21,6 @@ perl -i -0pe '
 ' "$TARGET_FILE"
 {{ end -}}
 
-# Clear any existing [tui] section before re-adding the managed version below.
-perl -i -0pe '
-	s{
-		^\[tui\]\n
-		(?:
-			(?!^\[[^\]]+\]$).*\n?
-		)*
-	}{}gmsx
-' "$TARGET_FILE"
-
 TUI_CONTENT='[tui]
 status_line = ["model-with-reasoning", "current-dir", "context-usage", "five-hour-limit", "weekly-limit"]'
 
