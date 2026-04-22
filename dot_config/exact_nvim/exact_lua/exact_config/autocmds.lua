@@ -31,3 +31,16 @@ vim.api.nvim_create_autocmd("OptionSet", {
 		end
 	end,
 })
+
+vim.api.nvim_create_user_command("LspLogClear", function()
+	local log_path = vim.lsp.log.get_filename()
+	local size_mb = (vim.uv.fs_stat(log_path) or {}).size or 0
+	size_mb = math.floor(size_mb / 1024 / 1024 * 10) / 10
+	local fd = io.open(log_path, "w")
+	if fd then
+		fd:close()
+		vim.notify(string.format("LSP log cleared (%.1f MB): %s", size_mb, log_path))
+	else
+		vim.notify("Failed to clear LSP log: " .. log_path, vim.log.levels.ERROR)
+	end
+end, { desc = "Clears the Neovim LSP log file" })

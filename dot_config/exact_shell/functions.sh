@@ -3,19 +3,6 @@ add_to_path() {
 	export PATH="${1}:${PATH//$1:/}"
 }
 
-# Empty the nvim LSP log file.
-nvim_clear_lsp_log() {
-	local log="${XDG_STATE_HOME:-$HOME/.local/state}/nvim/lsp.log"
-	if [[ -f "$log" ]]; then
-		local size_mb
-		size_mb="$(du -m "$log" | cut -f1)"
-		: >"$log"
-		echo "Cleared $log (${size_mb}MB)"
-	else
-		echo "No lsp.log found at $log"
-	fi
-}
-
 # Delete all nvim swap files.
 nvim_clear_swap() {
 	local swap_dir="${XDG_STATE_HOME:-$HOME/.local/state}/nvim/swap"
