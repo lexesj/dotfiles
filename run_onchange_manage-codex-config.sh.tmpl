@@ -1,31 +1,15 @@
 #!/usr/bin/env bash
 
-source "{{ .chezmoi.sourceDir }}/scripts/manage_block.sh"
-
 TARGET_FILE="$HOME/.codex/config.toml"
 mkdir -p "$(dirname "$TARGET_FILE")"
 touch "$TARGET_FILE"
 
 {{ if .is_work -}}
-# Keep a single top-level reasoning setting and force it for work machines.
-perl -i -0pe '
-	s/^model_reasoning_effort\s*=.*\n+//mg;
-	$_ = qq{model_reasoning_effort = "high"\n\n} . $_;
-' "$TARGET_FILE"
+yq -i -p toml -o toml '.model_reasoning_effort = "high"' "$TARGET_FILE"
 {{ end -}}
 
 {{ if .is_personal -}}
-# Remove any stale top-level reasoning setting on personal machines.
-perl -i -0pe '
-	s/^model_reasoning_effort\s*=.*\n+//mg;
-' "$TARGET_FILE"
+yq -i -p toml -o toml 'del(.model_reasoning_effort)' "$TARGET_FILE"
 {{ end -}}
 
-TUI_CONTENT='[tui]
-status_line = ["model-with-reasoning", "current-dir", "context-usage", "five-hour-limit", "weekly-limit"]'
-
-manage_block \
-	"$TARGET_FILE" \
-	"$TUI_CONTENT" \
-	"# BEGIN CHEZMOI MANAGED BLOCK: codex-tui" \
-	"# END CHEZMOI MANAGED BLOCK: codex-tui"
+yq -i -p toml -o toml '.tui.status_line = ["model-with-reasoning", "current-dir", "context-usage", "five-hour-limit", "weekly-limit"]' "$TARGET_FILE"
