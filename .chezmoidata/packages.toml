@@ -1,7 +1,7 @@
 [packages]
 # Tools shared across ALL operating systems (CLI only)
 [packages.universal]
-common = ["git-delta", "ripgrep", "tmux", "zoxide"]
+common = ["git-delta", "ripgrep", "tmux", "yq", "zoxide"]
 work = []
 personal = []
 
