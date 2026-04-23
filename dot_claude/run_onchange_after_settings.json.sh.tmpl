@@ -7,6 +7,9 @@ TARGET_FILE="$HOME/.claude/settings.json"
 
 tmp=$(mktemp)
 
+# Always set the status line
+jq '.statusLine = {"type": "command", "command": "bash ~/.claude/statusline-command.sh"}' "$TARGET_FILE" > "$tmp"
+
 {{ if .is_work -}}
 # Work: add env overrides and model
 jq '
@@ -17,12 +20,12 @@ jq '
     "CLAUDE_CODE_NO_FLICKER": "1"
   } |
   .model = "opusplan"
-' "$TARGET_FILE" > "$tmp"
+' "$tmp" > "$TARGET_FILE"
 {{ end -}}
 
 {{ if .is_personal -}}
 # Personal: remove work-specific settings
-jq 'del(.env, .model)' "$TARGET_FILE" > "$tmp"
+jq 'del(.env, .model)' "$tmp" > "$TARGET_FILE"
 {{ end -}}
 
 mv "$tmp" "$TARGET_FILE"
