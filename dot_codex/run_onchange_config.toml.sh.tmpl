@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 TARGET_FILE="$HOME/.codex/config.toml"
-mkdir -p "$(dirname "$TARGET_FILE")"
 touch "$TARGET_FILE"
 
 # Strip top-level model_reasoning_effort (if any) and set the tui config.
