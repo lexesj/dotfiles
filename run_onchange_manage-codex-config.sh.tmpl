@@ -4,12 +4,20 @@ TARGET_FILE="$HOME/.codex/config.toml"
 mkdir -p "$(dirname "$TARGET_FILE")"
 touch "$TARGET_FILE"
 
+# Strip top-level model_reasoning_effort (if any) and set the tui config.
+# Written to a temp file so we can optionally prepend the reasoning key at the
+# top of the file — TOML requires bare keys to appear before any [section] headers.
+tmp=$(mktemp)
+yq -p toml -o toml 'del(.model_reasoning_effort) | .tui.status_line = ["model-with-reasoning", "current-dir", "context-usage", "five-hour-limit", "weekly-limit"]' "$TARGET_FILE" > "$tmp"
+
 {{ if .is_work -}}
-yq -i -p toml -o toml '.model_reasoning_effort = "high"' "$TARGET_FILE"
+# Work: force high reasoning effort at the top level
+{ printf 'model_reasoning_effort = "high"\n\n'; cat "$tmp"; } > "$TARGET_FILE"
 {{ end -}}
 
 {{ if .is_personal -}}
-yq -i -p toml -o toml 'del(.model_reasoning_effort)' "$TARGET_FILE"
+# Personal: no reasoning effort override
+cp "$tmp" "$TARGET_FILE"
 {{ end -}}
 
-yq -i -p toml -o toml '.tui.status_line = ["model-with-reasoning", "current-dir", "context-usage", "five-hour-limit", "weekly-limit"]' "$TARGET_FILE"
+rm "$tmp"
