@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+TARGET_FILE="$HOME/.claude/settings.json"
+
+# Ensure file exists with valid JSON
+[[ -s "$TARGET_FILE" ]] || echo '{}' > "$TARGET_FILE"
+
+tmp=$(mktemp)
+
+{{ if .is_work -}}
+# Work: add env overrides and model
+jq '
+  .env = {
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "claude-opus-4-6[1m]",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "claude-sonnet-4-6[1m]",
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+    "CLAUDE_CODE_NO_FLICKER": "1"
+  } |
+  .model = "opusplan"
+' "$TARGET_FILE" > "$tmp"
+{{ end -}}
+
+{{ if .is_personal -}}
+# Personal: remove work-specific settings
+jq 'del(.env, .model)' "$TARGET_FILE" > "$tmp"
+{{ end -}}
+
+mv "$tmp" "$TARGET_FILE"
