@@ -28,4 +28,4 @@ jq '
 jq 'del(.env, .model)' "$tmp" > "$TARGET_FILE"
 {{ end -}}
 
-mv "$tmp" "$TARGET_FILE"
+rm "$tmp"
