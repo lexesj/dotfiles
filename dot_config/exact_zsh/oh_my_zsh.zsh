@@ -72,9 +72,12 @@ ZSH_THEME="robbyrussell"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
 	git
-	vi-mode
+	zsh-vi-mode
 	zsh-autosuggestions
 )
+
+# Use ys/cs/ds verbs (vim-surround style) instead of s-prefix mode
+ZVM_VI_SURROUND_BINDKEY=classic
 
 source $ZSH/oh-my-zsh.sh
 
