@@ -6,7 +6,7 @@ new_devbox() {
 		case "$arg" in
 		--fe) fe=1 ;;
 		--help | -h)
-			echo "Usage: new_devbox <name> [--fe]"
+			echo "Usage: new_devbox [--fe] <name>"
 			echo ""
 			echo "Arguments:"
 			echo "  <name>   Name of the devbox (required)"
@@ -28,10 +28,12 @@ new_devbox() {
 	local cmd=(pay remote new --ide none --notify-on-ready --ssh --tmux --repo=mint --workspace=pay-server)
 
 	if [[ $fe -eq 1 ]]; then
-		cmd+=(--graph dashboard-fe-srv/base)
+		cmd+=(--graph dashboard-fe-srv)
 	fi
 
 	cmd+=(-y "$name")
+
+	echo "${cmd[@]}"
 
 	"${cmd[@]}"
 }
