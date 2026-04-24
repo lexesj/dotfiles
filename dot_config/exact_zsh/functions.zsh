@@ -28,7 +28,7 @@ new_devbox() {
 	local cmd=(pay remote new --ide none --notify-on-ready --ssh --tmux --repo=mint --workspace=pay-server)
 
 	if [[ $fe -eq 1 ]]; then
-		cmd+=(--graph dashboard-fe-srv)
+		cmd+=(--graph dashboard-fe-srv/default)
 	fi
 
 	cmd+=(-y "$name")
