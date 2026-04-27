@@ -57,14 +57,13 @@ Follow the template's section structure as-is — do not merge, rename, or rearr
 - JIRA tickets: Link using `Closes [KEY-123](https://jira.corp.stripe.com/browse/KEY-123).` or `Relates to [KEY-456](...).` format — always end with a full stop after the link.
 - Test plan: Honest checkbox state based on whether tests were actually added/modified.
 - For visual changes, includes Before/After screenshots section.
-- Strip all HTML comments from the template in the output (the `<!-- ... -->` blocks) — keep sections clean without comment noise.
 - Do NOT add the LLM disclaimer. This is a draft for the user to review, not a final PR submission.
 - Do NOT actually create the PR. Only generate the markdown file.
 
 ### 5. Write the output
 
 1. Suggest a PR title following the `[Tag] Description` convention.
-2. Write the filled PR body to `pr-description.md` in the repo root.
+2. Write the filled PR body to `pr-description.md` in the repo root, with the suggested title as a top-level heading (`# <suggested title>`) on the first line, followed by the PR body.
 3. Display a summary of:
    - Suggested title
    - Linked JIRA tickets
