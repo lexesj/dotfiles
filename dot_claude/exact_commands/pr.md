@@ -53,8 +53,8 @@ To find the correct PR template, run `git rev-parse --show-toplevel` to get the 
 **Other formatting rules:**
 
 - Title format: `[Project/Feature Name] Short description` — concise and descriptive.
-- Reviewers: place `cc @<org>/<codeowner-team>` immediately followed by `r?` on the very next line (no blank line between them), at the top of the first section, before any description text.
 - Motivation: only use JIRA ticket links — `Closes [KEY-123](https://jira.corp.stripe.com/browse/KEY-123).` or `Relates to [KEY-456](...).` — nothing else. Always end with a period.
+- Reviewers: fill in the `cc @stripe-internal/` line already present in the template with the codeowner team, and add `r? @<reviewer>` on the line immediately after it (no blank line between them). Keep them in the position the template places them — do not move them earlier in the section.
 - Do NOT add an LLM disclaimer. This is a draft for the user to review.
 - Do NOT create the PR. Only generate the markdown file.
 - Use past PRs found in step 3 as a reference for tone and level of detail.
