@@ -42,23 +42,22 @@ Then run the following commands in parallel to understand what changed (substitu
 - Identify the main directories touched from the diff stat.
 - Use the `code_get_pull_request` and `code_get_branch_info` Toolshed MCP tools to find recent merged PRs by the current user that touched similar directories.
 - From those PRs, note which teams were cc'd and who reviewed/approved them.
-- Use those teams and reviewers to populate the `cc` and `r?` lines in the description.
+- Use those teams and reviewers in step 4 when placing the `r?` and `cc` lines.
 
 ### 4. Generate the PR description
 
-Read the PR template from `.github/PULL_REQUEST_TEMPLATE.md` in the current repo and fill it in. Use past PRs found in step 3 as a reference for tone and level of detail.
+To find the correct PR template, run `git rev-parse --show-toplevel` to get the repo root. Use the template at `<repo-root>/.github/PULL_REQUEST_TEMPLATE.md`. Fill it in following these rules:
 
-Follow the template's section structure as-is — do not merge, rename, or rearrange sections. Fill in each section faithfully based on the changes.
+**Critical: treat the template as a scaffold.** HTML comments (`<!-- ... -->`) serve two purposes at once: they are hints that describe what content belongs in the adjacent blank, AND they must be copied verbatim into the output. Read each comment to understand what to write in the blank next to it, then write that content — but keep the comment itself in place unchanged. Never remove, reword, or summarize a comment.
 
-**Formatting rules:**
+**Other formatting rules:**
 
-- Title format: `[Project/Feature Name] Short description`.
-- Reviewers: Place `cc @<org>/<codeowner-team>` and `r?` on its own line at the top of the first section, before the description text.
-- JIRA tickets: Link using `Closes [KEY-123](https://jira.corp.stripe.com/browse/KEY-123).` or `Relates to [KEY-456](...).` format — always end with a full stop after the link.
-- Test plan: Honest checkbox state based on whether tests were actually added/modified.
-- For visual changes, includes Before/After screenshots section.
-- Do NOT add the LLM disclaimer. This is a draft for the user to review, not a final PR submission.
-- Do NOT actually create the PR. Only generate the markdown file.
+- Title format: `[Project/Feature Name] Short description` — concise and descriptive.
+- Reviewers: place `cc @<org>/<codeowner-team>` immediately followed by `r?` on the very next line (no blank line between them), at the top of the first section, before any description text.
+- Motivation: only use JIRA ticket links — `Closes [KEY-123](https://jira.corp.stripe.com/browse/KEY-123).` or `Relates to [KEY-456](...).` — nothing else. Always end with a period.
+- Do NOT add an LLM disclaimer. This is a draft for the user to review.
+- Do NOT create the PR. Only generate the markdown file.
+- Use past PRs found in step 3 as a reference for tone and level of detail.
 
 ### 5. Write the output
 
