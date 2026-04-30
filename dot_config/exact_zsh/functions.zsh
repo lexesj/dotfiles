@@ -40,7 +40,8 @@ new_devbox() {
 	pay remote ssh "$name" -- "echo $(gh auth token -h git.corp.stripe.com) | gh auth login -p ssh -h git.corp.stripe.com --with-token"
 
 	echo "Copying copilot credentials to $name..."
-	pay remote scp ~/.config/github-copilot/apps.json "$name:.config/github-copilot/apps.json"
+	pay remote ssh "$name" -- "mkdir -p ~/.config/github-copilot"
+	pay remote copy "$name" ~/.config/github-copilot/apps.json remote:~/.config/github-copilot/apps.json
 
 	pay remote ssh "$name" --tmux
 }
