@@ -1,5 +1,5 @@
 ---
-description: Generate a PR description markdown file from the current branch's changes and link relevant JIRA tickets.
+description: Create a draft PR from the current branch's changes, linking relevant JIRA tickets.
 ---
 
 # Generate PR Description
@@ -56,17 +56,21 @@ To find the correct PR template, run `git rev-parse --show-toplevel` to get the 
 - Motivation: only use JIRA ticket links — `Closes [KEY-123](https://jira.corp.stripe.com/browse/KEY-123).` or `Relates to [KEY-456](...).` — nothing else. Always end with a period.
 - Reviewers: fill in the `cc @stripe-internal/` line already present in the template with the codeowner team, and add `r? @<reviewer>` on the line immediately after it (no blank line between them). Keep them in the position the template places them — do not move them earlier in the section.
 - Do NOT add an LLM disclaimer. This is a draft for the user to review.
-- Do NOT create the PR. Only generate the markdown file.
 - Use past PRs found in step 3 as a reference for tone and level of detail.
 
-### 5. Write the output
+### 5. Create the draft PR
 
-1. Suggest a PR title following the `[Tag] Description` convention.
-2. Write the filled PR body to `pr-description.md` in the repo root, with the suggested title as a top-level heading (`# <suggested title>`) on the first line, followed by the PR body.
-3. Display a summary of:
-   - Suggested title
+1. Determine the PR title following the `[Tag] Description` convention.
+2. Write the PR body to a temporary file (e.g. `/tmp/pr-body.md`) to avoid shell quoting issues.
+3. Run:
+   ```
+   gh pr create --draft --base <base> --title "<title>" --body-file /tmp/pr-body.md
+   ```
+   where `<base>` is the base branch determined in step 1.
+4. Display a summary of:
+   - PR URL (from `gh` output)
+   - Target base branch (note if this is a stacked PR targeting a feature branch)
    - Linked JIRA tickets
    - Files changed count
-   - Path to the generated file
 
-Tell the user they can review and edit `pr-description.md`, then create the PR manually using their preferred method (e.g. the GitHub web UI).
+Tell the user the draft PR is ready to review and edit on GitHub before marking it ready for review.
