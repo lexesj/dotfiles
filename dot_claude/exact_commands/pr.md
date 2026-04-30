@@ -37,12 +37,12 @@ Then run the following commands in parallel to understand what changed (substitu
 - From the results, identify which tickets are relevant to the changes in this branch.
 - **Fallback to epics:** Only if no relevant non-epic tickets are found, re-run the same queries **without** the `issuetype != Epic` filter and pick relevant tickets from those broader results.
 
-### 3. Determine reviewers from past PRs
+### 3. Determine the codeowner team from past PRs
 
 - Identify the main directories touched from the diff stat.
 - Use the `code_get_pull_request` and `code_get_branch_info` Toolshed MCP tools to find recent merged PRs by the current user that touched similar directories.
-- From those PRs, note which teams were cc'd and who reviewed/approved them.
-- Use those teams and reviewers in step 4 when placing the `r?` and `cc` lines.
+- From those PRs, note which teams were cc'd.
+- Use those teams in step 4 when placing the `cc` line.
 
 ### 4. Generate the PR description
 
@@ -54,7 +54,7 @@ To find the correct PR template, run `git rev-parse --show-toplevel` to get the 
 
 - Title format: `[Project/Feature Name] Short description` — concise and descriptive.
 - Motivation: only use JIRA ticket links — `Closes [KEY-123](https://jira.corp.stripe.com/browse/KEY-123).` or `Relates to [KEY-456](...).` — nothing else. Always end with a period.
-- Reviewers: fill in the `cc @stripe-internal/` line already present in the template with the codeowner team, and add `r? @<reviewer>` on the line immediately after it (no blank line between them). Keep them in the position the template places them — do not move them earlier in the section.
+- Reviewers: fill in the `cc @stripe-internal/` line already present in the template with the codeowner team. Keep it in the position the template places it — do not move it earlier in the section. Do not add an `r?` line.
 - Do NOT add an LLM disclaimer. This is a draft for the user to review.
 - Use past PRs found in step 3 as a reference for tone and level of detail.
 
