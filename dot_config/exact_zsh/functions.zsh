@@ -21,11 +21,11 @@ new_devbox() {
 	if [[ -z "$name" ]]; then
 		echo "Error: devbox name is required"
 		echo ""
-		echo "Usage: new_devbox <name> [--fe]"
+		echo "Usage: new_devbox [--fe] <name>"
 		return 1
 	fi
 
-	local cmd=(pay remote new --ide none --notify-on-ready --ssh --tmux --repo=mint --workspace=pay-server)
+	local cmd=(pay remote new --ide none --notify-on-ready --repo=mint --workspace=pay-server)
 
 	if [[ $fe -eq 1 ]]; then
 		cmd+=(--graph dashboard-fe-srv/default)
@@ -34,6 +34,10 @@ new_devbox() {
 	cmd+=(-y "$name")
 
 	echo "${cmd[@]}"
+	"${cmd[@]}" || return 1
 
-	"${cmd[@]}"
+	echo "Copying gh credentials to $name..."
+	pay remote ssh "$name" -- "echo $(gh auth token -h git.corp.stripe.com) | gh auth login -p ssh -h git.corp.stripe.com --with-token"
+
+	pay remote ssh "$name" --tmux
 }

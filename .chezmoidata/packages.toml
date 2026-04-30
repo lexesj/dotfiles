@@ -1,13 +1,13 @@
 [packages]
 # Tools shared across ALL operating systems (CLI only)
 [packages.universal]
-common = ["git-delta", "ripgrep", "tmux", "yq", "zoxide"]
+common = ["gh", "git-delta", "ripgrep", "tmux", "yq", "zoxide"]
 work = []
 personal = []
 
 # macOS CLI tools (brew install)
 [packages.darwin.brew]
-common = ["fd", "fzf", "gh", "lazygit", "neovim", "sesh"]
+common = ["fd", "fzf", "lazygit", "neovim", "sesh"]
 work = []
 personal = ["bitwarden-cli", "gemini-cli", "tlrc", "mise"]
 
