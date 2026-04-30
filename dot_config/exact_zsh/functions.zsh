@@ -44,8 +44,8 @@ copy_devbox_creds() {
 	local name="$1"
 	if [[ -z "$name" ]]; then
 		name=$(pay remote list --raw |
-			jq '.[] | select(.status == "running") | select(.type == "remotedevbox" or .type == "remotemydata") | "\(.name) \(.host)"' -r |
-			fzf --with-nth=1 --accept-nth=2)
+			jq '.[] | select(.status == "running") | select(.type == "remotedevbox" or .type == "remotemydata") | .name' -r |
+			fzf)
 	fi
 
 	if [[ -z "$name" ]]; then
