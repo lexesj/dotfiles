@@ -36,12 +36,26 @@ new_devbox() {
 	echo "${cmd[@]}"
 	"${cmd[@]}" || return 1
 
+	copy_devbox_creds "$name"
+	pay remote ssh "$name" --tmux
+}
+
+copy_devbox_creds() {
+	local name="$1"
+	if [[ -z "$name" ]]; then
+		name=$(pay remote list --raw |
+			jq '.[] | select(.status == "running") | select(.type == "remotedevbox" or .type == "remotemydata") | "\(.name) \(.host)"' -r |
+			fzf --with-nth=1 --accept-nth=2)
+	fi
+
+	if [[ -z "$name" ]]; then
+		return 1
+	fi
+
 	echo "Copying gh credentials to $name..."
 	pay remote ssh "$name" -- "echo $(gh auth token -h git.corp.stripe.com) | gh auth login -p ssh -h git.corp.stripe.com --with-token"
 
 	echo "Copying copilot credentials to $name..."
 	pay remote ssh "$name" -- "mkdir -p ~/.config/github-copilot"
 	pay remote copy "$name" ~/.config/github-copilot/apps.json remote:~/.config/github-copilot/apps.json
-
-	pay remote ssh "$name" --tmux
 }
