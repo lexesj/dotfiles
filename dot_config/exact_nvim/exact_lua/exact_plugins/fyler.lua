@@ -12,7 +12,7 @@ return {
 			---@diagnostic disable-next-line: missing-fields
 			finder = {
 				mappings = {
-					["-"] = "GotoNode",
+					["-"] = "GotoParent",
 				},
 			},
 		},
