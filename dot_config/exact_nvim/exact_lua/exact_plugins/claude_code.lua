@@ -1,7 +1,6 @@
----@module 'claudecode.types'
-
 return {
 	"coder/claudecode.nvim",
+	---@module 'claudecode.types'
 	---@type PartialClaudeCodeConfig
 	opts = {
 		---@diagnostic disable-next-line: missing-fields
