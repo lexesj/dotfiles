@@ -4,6 +4,6 @@ function zvm_after_init() {
 		source <(fzf --zsh)
 	fi
 
-	# Restore Ctrl+[ → normal mode after fzf may have clobbered the binding
-	zvm_bindkey viins '^[' zvm_exit_insert_mode
+	# Bind Ghostty's CSI u encoding of Ctrl+[ to enter normal mode
+	zvm_bindkey viins '^[[91;5u' zvm_exit_insert_mode
 }
