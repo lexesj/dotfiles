@@ -58,16 +58,21 @@ To find the correct PR template, run `git rev-parse --show-toplevel` to get the 
 - Do NOT add an LLM disclaimer. This is a draft for the user to review.
 - Use past PRs found in step 3 as a reference for tone and level of detail.
 
-### 5. Create the draft PR
+### 5. Show the draft for approval
 
 1. Determine the PR title following the `[Tag] Description` convention.
-2. Write the PR body to a temporary file (e.g. `/tmp/pr-body.md`) to avoid shell quoting issues.
-3. Run:
+2. Present the full PR title and body to the user for review.
+3. **Ask the user explicitly:** "Does this look good? Should I create the PR?" — wait for their response before proceeding.
+
+### 6. Create the draft PR (only after approval)
+
+1. Write the PR body to a temporary file (e.g. `/tmp/pr-body.md`) to avoid shell quoting issues.
+2. Run:
    ```
    gh pr create --draft --base <base> --title "<title>" --body-file /tmp/pr-body.md
    ```
    where `<base>` is the base branch determined in step 1.
-4. Display a summary of:
+3. Display a summary of:
    - PR URL (from `gh` output)
    - Target base branch (note if this is a stacked PR targeting a feature branch)
    - Linked JIRA tickets
