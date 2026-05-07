@@ -1,3 +1,8 @@
+local function should_skip_setup()
+	local skip_setup = require("stripe_utils").is_remote_devbox()
+	return skip_setup
+end
+
 return {
 	{
 		"virtual_js_scripts",
@@ -29,15 +34,9 @@ return {
 				stripe_typescript_native = {},
 			},
 			setup = {
-				-- disable vtsls and tsgo in favour of stripe_typescript_native.
-				vtsls = function()
-					local skip_setup = require("stripe_utils").is_remote_devbox()
-					return skip_setup
-				end,
-				tsgo = function()
-					local skip_setup = require("stripe_utils").is_remote_devbox()
-					return skip_setup
-				end,
+				stripe_autogen = should_skip_setup,
+				tsgo = should_skip_setup,
+				vtsls = should_skip_setup,
 			},
 		},
 	},
