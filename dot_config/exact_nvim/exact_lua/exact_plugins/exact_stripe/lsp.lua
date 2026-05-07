@@ -1,6 +1,15 @@
-local function should_skip_setup()
-	local skip_setup = require("stripe_utils").is_remote_devbox()
-	return skip_setup
+local function skip_setup(predicate)
+	return function()
+		return predicate()
+	end
+end
+
+local function is_remote_devbox()
+	return require("stripe_utils").is_remote_devbox()
+end
+
+local function is_laptop()
+	return not is_remote_devbox()
 end
 
 return {
@@ -34,9 +43,10 @@ return {
 				stripe_typescript_native = {},
 			},
 			setup = {
-				stripe_autogen = should_skip_setup,
-				tsgo = should_skip_setup,
-				vtsls = should_skip_setup,
+				stripe_autogen = skip_setup(is_laptop),
+				-- Use stripe_typescript_native on devbox.
+				tsgo = skip_setup(is_remote_devbox),
+				vtsls = skip_setup(is_remote_devbox),
 			},
 		},
 	},
