@@ -1,8 +1,9 @@
 {
   "extras": [
     {{- if .is_personal }}
-    "lazyvim.plugins.extras.lang.python",
     "lazyvim.plugins.extras.ai.supermaven",
+    "lazyvim.plugins.extras.lang.go",
+    "lazyvim.plugins.extras.lang.python",
     {{- end }}
     {{- if .is_work }}
     "lazyvim.plugins.extras.ai.copilot",
