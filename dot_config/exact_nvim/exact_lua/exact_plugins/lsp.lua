@@ -3,6 +3,7 @@ return {
 	---@module 'lazyvim.plugins.lsp'
 	---@type PluginLspOpts
 	opts = {
+		inlay_hints = { enabled = false },
 		servers = {
 			["*"] = {
 				keys = {
