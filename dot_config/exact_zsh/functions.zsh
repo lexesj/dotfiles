@@ -40,12 +40,76 @@ new_devbox() {
 	pay remote ssh "$name" --tmux
 }
 
+_pick_devbox() {
+	local status_filter="${1:-}"
+	local jq_filter='.[] | select(.type == "remotedevbox" or .type == "remotemydata")'
+	if [[ -n "$status_filter" ]]; then
+		jq_filter+=" | select(.status == \"$status_filter\")"
+	fi
+	pay remote list --raw | jq -r "$jq_filter | .name" | fzf
+}
+
+restart_devbox() {
+	local name=""
+	local ssh=0
+	local tmux=0
+
+	for arg in "$@"; do
+		case "$arg" in
+		--ssh) ssh=1 ;;
+		--tmux) tmux=1 ;;
+		-*) echo "Unknown option: $arg" && return 1 ;;
+		*) name="$arg" ;;
+		esac
+	done
+
+	if [[ -z "$name" ]]; then
+		name=$(_pick_devbox)
+	fi
+
+	if [[ -z "$name" ]]; then
+		return 1
+	fi
+
+	local box_status
+	box_status=$(pay remote list --raw | jq -r --arg name "$name" '.[] | select(.name == $name) | .status')
+
+	if [[ "$box_status" == "running" ]]; then
+		echo "Stopping devbox $name..."
+		pay remote stop "$name" || return 1
+	else
+		echo "Devbox $name is $box_status, skipping stop."
+	fi
+
+	echo "Starting devbox $name..."
+	local max_attempts=30
+	local attempt=0
+	while [[ $attempt -lt $max_attempts ]]; do
+		if pay remote start "$name" 2>/dev/null; then
+			echo "Devbox $name is running."
+			break
+		fi
+		attempt=$((attempt + 1))
+		echo "  [$attempt/$max_attempts] not ready yet, retrying in 10s..."
+		sleep 10
+	done
+
+	if [[ $attempt -eq $max_attempts ]]; then
+		echo "Timed out waiting for devbox $name to start."
+		return 1
+	fi
+
+	if [[ $tmux -eq 1 ]]; then
+		pay remote ssh "$name" --tmux
+	elif [[ $ssh -eq 1 ]]; then
+		pay remote ssh "$name"
+	fi
+}
+
 copy_devbox_creds() {
 	local name="$1"
 	if [[ -z "$name" ]]; then
-		name=$(pay remote list --raw |
-			jq '.[] | select(.status == "running") | select(.type == "remotedevbox" or .type == "remotemydata") | .name' -r |
-			fzf)
+		name=$(_pick_devbox running)
 	fi
 
 	if [[ -z "$name" ]]; then
