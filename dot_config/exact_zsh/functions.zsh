@@ -118,5 +118,8 @@ copy_devbox_creds() {
 
 	echo "Copying copilot credentials to $name..."
 	pay remote ssh "$name" -- "mkdir -p ~/.config/github-copilot"
-	pay remote copy "$name" ~/.config/github-copilot/apps.json remote:~/.config/github-copilot/apps.json
+	for file in ~/.config/github-copilot/auth.*; do
+		[[ -f "$file" ]] || continue
+		pay remote copy "$name" "$file" "remote:~/.config/github-copilot/$(basename "$file")"
+	done
 }
