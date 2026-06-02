@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-{{ if .is_work -}}
-if command -v gh-real &>/dev/null; then
-	gh proxy enable
-fi
-{{- end }}
