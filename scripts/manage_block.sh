@@ -6,6 +6,16 @@ manage_block() {
 	local content="$2"
 	local marker_begin="${3:-# BEGIN CHEZMOI MANAGED BLOCK}"
 	local marker_end="${4:-# END CHEZMOI MANAGED BLOCK}"
+	local display_target
+
+	case "$target_file" in
+	"$HOME"/*)
+		display_target="~/${target_file#"$HOME"/}"
+		;;
+	*)
+		display_target="$target_file"
+		;;
+	esac
 
 	# Ensure target file exists
 	touch "$target_file"
@@ -20,7 +30,7 @@ $marker_end"
 	export FULL_BLOCK="$full_block"
 
 	if grep -q "$marker_begin" "$target_file" && grep -q "$marker_end" "$target_file"; then
-		echo "Updating existing chezmoi block in $target_file..."
+		echo "Updating existing chezmoi block in $display_target..."
 		# Replace everything between the markers, including the markers themselves
 		# Using perl substr to avoid regex interpolation in the replacement string
 		perl -i -0777 -pe '
@@ -51,7 +61,7 @@ $marker_end"
 				}
 			' "$target_file"
 		fi
-		echo "Appending new chezmoi block to $target_file..."
+		echo "Appending new chezmoi block to $display_target..."
 		# Append the block to the end of the file
 		{
 			echo ""
