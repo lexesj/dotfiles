@@ -3,8 +3,6 @@
 # mise.toml hash: {{ includeTemplate ".chezmoitemplates/file-hash.tmpl" "dot_config/exact_mise/config.toml" }}
 
 {{ if .is_personal -}}
-echo "Installing mise tools..."
-
 if command -v mise &>/dev/null; then
   echo "Installing tools with mise..."
   mise install --yes

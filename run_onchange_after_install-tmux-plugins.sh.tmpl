@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 # .tmux.conf hash: {{ includeTemplate ".chezmoitemplates/file-hash.tmpl" "dot_tmux.conf" }}
-echo "Installing tmux plugins..."
 
 if [[ -d "$HOME/.tmux/plugins/tpm" ]]; then
 	export TMUX_PLUGIN_MANAGER_PATH="$HOME/.tmux/plugins"
