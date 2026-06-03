@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# config.toml hash: {{ includeTemplate ".chezmoitemplates/file-hash.tmpl" (joinPath .chezmoi.homeDir ".codex/config.toml") }}
+echo "Updating dot_codex/config.toml..."
+
 TARGET_FILE="$HOME/.codex/config.toml"
 touch "$TARGET_FILE"
 

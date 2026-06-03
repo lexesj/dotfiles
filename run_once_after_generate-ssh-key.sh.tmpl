@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 {{ if .is_personal -}}
+echo "Checking SSH key..."
+
 set -euo pipefail
 
 SSH_KEY="$HOME/.ssh/id_ed25519"

@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 {{ if .is_personal -}}
+echo "Checking default shell..."
+
 # Set zsh as default shell if it's not already
 if [[ "$SHELL" != "$(command -v zsh)" ]]; then
 	echo "Changing default shell to zsh..."

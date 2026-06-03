@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
 {{ if .is_personal -}}
+echo "Installing Claude Code..."
+
 curl -fsSL https://claude.ai/install.sh | bash
 {{- end }}

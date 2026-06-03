@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
-# .bashrc hash: {{ if stat (joinPath .chezmoi.homeDir ".bashrc") }}{{ include (joinPath .chezmoi.homeDir ".bashrc") | sha256sum }}{{ else }}none{{ end }}
+# .bashrc hash: {{ includeTemplate ".chezmoitemplates/file-hash.tmpl" (joinPath .chezmoi.homeDir ".bashrc") }}
 
 {{ if and .is_work (eq .chezmoi.os "linux") -}}
+echo "Updating .bashrc..."
+
 source "{{ .chezmoi.sourceDir }}/scripts/manage_block.sh"
 
 BASHRC_CONTENT='if [[ -f "$HOME/.config/bash/.bashrc" ]]; then
