@@ -1,13 +1,13 @@
 [packages]
 # Tools shared across ALL operating systems (CLI only)
 [packages.universal]
-common = ["gh", "git-delta", "ripgrep", "tmux", "yq", "zoxide"]
+common = ["gh", "git-delta", "ripgrep", "tmux", "zoxide"]
 work = []
 personal = []
 
 # macOS CLI tools (brew install)
 [packages.darwin.brew]
-common = ["fd", "fzf", "lazygit", "neovim", "sesh"]
+common = ["fd", "fzf", "lazygit", "neovim", "python-yq", "sesh"]
 work = []
 personal = ["bitwarden-cli", "gemini-cli", "tlrc", "mise"]
 
@@ -31,6 +31,6 @@ personal = [
 
 # Linux packages (apt install)
 [packages.linux]
-common = ["fd-find", "unzip"]
+common = ["fd-find", "unzip", "yq"]
 work = []
 personal = ["build-essential", "tldr", "zsh"]
