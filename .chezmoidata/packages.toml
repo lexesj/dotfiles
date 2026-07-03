@@ -9,13 +9,14 @@ personal = []
 [packages.darwin.brew]
 common = ["fd", "fzf", "lazygit", "neovim", "python-yq", "sesh"]
 work = []
-personal = ["bitwarden-cli", "gemini-cli", "tlrc", "mise"]
+personal = ["bitwarden-cli", "tlrc", "mise"]
 
 # macOS GUI apps (brew install --cask)
 [packages.darwin.cask]
 common = ["ghostty", "raycast", "scroll-reverser"]
 work = []
 personal = [
+    "antigravity-cli",
     "codex",
     "firefox",
     "google-chrome",
