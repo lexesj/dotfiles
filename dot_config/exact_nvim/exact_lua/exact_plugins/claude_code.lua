@@ -7,5 +7,9 @@ return {
 		terminal = {
 			split_width_percentage = 0.4,
 		},
+		---@diagnostic disable-next-line: missing-fields
+		diff_opts = {
+			open_in_new_tab = true,
+		},
 	},
 }
