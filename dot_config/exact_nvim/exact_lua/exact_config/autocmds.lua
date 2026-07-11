@@ -22,16 +22,6 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 	end,
 })
 
--- Ensure diff mode has wrapping enabled.
-vim.api.nvim_create_autocmd("OptionSet", {
-	pattern = "diff",
-	callback = function()
-		if vim.v.option_new == "1" then
-			vim.opt_local.wrap = true
-		end
-	end,
-})
-
 vim.api.nvim_create_user_command("LspLogClear", function()
 	local log_path = vim.lsp.log.get_filename()
 	local size_mb = (vim.uv.fs_stat(log_path) or {}).size or 0

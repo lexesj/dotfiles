@@ -30,6 +30,9 @@ vim.o.splitbelow = true
 -- Override default LazyVim no-wrap.
 vim.opt.wrap = true
 
+-- Diff mode force-disables wrap regardless of 'wrap'; make it respect our setting.
+vim.opt.diffopt:append("followwrap")
+
 -- JavaScript / TypeScript settings.
 vim.g.lazyvim_ts_lsp = "tsgo"
 vim.g.lazyvim_prettier_needs_config = true
