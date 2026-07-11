@@ -1,10 +1,12 @@
 [settings]
 all_compile = false
+node.corepack = true
 python.precompiled_flavor = "install_only_stripped"
 
 [tools]
+"npm:corepack" = "latest"
+bun = "latest"
 go = "latest"
 node = "latest"
 python = "3.13"
 uv = "latest"
-bun = "latest"
