@@ -8,6 +8,10 @@ return {
 		integrations = {
 			winpick = "snacks",
 		},
+		win_opts = {
+			number = true,
+			relativenumber = true,
+		},
 		views = {
 			---@diagnostic disable-next-line: missing-fields
 			finder = {
