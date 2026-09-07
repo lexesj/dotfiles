@@ -3,9 +3,9 @@ git:
   autoFetch: false
   fetchAll: false
   {{- end }}
-  pagers:
+  diffRenderers:
     - colorArg: always
-      pager: delta --paging=never --dark
+      command: delta --paging=never --dark
 {{- if .is_work }}
 disableStartupPopups: true
 {{- end }}
