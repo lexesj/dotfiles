@@ -34,8 +34,6 @@ Then run the following commands, using the selected `<base>` branch:
 - `git diff <base>...HEAD --stat` to get a summary of changed files.
 - `git diff <base>...HEAD` to get the full diff. Read it carefully.
 
-If this is a stacked PR targeting a parent feature branch, mention in the generated PR description that the target merge branch is `<base>` rather than the default branch.
-
 ### 2. Identify the JIRA project and find relevant tickets
 
 - Look at the branch name and commit messages for JIRA ticket keys, such as `PROJ-123`.
