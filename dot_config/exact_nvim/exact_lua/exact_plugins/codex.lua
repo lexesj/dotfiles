@@ -1,38 +1,30 @@
 return {
-	"pittcat/codex.nvim",
-	cmd = { "CodexToggle", "CodexSendPath", "CodexSendSelection" },
+	"leejh903/codex.nvim",
+	commit = "ea699ace144d6db24ad0fbb1973fd8bb398665f5",
+	dependencies = { "folke/snacks.nvim" },
 	keys = {
 		{
 			"<leader>ao",
-			-- stylua: ignore
-			function() require("codex").toggle() end,
-			desc = "Toggle Codex side-panel",
+			"<cmd>Codex<cr>",
+			desc = "Toggle Codex",
 			mode = { "n", "t" },
 		},
 		{
 			"<leader>aos",
-			":'<,'>CodexSendSelection<cr>",
-			desc = "Send selected text to Codex",
+			":'<,'>CodexSend<cr>",
+			desc = "Reference selection in Codex",
 			mode = { "v" },
-		},
-		{
-			"<leader>ap",
-			":CodexSendPath<cr>",
-			desc = "Send selected path to Codex",
-			mode = { "n" },
 		},
 	},
 	opts = {
-		terminal = {
-			provider = "auto",
-			direction = "vertical",
-			size = 0.40,
-		},
-		terminal_bridge = {
-			path_format = "abs",
-			path_prefix = "@",
-			auto_attach = true,
-			selection_mode = "reference",
-		},
+		split_side = "right",
+		split_width_percentage = 0.40,
 	},
+	config = function(_, opts)
+		local codex = require("codex")
+		codex.setup()
+		require("codex.current_file").setup()
+		codex.start()
+		require("codex.terminal").setup(opts)
+	end,
 }
