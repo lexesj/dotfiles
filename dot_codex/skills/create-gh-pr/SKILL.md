@@ -36,7 +36,12 @@ Resolve the Mint root with `MINT_ROOT="$(dirname "$(mint-path-resolver)")"` when
 
 ### 3. Determine the codeowner teams
 
-For each changed file, resolve ownership from its nearest `metadata.yaml`. In modern metadata, use the most-specific matching `ownership.file_overrides`, otherwise resolve `ownership.project` in `project.yaml`. In legacy metadata, use `responsible_team` and the last matching `review_requirements` entry. Use the resulting team slugs for the template's `cc @stripe-internal/` line. Report ownership as unresolved if no rule applies.
+For each changed file, find its nearest `metadata.yaml` and resolve its code review group:
+
+- With modern `ownership` metadata, use the last matching exact-path `ownership.file_overrides` entry (paths are relative to the metadata directory), or `ownership.project` if none matches. Look up the effective project in `$MINT_ROOT/pay-server/lib/project/project.yaml`, resolving YAML inheritance, and use its `code_review.auto_assign_reviews` groups.
+- With legacy metadata, use `assignees` from the last matching `review_requirements` entry; use its `reviewers` only if `assignees` is absent. The `responsible_team` field identifies the accountable team, not necessarily its code review group.
+
+Put the actual codeowner group names in the template's `cc` line as `@stripe-internal/<group>`, deduplicated across changed files. Do not substitute a `responsible_team` slug or derive a group name from it. For example, project `risk_platform` has `responsible_team: risk-eng` but `code_review.auto_assign_reviews: [codeowners-risk-platform]`, so its `cc` is `@stripe-internal/codeowners-risk-platform`. Report a codeowner group as unresolved when no matching review group can be found.
 
 ### 4. Generate the PR description
 
