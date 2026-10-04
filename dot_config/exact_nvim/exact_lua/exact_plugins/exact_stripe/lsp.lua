@@ -45,7 +45,7 @@ return {
 			setup = {
 				stripe_autogen = skip_setup(is_laptop),
 				-- Use stripe_typescript_native on devbox.
-				tsgo = skip_setup(is_remote_devbox),
+				tsc = skip_setup(is_remote_devbox),
 				vtsls = skip_setup(is_remote_devbox),
 			},
 		},

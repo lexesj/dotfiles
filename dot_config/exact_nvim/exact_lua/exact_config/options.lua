@@ -34,5 +34,5 @@ vim.opt.wrap = true
 vim.opt.diffopt:append("followwrap")
 
 -- JavaScript / TypeScript settings.
-vim.g.lazyvim_ts_lsp = "tsgo"
+vim.g.lazyvim_ts_lsp = "tsc"
 vim.g.lazyvim_prettier_needs_config = true
