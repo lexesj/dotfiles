@@ -21,21 +21,6 @@ if command -v zoxide &>/dev/null; then
 	eval "$(zoxide init --cmd cd bash)"
 fi
 
-# gitfs.
-function setup_git() {
-	pay gitfs profile dashboard-frontend
-	pay gitfs add \
-		pay-server/api/lib \
-		pay-server/frontend/data-manage \
-		pay-server/lib/api_core/test \
-		pay-server/lib/bapling_routing \
-		pay-server/lib/compliance_hub \
-		pay-server/lib/permission/lockfiles \
-		pay-server/openapi \
-		pay-server/stripe_frontend/config
-	pay gitfs watch
-}
-
 # sesh.
 if command -v sesh &>/dev/null; then
 	function sesh-sessions() {

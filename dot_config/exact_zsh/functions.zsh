@@ -31,7 +31,7 @@ new_devbox() {
 		cmd+=(--graph dashboard-fe-srv/default)
 	fi
 
-	cmd+=(-y "$name")
+	cmd+=(--skip-confirm "$name")
 
 	echo "${cmd[@]}"
 	"${cmd[@]}" || return 1
