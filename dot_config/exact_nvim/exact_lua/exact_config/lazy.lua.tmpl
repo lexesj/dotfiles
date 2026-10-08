@@ -37,7 +37,13 @@ require("lazy").setup({
 		-- version = "*", -- try installing the latest stable version for plugins that support semver
 	},
 	install = { colorscheme = { "catppuccin", "habamax" } },
+	-- {{- if .is_work }}
+	-- The checker fetches every plugin in parallel on startup, which overwhelms the git wrapper.
+	checker = { enabled = false },
+	concurrency = 4,
+	-- {{- else }}
 	checker = { enabled = true }, -- automatically check for plugin updates
+	-- {{- end }}
 	performance = {
 		rtp = {
 			-- disable some rtp plugins
