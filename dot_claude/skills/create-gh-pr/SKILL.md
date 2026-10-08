@@ -1,5 +1,6 @@
 ---
-description: Create GitHub PR for the current Mint branch, linking relevant Jira tickets and codeowner teams.
+name: create-gh-pr
+description: Draft or create a Mint pull request from the current branch, linking relevant Jira tickets and the teams that own the changed files. Use when the user asks to generate, draft, or create a PR or PR description.
 ---
 
 # Create GitHub PR
@@ -11,6 +12,7 @@ Use the current Mint branch and its PR template to prepare a draft pull request.
 - Gather local git context before drafting. Run git as `git -C "$MINT_ROOT" ...` with paths relative to the Mint root.
 - Use available Toolshed/MCP tools for Jira, org user info, and past PR context when useful. Do not invent tickets, teams, or past PR references.
 - If the user asks to generate or draft a description, present the title and body. If the user asks to create a PR, create the draft PR after preparing its title and body; do not require a second approval for the same request.
+- Keep every section of the PR description brief and high level. Reviewers can read the diff, so describe the change in plain language rather than technical detail: do not name files, functions, classes, or flags, do not walk through implementation steps, and do not use bullet lists in Summary or Test plan.
 - Do not add an LLM disclaimer.
 
 ## Steps
@@ -47,8 +49,7 @@ Put the actual codeowner group names in the template's `cc` line as `@stripe-int
 Use `$MINT_ROOT/.github/PULL_REQUEST_TEMPLATE.md` as the scaffold. Read its HTML comments as instructions for adjacent blanks and preserve them in the body. Fill the sections with concrete details supported by the branch and user context:
 
 - Title format: `[Project/Feature Name] Short description`. Keep it concise and descriptive.
-- Be brief overall. Reviewers can read the diff, so do not list files, functions, or implementation steps, and do not use bullet lists in Summary or Test plan.
-- Summary: a single short paragraph (2-3 sentences) on what changed and what it affects.
+- Summary: a short paragraph on what changed and what it affects, describing behavior and outcome rather than implementation.
 - Motivation: one or two sentences on why the change is needed, linking relevant documents or other context. Under the same Motivation heading, insert a blank line after the paragraph and put each Jira reference on its own line so it can be parsed correctly. Use `Closes [KEY-123](https://jira.corp.stripe.com/browse/KEY-123)` only when the PR closes that ticket; otherwise use `Mentions [KEY-123](https://jira.corp.stripe.com/browse/KEY-123)`. Do not add a separate heading for Jira references.
 - Test plan: reconstruct validation from the diff and available test results even if this session did not make the changes. Keep it to a single short paragraph: retain the template checkboxes, then write one paragraph (at most 2-3 sentences) naming the relevant tests and edge cases, plus any essential manual check. Do not restate routine CI status in the PR body. Tick a box when relevant assertions and a passing applicable test job support its claim; individual test case logs are not required. Do not claim an unverified test run. Leave a box unchecked only for a specific coverage or execution gap, and briefly name that gap. Missing prior agent context alone is not a reason to leave boxes unchecked or remove them. Remove the boxes only when the changes genuinely cannot be tested, as the template instructs, and explain why. Include a screenshot or video for visual changes.
 - Rollout/revert plan: describe manual steps, how to recognize success, monitoring, and any rollback steps or limits. Keep `Safe to revert.` only when the evidence supports it.
