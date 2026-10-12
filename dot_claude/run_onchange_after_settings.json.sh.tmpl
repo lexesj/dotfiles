@@ -10,10 +10,11 @@ TARGET_FILE="$HOME/.claude/settings.json"
 
 tmp=$(mktemp)
 
-# Always set the status line and flicker-free rendering
+# Always set the status line, flicker-free rendering, and no PR attribution footer
 jq '
   .statusLine = {"type": "command", "command": "bash ~/.claude/statusline-command.sh"} |
-  .tui = "fullscreen"
+  .tui = "fullscreen" |
+  .attribution.pr = ""
 ' "$TARGET_FILE" > "$tmp"
 
 {{ if .is_work -}}
