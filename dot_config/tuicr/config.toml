@@ -1,1 +1,2 @@
 backend = "cli"
+diff_view = "side-by-side"
