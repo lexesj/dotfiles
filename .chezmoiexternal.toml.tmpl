@@ -20,6 +20,15 @@ refreshPeriod = "168h"
 
 {{- $arch := ternary "x86_64" .chezmoi.arch (eq .chezmoi.arch "amd64") -}}
 
+{{- $tuicrVersion := (gitHubLatestRelease "agavra/tuicr").TagName | trimPrefix "v" -}}
+{{- $tuicrArch := ternary "x86_64" "aarch64" (eq .chezmoi.arch "amd64") -}}
+{{- $tuicrTarget := ternary "apple-darwin" "unknown-linux-musl" (eq .chezmoi.os "darwin") }}
+[".local/bin/tuicr"]
+type = "archive-file"
+url = "https://github.com/agavra/tuicr/releases/download/v{{ $tuicrVersion }}/tuicr-{{ $tuicrVersion }}-{{ $tuicrArch }}-{{ $tuicrTarget }}.tar.gz"
+path = "tuicr"
+executable = true
+
 {{- if eq .chezmoi.os "linux" -}}
 {{- $fzfVersion := (gitHubLatestRelease "junegunn/fzf").TagName | trimPrefix "v" }}
 [".local/bin/fzf"]
