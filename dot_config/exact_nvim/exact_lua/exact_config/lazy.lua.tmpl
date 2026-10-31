@@ -43,6 +43,8 @@ require("lazy").setup({
 	concurrency = 4,
 	-- {{- else }}
 	checker = { enabled = true }, -- automatically check for plugin updates
+	-- Fetching every plugin at once gets throttled by GitHub and times out.
+	concurrency = 8,
 	-- {{- end }}
 	performance = {
 		rtp = {
