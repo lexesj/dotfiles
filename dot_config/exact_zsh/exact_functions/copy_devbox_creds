@@ -1,0 +1,15 @@
+local name="$1"
+if [[ -z "$name" ]]; then
+	name=$(_pick_devbox running)
+fi
+
+if [[ -z "$name" ]]; then
+	return 1
+fi
+
+echo "Copying copilot credentials to $name..."
+pay remote ssh "$name" -- "mkdir -p ~/.config/github-copilot"
+for file in ~/.config/github-copilot/auth.*; do
+	[[ -f "$file" ]] || continue
+	pay remote copy "$name" "$file" "remote:~/.config/github-copilot/$(basename "$file")"
+done

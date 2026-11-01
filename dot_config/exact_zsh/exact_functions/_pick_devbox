@@ -1,0 +1,6 @@
+local status_filter="${1:-}"
+local jq_filter='.[] | select(.type == "remotedevbox" or .type == "remotemydata")'
+if [[ -n "$status_filter" ]]; then
+	jq_filter+=" | select(.status == \"$status_filter\")"
+fi
+pay remote list --raw | jq -r "$jq_filter | .name" | fzf
