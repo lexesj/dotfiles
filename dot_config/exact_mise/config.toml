@@ -4,6 +4,7 @@ node.corepack = true
 python.precompiled_flavor = "install_only_stripped"
 
 [tools]
+"npm:cf" = "latest"
 "npm:corepack" = "latest"
 bun = "latest"
 go = "latest"
