@@ -3,7 +3,7 @@
 [packages.universal]
 common = ["gh", "git-delta", "ripgrep", "tmux", "zoxide"]
 work = []
-personal = []
+personal = ["ncdu"]
 
 # macOS CLI tools (brew install)
 [packages.darwin.brew]
