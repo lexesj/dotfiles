@@ -9,7 +9,7 @@ personal = []
 [packages.darwin.brew]
 common = ["fd", "fzf", "lazygit", "neovim", "python-yq", "sesh"]
 work = []
-personal = ["bitwarden-cli", "tlrc", "mise"]
+personal = ["bitwarden-cli", "cloudflared", "tlrc", "mise"]
 
 # macOS GUI apps (brew install --cask)
 [packages.darwin.cask]
