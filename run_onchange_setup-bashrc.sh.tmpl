@@ -2,7 +2,7 @@
 
 # .bashrc hash: {{ includeTemplate ".chezmoitemplates/file-hash.tmpl" (joinPath .chezmoi.homeDir ".bashrc") }}
 
-{{ if eq .machine "devbox" -}}
+{{ if eq .profile "devbox" -}}
 source "{{ .chezmoi.sourceDir }}/scripts/manage_block.sh"
 
 BASHRC_CONTENT='if [[ -f "$HOME/.config/bash/.bashrc" ]]; then

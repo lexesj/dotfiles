@@ -7,11 +7,11 @@ sudo apt update
 sudo apt install -y \
 	{{ range .packages.universal.common -}}{{ . }} {{ end -}}
 	{{ range .packages.linux.common -}}{{ . }} {{ end -}}
-	{{ if has .machine (list "work" "devbox") -}}
+	{{ if has .profile (list "work" "devbox") -}}
 	{{   range .packages.universal.work -}}{{ . }} {{ end -}}
 	{{   range .packages.linux.work -}}{{ . }} {{ end -}}
 	{{ end -}}
-	{{ if has .machine (list "personal" "server") -}}
+	{{ if has .profile (list "personal" "server") -}}
 	{{   range .packages.universal.personal -}}{{ . }} {{ end -}}
 	{{   range .packages.linux.personal -}}{{ . }} {{ end -}}
 	{{ end }}
@@ -29,7 +29,7 @@ if command -v brew &>/dev/null; then
 		{{ range .packages.darwin.cask.common -}}
 		cask {{ . | quote }}
 		{{ end -}}
-		{{ if has .machine (list "work" "devbox") -}}
+		{{ if has .profile (list "work" "devbox") -}}
 		{{   range .packages.universal.work -}}
 		brew {{ . | quote }}
 		{{   end -}}
@@ -40,7 +40,7 @@ if command -v brew &>/dev/null; then
 		cask {{ . | quote }}
 		{{   end -}}
 		{{ end -}}
-		{{ if has .machine (list "personal" "server") -}}
+		{{ if has .profile (list "personal" "server") -}}
 		{{   range .packages.universal.personal -}}
 		brew {{ . | quote }}
 		{{   end -}}

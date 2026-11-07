@@ -1,11 +1,11 @@
 git:
-  {{- if has .machine (list "work" "devbox") }}
+  {{- if has .profile (list "work" "devbox") }}
   autoFetch: false
   fetchAll: false
   {{- end }}
   diffRenderers:
     - colorArg: always
       command: delta --paging=never --dark
-{{- if has .machine (list "work" "devbox") }}
+{{- if has .profile (list "work" "devbox") }}
 disableStartupPopups: true
 {{- end }}

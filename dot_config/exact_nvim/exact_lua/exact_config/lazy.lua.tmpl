@@ -23,7 +23,7 @@ require("lazy").setup({
 		{ import = "plugins" },
 		{ import = "plugins.formatting" },
 		{ import = "plugins.lang" },
-		-- {{- if has .machine (list "work" "devbox") }}
+		-- {{- if has .profile (list "work" "devbox") }}
 		{ import = "plugins.stripe" },
 		-- {{- end }}
 	},
@@ -37,7 +37,7 @@ require("lazy").setup({
 		-- version = "*", -- try installing the latest stable version for plugins that support semver
 	},
 	install = { colorscheme = { "catppuccin", "habamax" } },
-	-- {{- if has .machine (list "work" "devbox") }}
+	-- {{- if has .profile (list "work" "devbox") }}
 	-- The checker fetches every plugin in parallel on startup, which overwhelms the git wrapper.
 	checker = { enabled = false },
 	concurrency = 4,

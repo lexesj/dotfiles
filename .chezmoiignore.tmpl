@@ -11,7 +11,7 @@ CLAUDE.md
 # Neovim files.
 .config/nvim/lazy-lock.json
 
-{{- if has .machine (list "work" "devbox") }}
+{{- if has .profile (list "work" "devbox") }}
 # Personal configs.
 .ssh/config
 .gitconfig
@@ -20,7 +20,7 @@ CLAUDE.md
 .config/zsh/after/vite-plus.zsh
 {{- end }}
 
-{{- if eq .machine "server" }}
+{{- if eq .profile "server" }}
 # Tools not installed on servers.
 .claude/
 .claude.json
@@ -37,7 +37,7 @@ claude-json.sh
 .ssh/config
 {{- end }}
 
-{{- if has .machine (list "personal" "server") }}
+{{- if has .profile (list "personal" "server") }}
 # Work configs.
 .claude/commands/pr.md
 .config/nvim/lua/plugins/stripe/

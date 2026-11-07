@@ -24,11 +24,11 @@ tomlq -t '
   | .tui.vim_mode_default = true
 ' "$TARGET_FILE" > "$tmp"
 
-{{ if has .machine (list "work" "devbox") -}}
+{{ if has .profile (list "work" "devbox") -}}
 { printf '%s\n' 'model_reasoning_effort = "high"'; cat "$tmp"; } > "$TARGET_FILE"
 {{ end -}}
 
-{{ if has .machine (list "personal" "server") -}}
+{{ if has .profile (list "personal" "server") -}}
 cat "$tmp" > "$TARGET_FILE"
 {{ end -}}
 
