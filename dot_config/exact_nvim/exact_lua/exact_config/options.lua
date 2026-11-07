@@ -8,6 +8,12 @@ vim.opt.shiftwidth = 4
 -- Global clipboard, also over SSH (LazyVim disables it there).
 vim.opt.clipboard = "unnamedplus"
 
+-- Over SSH, use OSC 52 so paste reads the local clipboard. Inside tmux, Neovim would otherwise use
+-- tmux's paste buffer, which copying updates but pasting never syncs from the local clipboard.
+if vim.env.SSH_CONNECTION then
+	vim.g.clipboard = "osc52"
+end
+
 -- Preview substitutions in a split.
 vim.opt.inccommand = "split"
 
