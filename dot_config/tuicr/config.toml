@@ -1,3 +1,0 @@
-backend = "cli"
-diff_view = "side-by-side"
-relative_line_numbers = true
