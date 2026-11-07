@@ -1,20 +1,26 @@
-[packages]
-# Tools shared across ALL operating systems (CLI only)
-[packages.universal]
-common = ["gh", "git-delta", "ripgrep", "tmux", "zoxide"]
-work = []
-personal = ["ncdu"]
+# Packages installed for each profile, by package manager.
+# Every profile gets the manager's "common" list plus its own list, if any.
 
 # macOS CLI tools (brew install)
-[packages.darwin.brew]
-common = ["fd", "fzf", "lazygit", "neovim", "python-yq", "sesh"]
-work = []
-personal = ["cloudflared", "tlrc", "mise"]
+[packages.brew]
+common = [
+    "fd",
+    "fzf",
+    "gh",
+    "git-delta",
+    "lazygit",
+    "neovim",
+    "python-yq",
+    "ripgrep",
+    "sesh",
+    "tmux",
+    "zoxide",
+]
+personal = ["cloudflared", "mise", "ncdu", "tlrc"]
 
 # macOS GUI apps (brew install --cask)
-[packages.darwin.cask]
+[packages.cask]
 common = ["ghostty", "raycast", "scroll-reverser"]
-work = []
 personal = [
     "antigravity-cli",
     "codex",
@@ -30,8 +36,10 @@ personal = [
     "zoom",
 ]
 
-# Linux packages (apt install)
-[packages.linux]
-common = ["fd-find", "unzip", "yq"]
-work = []
-personal = ["build-essential", "tldr", "zsh"]
+# Linux packages (apt install). fzf, lazygit (not on servers), sesh and nvim
+# come from .chezmoiexternal.toml.tmpl instead.
+[packages.apt]
+common = ["fd-find", "ripgrep", "tmux", "unzip", "zoxide"]
+personal = ["build-essential", "gh", "git-delta", "ncdu", "tldr", "yq", "zsh"]
+devbox = ["gh", "git-delta", "yq"]
+server = ["build-essential", "ncdu", "tldr", "zsh"]

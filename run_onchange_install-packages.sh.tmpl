@@ -1,56 +1,25 @@
 #!/usr/bin/env bash
 
+{{- $apt := concat .packages.apt.common (index .packages.apt .profile | default list) }}
+{{- $brew := concat .packages.brew.common (index .packages.brew .profile | default list) }}
+{{- $cask := concat .packages.cask.common (index .packages.cask .profile | default list) }}
+
 echo "Installing packages..."
 
-{{ if eq .chezmoi.os "linux" -}}
+{{ if and (eq .chezmoi.os "linux") $apt -}}
 sudo apt update
-sudo apt install -y \
-	{{ range .packages.universal.common -}}{{ . }} {{ end -}}
-	{{ range .packages.linux.common -}}{{ . }} {{ end -}}
-	{{ if has .profile (list "work" "devbox") -}}
-	{{   range .packages.universal.work -}}{{ . }} {{ end -}}
-	{{   range .packages.linux.work -}}{{ . }} {{ end -}}
-	{{ end -}}
-	{{ if has .profile (list "personal" "server") -}}
-	{{   range .packages.universal.personal -}}{{ . }} {{ end -}}
-	{{   range .packages.linux.personal -}}{{ . }} {{ end -}}
-	{{ end }}
-{{- end -}}
+sudo apt install -y {{ $apt | join " " }}
+{{ end -}}
 
-{{ if eq .chezmoi.os "darwin" -}}
+{{ if and (eq .chezmoi.os "darwin") (or $brew $cask) -}}
 if command -v brew &>/dev/null; then
 	brew bundle --file=/dev/stdin <<-EOF
-		{{ range .packages.universal.common -}}
+		{{- range $brew }}
 		brew {{ . | quote }}
-		{{ end -}}
-		{{ range .packages.darwin.brew.common -}}
-		brew {{ . | quote }}
-		{{ end -}}
-		{{ range .packages.darwin.cask.common -}}
+		{{- end }}
+		{{- range $cask }}
 		cask {{ . | quote }}
-		{{ end -}}
-		{{ if has .profile (list "work" "devbox") -}}
-		{{   range .packages.universal.work -}}
-		brew {{ . | quote }}
-		{{   end -}}
-		{{   range .packages.darwin.brew.work -}}
-		brew {{ . | quote }}
-		{{   end -}}
-		{{   range .packages.darwin.cask.work -}}
-		cask {{ . | quote }}
-		{{   end -}}
-		{{ end -}}
-		{{ if has .profile (list "personal" "server") -}}
-		{{   range .packages.universal.personal -}}
-		brew {{ . | quote }}
-		{{   end -}}
-		{{   range .packages.darwin.brew.personal -}}
-		brew {{ . | quote }}
-		{{   end -}}
-		{{   range .packages.darwin.cask.personal -}}
-		cask {{ . | quote }}
-		{{   end -}}
-		{{ end }}
+		{{- end }}
 	EOF
 fi
 {{ end -}}
