@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+{{ if .is_personal -}}
+set -euo pipefail
+
+vp="$HOME/.local/share/vite-plus/bin/vp"
+
+if [[ ! -x "$vp" ]]; then
+	echo "Installing Vite+..."
+	# Shell setup is handled by ~/.config/zsh/after/vite-plus.zsh.
+	curl -fsSL https://vite.plus | VP_NODE_MANAGER=yes VP_SELF_SETUP_NO_MODIFY_PATH=1 bash
+fi
+
+echo "Configuring Vite+ JS toolchain..."
+"$vp" env on
+"$vp" env default latest
+"$vp" install -g cf@latest
+{{- end }}
