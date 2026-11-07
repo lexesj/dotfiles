@@ -10,6 +10,7 @@ manage_block() {
 
 	case "$target_file" in
 	"$HOME"/*)
+		# shellcheck disable=SC2088 # ~ is for display only, not a path.
 		display_target="~/${target_file#"$HOME"/}"
 		;;
 	*)
