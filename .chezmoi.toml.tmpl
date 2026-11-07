@@ -1,10 +1,4 @@
-{{- $is_work := false -}}
-{{- if (hasKey . "is_work") -}}
-{{-   $is_work = .is_work -}}
-{{- else -}}
-{{-   $is_work = promptBool "Is this a work machine" -}}
-{{- end -}}
+{{- $machine := promptChoiceOnce . "machine" "Machine" (list "personal" "work" "devbox" "server") -}}
 
 [data]
-    is_work = {{ $is_work }}
-    is_personal = {{ not $is_work }}
+    machine = {{ $machine | quote }}

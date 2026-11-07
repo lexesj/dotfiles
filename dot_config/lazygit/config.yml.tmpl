@@ -1,11 +1,11 @@
 git:
-  {{- if .is_work }}
+  {{- if has .machine (list "work" "devbox") }}
   autoFetch: false
   fetchAll: false
   {{- end }}
   diffRenderers:
     - colorArg: always
       command: delta --paging=never --dark
-{{- if .is_work }}
+{{- if has .machine (list "work" "devbox") }}
 disableStartupPopups: true
 {{- end }}

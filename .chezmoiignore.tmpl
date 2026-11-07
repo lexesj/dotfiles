@@ -11,7 +11,7 @@ CLAUDE.md
 # Neovim files.
 .config/nvim/lazy-lock.json
 
-{{- if .is_work }}
+{{- if has .machine (list "work" "devbox") }}
 # Personal configs.
 .ssh/config
 .gitconfig
@@ -20,7 +20,24 @@ CLAUDE.md
 .config/zsh/after/vite-plus.zsh
 {{- end }}
 
-{{- if .is_personal }}
+{{- if eq .machine "server" }}
+# Tools not installed on servers.
+.claude/
+.claude.json
+claude-json.sh
+.codex/
+.config/bash/
+.config/ghostty/
+.config/karabiner/
+.config/mise/
+.config/zsh/after/mise.zsh
+.config/zsh/after/vite-plus.zsh
+.local/bin/mise
+# cloudflared isn't installed and the server doesn't SSH to itself.
+.ssh/config
+{{- end }}
+
+{{- if has .machine (list "personal" "server") }}
 # Work configs.
 .claude/commands/pr.md
 .config/nvim/lua/plugins/stripe/

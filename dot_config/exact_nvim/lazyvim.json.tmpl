@@ -1,10 +1,10 @@
 {
   "extras": [
     "lazyvim.plugins.extras.ai.claudecode",
-    {{- if .is_personal }}
+    {{- if has .machine (list "personal" "server") }}
     "lazyvim.plugins.extras.ai.supermaven",
     {{- end }}
-    {{- if .is_work }}
+    {{- if has .machine (list "work" "devbox") }}
     "lazyvim.plugins.extras.ai.copilot",
     {{- end }}
     "lazyvim.plugins.extras.coding.blink",
@@ -12,12 +12,12 @@
     "lazyvim.plugins.extras.editor.snacks_explorer",
     "lazyvim.plugins.extras.editor.snacks_picker",
     "lazyvim.plugins.extras.formatting.prettier",
-    {{- if .is_personal }}
+    {{- if has .machine (list "personal" "server") }}
     "lazyvim.plugins.extras.lang.go",
     {{- end }}
     "lazyvim.plugins.extras.lang.json",
     "lazyvim.plugins.extras.lang.markdown",
-    {{- if .is_personal }}
+    {{- if has .machine (list "personal" "server") }}
     "lazyvim.plugins.extras.lang.python",
     {{- end }}
     "lazyvim.plugins.extras.lang.toml",
