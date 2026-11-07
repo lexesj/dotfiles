@@ -1,20 +1,11 @@
 return {
 	"leejh903/codex.nvim",
-	commit = "ea699ace144d6db24ad0fbb1973fd8bb398665f5",
 	dependencies = { "folke/snacks.nvim" },
 	keys = {
-		{
-			"<leader>ao",
-			"<cmd>Codex<cr>",
-			desc = "Toggle Codex",
-			mode = { "n", "t" },
-		},
-		{
-			"<leader>aos",
-			":'<,'>CodexSend<cr>",
-			desc = "Reference selection in Codex",
-			mode = { "v" },
-		},
+		{ "<leader>ao", "", desc = "+codex", mode = { "n", "v" } },
+		{ "<leader>aoo", "<cmd>Codex<cr>", desc = "Toggle Codex" },
+		{ "<leader>aof", "<cmd>CodexFocus<cr>", desc = "Focus Codex" },
+		{ "<leader>aos", ":CodexSend<cr>", mode = "v", desc = "Send to Codex" },
 	},
 	opts = {
 		split_side = "right",
