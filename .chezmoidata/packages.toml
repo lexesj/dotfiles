@@ -40,6 +40,6 @@ personal = [
 # .chezmoiexternal.toml.tmpl instead.
 [packages.apt]
 common = ["fd-find", "git-delta", "ripgrep", "tmux", "unzip", "zoxide"]
-personal = ["build-essential", "gh", "ncdu", "tldr", "yq", "zsh"]
+personal = ["build-essential", "gh", "ncdu", "tealdeer", "yq", "zsh"]
 devbox = ["gh", "yq"]
-server = ["build-essential", "ncdu", "tldr", "zsh"]
+server = ["build-essential", "ncdu", "tealdeer", "zsh"]
