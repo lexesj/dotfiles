@@ -33,14 +33,12 @@ url = "https://github.com/junegunn/fzf/releases/download/v{{ $fzfVersion }}/fzf-
 path = "fzf"
 executable = true
 
-{{- if ne .profile "server" }}
 {{- $lazygitVersion := (gitHubLatestRelease "jesseduffield/lazygit").TagName | trimPrefix "v" }}
 [".local/bin/lazygit"]
 type = "archive-file"
 url = "https://github.com/jesseduffield/lazygit/releases/download/v{{ $lazygitVersion }}/lazygit_{{ $lazygitVersion }}_{{ .chezmoi.os | title }}_{{ $arch }}.tar.gz"
 path = "lazygit"
 executable = true
-{{- end }}
 
 {{- $seshVersion := (gitHubLatestRelease "joshmedeski/sesh").TagName | trimPrefix "v" }}
 [".local/bin/sesh"]

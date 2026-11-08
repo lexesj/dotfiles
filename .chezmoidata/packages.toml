@@ -36,10 +36,10 @@ personal = [
     "zoom",
 ]
 
-# Linux packages (apt install). fzf, lazygit (not on servers), sesh and nvim
-# come from .chezmoiexternal.toml.tmpl instead.
+# Linux packages (apt install). fzf, lazygit, sesh and nvim come from
+# .chezmoiexternal.toml.tmpl instead.
 [packages.apt]
-common = ["fd-find", "ripgrep", "tmux", "unzip", "zoxide"]
-personal = ["build-essential", "gh", "git-delta", "ncdu", "tldr", "yq", "zsh"]
-devbox = ["gh", "git-delta", "yq"]
+common = ["fd-find", "git-delta", "ripgrep", "tmux", "unzip", "zoxide"]
+personal = ["build-essential", "gh", "ncdu", "tldr", "yq", "zsh"]
+devbox = ["gh", "yq"]
 server = ["build-essential", "ncdu", "tldr", "zsh"]
