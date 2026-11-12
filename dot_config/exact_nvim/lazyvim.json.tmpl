@@ -22,7 +22,9 @@
     {{- end }}
     "lazyvim.plugins.extras.lang.toml",
     "lazyvim.plugins.extras.lang.typescript",
+    {{- if ne .profile "devbox" }}
     "lazyvim.plugins.extras.lang.typescript.oxc",
+    {{- end }}
     "lazyvim.plugins.extras.lang.yaml",
     "lazyvim.plugins.extras.linting.eslint",
     "lazyvim.plugins.extras.test.core"
