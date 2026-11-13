@@ -22,7 +22,6 @@ personal = ["cloudflared", "mise", "ncdu", "tlrc"]
 [packages.cask]
 common = ["ghostty", "raycast", "scroll-reverser"]
 personal = [
-    "antigravity-cli",
     "codex",
     "firefox",
     "google-chrome",
