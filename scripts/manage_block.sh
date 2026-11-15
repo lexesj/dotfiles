@@ -52,7 +52,6 @@ $marker_end"
 	else
 		# Strip any orphaned begin marker before appending a fresh block
 		if grep -q "$marker_begin" "$target_file"; then
-			export MARKER_BEGIN="$marker_begin"
 			perl -i -0777 -pe '
 				BEGIN { $begin = $ENV{MARKER_BEGIN}; }
 				$start = index($_, $begin);

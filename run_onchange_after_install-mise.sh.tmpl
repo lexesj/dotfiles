@@ -4,7 +4,7 @@
 
 {{ if eq .profile "personal" -}}
 if command -v mise &>/dev/null; then
-  echo "Installing tools with mise..."
-  mise install --yes
+	echo "Installing tools with mise..."
+	mise install --yes
 fi
 {{- end }}

@@ -5,8 +5,6 @@ scripts/
 LICENSE
 README.md
 CLAUDE.md
-.shuck.toml
-.node-version
 
 # Neovim files.
 .config/nvim/lazy-lock.json
@@ -23,7 +21,6 @@ CLAUDE.md
 {{- if eq .profile "server" }}
 # Tools not installed on servers.
 .claude/
-.claude.json
 claude-json.sh
 .codex/
 .config/bash/
@@ -39,7 +36,6 @@ claude-json.sh
 
 {{- if has .profile (list "personal" "server") }}
 # Work configs.
-.claude/commands/pr.md
 .config/nvim/lua/plugins/stripe/
 .config/zsh/functions/
 .config/zsh/rbenv.zsh
