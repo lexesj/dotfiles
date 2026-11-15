@@ -8,9 +8,9 @@ common = [
     "fzf",
     "gh",
     "git-delta",
+    "jq",
     "lazygit",
     "neovim",
-    "python-yq",
     "ripgrep",
     "sesh",
     "tmux",
@@ -38,7 +38,7 @@ personal = [
 # Linux packages (apt install). fzf, lazygit, sesh and nvim come from
 # .chezmoiexternal.toml.tmpl instead.
 [packages.apt]
-common = ["fd-find", "git-delta", "ripgrep", "tmux", "unzip", "zoxide"]
-personal = ["build-essential", "gh", "ncdu", "tealdeer", "yq", "zsh"]
-devbox = ["gh", "yq"]
+common = ["fd-find", "git-delta", "jq", "ripgrep", "tmux", "unzip", "zoxide"]
+personal = ["build-essential", "gh", "ncdu", "tealdeer", "zsh"]
+devbox = ["gh"]
 server = ["build-essential", "ncdu", "tealdeer", "zsh"]
