@@ -1,0 +1,5 @@
+{{- /* chezmoi:modify-template */ -}}
+{{- /* Set our keys and keep everything else Claude Code writes to the file. */ -}}
+{{- $s := fromJson (default "{}" .chezmoi.stdin) -}}
+{{- $s = setValueAtPath "editorMode" "vim" $s -}}
+{{- toPrettyJson $s -}}

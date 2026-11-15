@@ -1,0 +1,4 @@
+{{- /* chezmoi:modify-template */ -}}
+{{- includeTemplate "managed-block.tmpl" (dict "stdin" .chezmoi.stdin "content" `if [[ -f "$HOME/.config/zsh/.zshrc" ]]; then
+	source "$HOME/.config/zsh/.zshrc"
+fi`) -}}

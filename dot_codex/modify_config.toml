@@ -1,0 +1,15 @@
+{{- /* chezmoi:modify-template */ -}}
+{{- /* Set our keys and keep everything else Codex writes to the file. */ -}}
+{{- $c := fromToml (default "" .chezmoi.stdin) -}}
+{{- $_ := unset $c "model" -}}
+{{- if has .profile (list "work" "devbox") -}}
+{{-   $c = setValueAtPath "model_reasoning_effort" "high" $c -}}
+{{- else -}}
+{{-   $_ := unset $c "model_reasoning_effort" -}}
+{{- end -}}
+{{- $c = setValueAtPath "approval_policy" "on-request" $c -}}
+{{- $c = setValueAtPath "approvals_reviewer" "auto_review" $c -}}
+{{- $c = setValueAtPath "sandbox_mode" "workspace-write" $c -}}
+{{- $c = setValueAtPath "tui.status_line" (list "model-with-reasoning" "current-dir" "context-usage" "five-hour-limit" "weekly-limit") $c -}}
+{{- $c = setValueAtPath "tui.vim_mode_default" true $c -}}
+{{- toToml $c -}}

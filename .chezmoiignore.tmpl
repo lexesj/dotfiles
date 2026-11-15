@@ -1,5 +1,4 @@
 bin/
-scripts/
 
 # Git repo files.
 LICENSE
@@ -21,7 +20,7 @@ CLAUDE.md
 {{- if eq .profile "server" }}
 # Tools not installed on servers.
 .claude/
-claude-json.sh
+.claude.json
 .codex/
 .config/bash/
 .config/ghostty/
@@ -45,4 +44,9 @@ claude-json.sh
 {{- if not (has .profile (list "devbox" "server")) }}
 # Ubuntu's fd-find installs as fdfind; alias it to fd on Linux.
 .local/bin/fd
+{{- end }}
+
+{{- if ne .profile "devbox" }}
+# Only devbox hooks the bash config into ~/.bashrc.
+.bashrc
 {{- end }}

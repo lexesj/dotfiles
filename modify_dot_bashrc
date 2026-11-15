@@ -1,0 +1,4 @@
+{{- /* chezmoi:modify-template */ -}}
+{{- includeTemplate "managed-block.tmpl" (dict "stdin" .chezmoi.stdin "content" `if [[ -f "$HOME/.config/bash/.bashrc" ]]; then
+	source "$HOME/.config/bash/.bashrc"
+fi`) -}}

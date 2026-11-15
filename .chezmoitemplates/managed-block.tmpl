@@ -1,0 +1,16 @@
+{{- /*
+  Put a chezmoi-managed block into a file and keep the rest of it.
+  Usage: includeTemplate "managed-block.tmpl" (dict "stdin" .chezmoi.stdin "content" "...")
+  Replaces the block between the markers, or appends one if there isn't one.
+*/ -}}
+{{- $begin := "# BEGIN CHEZMOI MANAGED BLOCK" -}}
+{{- $end := "# END CHEZMOI MANAGED BLOCK" -}}
+{{- $block := printf "%s\n%s\n%s" $begin (trimSuffix "\n" .content) $end -}}
+{{- $stdin := .stdin -}}
+{{- if and (contains $begin $stdin) (contains $end $stdin) -}}
+{{-   regexReplaceAllLiteral (printf "(?s)%s.*?%s" (regexQuoteMeta $begin) (regexQuoteMeta $end)) $stdin $block -}}
+{{- else if $stdin -}}
+{{-   printf "%s\n\n%s\n" (trimSuffix "\n" $stdin) $block -}}
+{{- else -}}
+{{-   printf "%s\n" $block -}}
+{{- end -}}

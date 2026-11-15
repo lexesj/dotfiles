@@ -1,0 +1,15 @@
+{{- /* chezmoi:modify-template */ -}}
+{{- /* Set our keys and keep everything else Claude Code writes to the file. */ -}}
+{{- $s := fromJson (default "{}" .chezmoi.stdin) -}}
+{{- $s = setValueAtPath "model" "opus" $s -}}
+{{- $s = setValueAtPath "statusLine" (dict "type" "command" "command" "bash ~/.claude/statusline-command.sh") $s -}}
+{{- /* Flicker-free rendering. */ -}}
+{{- $s = setValueAtPath "tui" "fullscreen" $s -}}
+{{- /* No PR attribution footer. */ -}}
+{{- $s = setValueAtPath "attribution.pr" "" $s -}}
+{{- if has .profile (list "work" "devbox") -}}
+{{-   $s = setValueAtPath "env" (dict "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS" "1") $s -}}
+{{- else -}}
+{{-   $_ := unset $s "env" -}}
+{{- end -}}
+{{- toPrettyJson $s -}}
