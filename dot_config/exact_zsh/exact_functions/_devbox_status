@@ -1,3 +1,5 @@
+# vim: set ft=zsh :
+
 # Usage: _devbox_status <name>
 # Prints the status of the named devbox (e.g. running, stopped).
 _devbox_list | jq -r --arg name "$1" '.[] | select(.name == $name) | .status'

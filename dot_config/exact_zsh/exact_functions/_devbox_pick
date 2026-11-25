@@ -1,3 +1,5 @@
+# vim: set ft=zsh :
+
 # Usage: _devbox_pick [status] [fzf args...]
 # Prints the selected devbox name(s). Auto-selects when only one box matches.
 local status_filter="${1:-}"

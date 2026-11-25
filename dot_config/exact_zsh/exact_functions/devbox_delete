@@ -1,3 +1,5 @@
+# vim: set ft=zsh :
+
 local names=("$@")
 
 if [[ "$1" == "--help" || "$1" == "-h" ]]; then

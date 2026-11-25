@@ -1,4 +1,5 @@
 #compdef devbox_ssh devbox_restart devbox_delete devbox_copy_creds
+# vim: set ft=zsh :
 
 # Completes devbox names with their status and mint branch.
 # Usage: __devbox_names <status|""> [compadd args...]

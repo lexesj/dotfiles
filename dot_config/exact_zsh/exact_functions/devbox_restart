@@ -1,3 +1,5 @@
+# vim: set ft=zsh :
+
 local name=""
 local ssh=0
 local tmux=0

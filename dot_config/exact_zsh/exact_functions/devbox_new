@@ -1,3 +1,5 @@
+# vim: set ft=zsh :
+
 local name=""
 local branch=""
 

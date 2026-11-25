@@ -1,3 +1,5 @@
+# vim: set ft=zsh :
+
 # Usage: _devbox_start <name>
 # Starts a devbox, retrying while the host frees up after a stop.
 local name="$1"
