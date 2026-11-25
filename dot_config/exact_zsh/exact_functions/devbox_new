@@ -1,0 +1,60 @@
+local name=""
+local branch=""
+
+local usage
+usage=$(
+	cat <<'USAGE'
+Usage: devbox_new [-b <branch>] <name>
+
+Arguments:
+  <name>             Name of the devbox (required)
+  -b, --branch <b>   Check out (or create) branch <b> in mint; "." uses the current git branch
+USAGE
+)
+
+while (($#)); do
+	case "$1" in
+	-b | --branch)
+		if [[ -z "$2" ]]; then
+			echo "Error: $1 requires a branch"
+			return 1
+		fi
+		branch="$2"
+		shift
+		;;
+	--help | -h)
+		echo "$usage"
+		return 0
+		;;
+	-*) echo "Unknown option: $1" && return 1 ;;
+	*) name="$1" ;;
+	esac
+	shift
+done
+
+if [[ -z "$name" ]]; then
+	echo "Error: devbox name is required"
+	echo ""
+	echo "$usage"
+	return 1
+fi
+
+if [[ "$branch" == "." ]]; then
+	branch=$(git branch --show-current) || return 1
+fi
+
+local cmd=(pay remote new --ide none --notify-on-ready --workspace=pay-server)
+
+if [[ -n "$branch" ]]; then
+	cmd+=(--repo="stripe-internal/mint:$branch")
+else
+	cmd+=(--repo=mint)
+fi
+
+cmd+=(--skip-confirm "$name")
+
+echo "${cmd[@]}"
+"${cmd[@]}" || return 1
+
+devbox_copy_creds "$name"
+pay remote ssh "$name" --tmux

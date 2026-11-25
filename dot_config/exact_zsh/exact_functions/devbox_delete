@@ -1,0 +1,27 @@
+local names=("$@")
+
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+	echo "Usage: devbox_delete [name...]"
+	echo ""
+	echo "Deletes devboxes. Prompts with fzf (multi-select with Tab) when no names are given."
+	return 0
+fi
+
+if ((${#names} == 0)); then
+	names=("${(@f)$(_devbox_pick "" --multi --no-select-1)}")
+fi
+
+if [[ -z "${names[1]}" ]]; then
+	return 1
+fi
+
+echo "About to delete:"
+printf '  %s\n' "${names[@]}"
+read -q "?Continue? [y/N] " || {
+	echo
+	return 1
+}
+echo
+
+# Deleted boxes go to the recycle bin; restore with `pay remote recover`.
+pay remote delete --skip-confirm "${names[@]}"

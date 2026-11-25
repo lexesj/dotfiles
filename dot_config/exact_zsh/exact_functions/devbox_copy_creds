@@ -1,6 +1,6 @@
 local name="$1"
 if [[ -z "$name" ]]; then
-	name=$(_pick_devbox running)
+	name=$(_devbox_pick running)
 fi
 
 if [[ -z "$name" ]]; then

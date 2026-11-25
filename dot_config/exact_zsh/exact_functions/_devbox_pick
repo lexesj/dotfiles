@@ -1,0 +1,20 @@
+# Usage: _devbox_pick [status] [fzf args...]
+# Prints the selected devbox name(s). Auto-selects when only one box matches.
+local status_filter="${1:-}"
+(($#)) && shift
+
+pay remote list --raw |
+	jq -r --arg status "$status_filter" '
+		.[]
+		| select(.type == "remotedevbox" or .type == "remotemydata")
+		| select($status == "" or .status == $status)
+		| [
+			.name,
+			.status,
+			((.current_working_copies // []) | map(select(.repo == "mint")) | .[0].branch // "-"),
+			.last_accessed_human_readable
+		]
+		| @tsv' |
+	column -t -s $'\t' |
+	fzf --select-1 --exit-0 "$@" |
+	awk '{ print $1 }'

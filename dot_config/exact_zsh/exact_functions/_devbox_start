@@ -1,0 +1,21 @@
+# Usage: _devbox_start <name>
+# Starts a devbox, retrying while the host frees up after a stop.
+local name="$1"
+local max_attempts=30
+local attempt=0
+local output
+
+echo "Starting devbox $name..."
+while ((attempt < max_attempts)); do
+	if output=$(pay remote start "$name" 2>&1); then
+		echo "Devbox $name is running."
+		return 0
+	fi
+	attempt=$((attempt + 1))
+	echo "  [$attempt/$max_attempts] not ready yet, retrying in 10s..."
+	sleep 10
+done
+
+echo "Timed out waiting for devbox $name to start. Last error:"
+echo "$output"
+return 1
