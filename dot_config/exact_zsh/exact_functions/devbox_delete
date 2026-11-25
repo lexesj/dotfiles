@@ -1,26 +1,46 @@
 # vim: set ft=zsh :
 
-local names=("$@")
+local force=0
+local names=()
 
-if [[ "$1" == "--help" || "$1" == "-h" ]]; then
-	echo "Usage: devbox_delete <name...>"
-	echo ""
-	echo "Deletes devboxes."
-	return 0
-fi
+local usage
+usage=$(
+	cat <<'USAGE'
+Usage: devbox_delete [-f] <name...>
+
+Deletes devboxes. Deleted boxes go to the recycle bin.
+
+Options:
+  -f, --force   Don't ask for confirmation
+USAGE
+)
+
+for arg in "$@"; do
+	case "$arg" in
+	-f | --force) force=1 ;;
+	--help | -h)
+		echo "$usage"
+		return 0
+		;;
+	-*) echo "Unknown option: $arg" && return 1 ;;
+	*) names+=("$arg") ;;
+	esac
+done
 
 if ((${#names} == 0)); then
-	echo "Usage: devbox_delete <name...>"
+	echo "$usage"
 	return 1
 fi
 
-echo "About to delete:"
-printf '  %s\n' "${names[@]}"
-read -q "?Continue? [y/N] " || {
+if [[ $force -eq 0 ]]; then
+	echo "About to delete:"
+	printf '  %s\n' "${names[@]}"
+	read -q "?Continue? [y/N] " || {
+		echo
+		return 1
+	}
 	echo
-	return 1
-}
-echo
+fi
 
 # Deleted boxes go to the recycle bin; restore with `pay remote recover`.
 pay remote delete --skip-confirm "${names[@]}"

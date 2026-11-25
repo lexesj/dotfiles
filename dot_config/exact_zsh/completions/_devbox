@@ -48,6 +48,7 @@ devbox_restart)
 	;;
 devbox_delete)
 	_arguments \
+		'(-f --force)'{-f,--force}"[don't ask for confirmation]" \
 		'(-h --help)'{-h,--help}'[show help]' \
 		'*:devbox:__devbox_all'
 	;;
