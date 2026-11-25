@@ -9,9 +9,9 @@ for arg in "$@"; do
 	--ssh) ssh=1 ;;
 	--tmux) tmux=1 ;;
 	--help | -h)
-		echo "Usage: devbox_restart [--ssh|--tmux] [name]"
+		echo "Usage: devbox_restart [--ssh|--tmux] <name>"
 		echo ""
-		echo "Stops (if running) and starts a devbox. Prompts with fzf when no name is given."
+		echo "Stops (if running) and starts a devbox."
 		return 0
 		;;
 	-*) echo "Unknown option: $arg" && return 1 ;;
@@ -20,10 +20,7 @@ for arg in "$@"; do
 done
 
 if [[ -z "$name" ]]; then
-	name=$(_devbox_pick)
-fi
-
-if [[ -z "$name" ]]; then
+	echo "Usage: devbox_restart [--ssh|--tmux] <name>"
 	return 1
 fi
 

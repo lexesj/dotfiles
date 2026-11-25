@@ -2,10 +2,7 @@
 
 local name="$1"
 if [[ -z "$name" ]]; then
-	name=$(_devbox_pick running)
-fi
-
-if [[ -z "$name" ]]; then
+	echo "Usage: devbox_copy_creds <name>"
 	return 1
 fi
 
