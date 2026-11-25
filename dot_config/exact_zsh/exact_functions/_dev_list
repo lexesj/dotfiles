@@ -1,6 +1,6 @@
 # vim: set ft=zsh :
 
-# Usage: _devbox_list [--cached|--clear]
+# Usage: _dev_list [--cached|--clear]
 # Prints `pay remote list --raw` JSON and caches it for tab completion.
 #   --cached  Print the cache instead if it's under 5 minutes old.
 #   --clear   Delete the cache (call after creating, deleting, or starting boxes).

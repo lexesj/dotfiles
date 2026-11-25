@@ -6,7 +6,7 @@ local names=()
 local usage
 usage=$(
 	cat <<'USAGE'
-Usage: devbox_delete [-f] <name...>
+Usage: dev delete [-f] <name...>
 
 Deletes devboxes. Deleted boxes go to the recycle bin.
 
@@ -44,4 +44,4 @@ fi
 
 # Deleted boxes go to the recycle bin; restore with `pay remote recover`.
 pay remote delete --skip-confirm "${names[@]}"
-_devbox_list --clear
+_dev_list --clear

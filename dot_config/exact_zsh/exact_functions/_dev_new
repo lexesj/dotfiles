@@ -6,7 +6,7 @@ local branch=""
 local usage
 usage=$(
 	cat <<'USAGE'
-Usage: devbox_new [-b <branch>] <name>
+Usage: dev new [-b <branch>] <name>
 
 Arguments:
   <name>             Name of the devbox (required)
@@ -57,7 +57,7 @@ cmd+=(--skip-confirm "$name")
 
 echo "${cmd[@]}"
 "${cmd[@]}" || return 1
-_devbox_list --clear
+_dev_list --clear
 
-devbox_copy_creds "$name"
+dev copy-creds "$name"
 pay remote ssh "$name" --tmux

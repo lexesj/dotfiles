@@ -5,7 +5,7 @@ local name=""
 for arg in "$@"; do
 	case "$arg" in
 	--help | -h)
-		echo "Usage: devbox_ssh <name>"
+		echo "Usage: dev ssh <name>"
 		echo ""
 		echo "Attaches to a devbox's tmux session, starting it first if it's stopped."
 		return 0
@@ -16,18 +16,18 @@ for arg in "$@"; do
 done
 
 if [[ -z "$name" ]]; then
-	echo "Usage: devbox_ssh <name>"
+	echo "Usage: dev ssh <name>"
 	return 1
 fi
 
 local box_status
-box_status=$(_devbox_status "$name")
+box_status=$(_dev_status "$name")
 
 if [[ -z "$box_status" ]]; then
 	echo "No devbox named $name."
 	return 1
 elif [[ "$box_status" != "running" ]]; then
-	_devbox_start "$name" || return 1
+	_dev_start "$name" || return 1
 fi
 
 pay remote ssh "$name" --tmux

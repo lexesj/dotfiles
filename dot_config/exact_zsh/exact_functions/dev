@@ -1,0 +1,33 @@
+# vim: set ft=zsh :
+
+local usage
+usage=$(
+	cat <<'USAGE'
+Usage: dev <command> [args...]
+
+Manage remote devboxes.
+
+Commands:
+  new          Create a devbox and attach to it
+  ssh          Attach to a devbox's tmux session, starting it if needed
+  restart      Stop and start a devbox
+  delete       Delete devboxes
+  copy-creds   Copy Copilot credentials to a devbox
+
+Run `dev <command> --help` for a command's options.
+USAGE
+)
+
+local cmd="$1"
+(($#)) && shift
+
+case "$cmd" in
+new | ssh | restart | delete | copy-creds) "_dev_${cmd//-/_}" "$@" ;;
+"" | -h | --help | help) echo "$usage" ;;
+*)
+	echo "Unknown command: $cmd"
+	echo ""
+	echo "$usage"
+	return 1
+	;;
+esac

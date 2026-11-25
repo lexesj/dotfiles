@@ -9,7 +9,7 @@ for arg in "$@"; do
 	--ssh) ssh=1 ;;
 	--tmux) tmux=1 ;;
 	--help | -h)
-		echo "Usage: devbox_restart [--ssh|--tmux] <name>"
+		echo "Usage: dev restart [--ssh|--tmux] <name>"
 		echo ""
 		echo "Stops (if running) and starts a devbox."
 		return 0
@@ -20,12 +20,12 @@ for arg in "$@"; do
 done
 
 if [[ -z "$name" ]]; then
-	echo "Usage: devbox_restart [--ssh|--tmux] <name>"
+	echo "Usage: dev restart [--ssh|--tmux] <name>"
 	return 1
 fi
 
 local box_status
-box_status=$(_devbox_status "$name")
+box_status=$(_dev_status "$name")
 
 if [[ -z "$box_status" ]]; then
 	echo "No devbox named $name."
@@ -37,7 +37,7 @@ else
 	echo "Devbox $name is $box_status, skipping stop."
 fi
 
-_devbox_start "$name" || return 1
+_dev_start "$name" || return 1
 
 if [[ $tmux -eq 1 ]]; then
 	pay remote ssh "$name" --tmux

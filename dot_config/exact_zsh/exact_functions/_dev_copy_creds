@@ -2,7 +2,7 @@
 
 local name="$1"
 if [[ -z "$name" ]]; then
-	echo "Usage: devbox_copy_creds <name>"
+	echo "Usage: dev copy-creds <name>"
 	return 1
 fi
 

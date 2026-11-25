@@ -1,0 +1,85 @@
+#compdef dev
+# vim: set ft=zsh :
+
+# Completes devbox names with their status and mint branch.
+# Usage: __dev_names <status|""> [compadd args...]
+__dev_names() {
+	local status_filter="$1"
+	shift
+
+	local -a boxes
+	boxes=(${(f)"$(
+		_dev_list --cached 2>/dev/null |
+			jq -r --arg status "$status_filter" '
+				.[]
+				| select(.type == "remotedevbox" or .type == "remotemydata")
+				| select($status == "" or .status == $status)
+				| "\(.name):\(.status)  \((.current_working_copies // []) | map(select(.repo == "mint")) | .[0].branch // "-")"'
+	)"})
+	_describe -t devboxes devbox boxes "$@"
+}
+
+# _arguments calls actions with compadd args (e.g. -M matchers) inserted before
+# any of our own, so each status filter gets its own action function.
+__dev_all() { __dev_names "" "$@"; }
+__dev_running() { __dev_names running "$@"; }
+
+# Completes "." (the current branch) plus local branches of the current repo.
+__dev_branches() {
+	local -a branches
+	branches=('.:current git branch')
+	branches+=(${(f)"$(git for-each-ref --format='%(refname:short)' refs/heads 2>/dev/null)"})
+	_describe -t branches branch branches "$@"
+}
+
+local curcontext="$curcontext" state line
+local -a commands=(
+	'new:create a devbox and attach to it'
+	'ssh:attach to a devbox, starting it if needed'
+	'restart:stop and start a devbox'
+	'delete:delete devboxes'
+	'copy-creds:copy Copilot credentials to a devbox'
+)
+
+_arguments -C \
+	'(-h --help)'{-h,--help}'[show help]' \
+	'1:command:->command' \
+	'*::arg:->args'
+
+case "$state" in
+command)
+	_describe -t commands 'dev command' commands
+	;;
+args)
+	curcontext="${curcontext%:*:*}:dev-$words[1]:"
+	case "$words[1]" in
+	new)
+		_arguments \
+			'(-b --branch)'{-b,--branch}'[check out (or create) a mint branch]:branch:__dev_branches' \
+			'(-h --help)'{-h,--help}'[show help]' \
+			'1:name (new devbox): '
+		;;
+	ssh)
+		_arguments \
+			'(-h --help)'{-h,--help}'[show help]' \
+			'1:devbox:__dev_all'
+		;;
+	restart)
+		_arguments \
+			'(--tmux)--ssh[SSH in once started]' \
+			'(--ssh)--tmux[attach to tmux once started]' \
+			'(-h --help)'{-h,--help}'[show help]' \
+			'1:devbox:__dev_all'
+		;;
+	delete)
+		_arguments \
+			'(-f --force)'{-f,--force}"[don't ask for confirmation]" \
+			'(-h --help)'{-h,--help}'[show help]' \
+			'*:devbox:__dev_all'
+		;;
+	copy-creds)
+		_arguments '1:devbox:__dev_running'
+		;;
+	esac
+	;;
+esac
