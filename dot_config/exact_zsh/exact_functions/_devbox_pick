@@ -3,7 +3,7 @@
 local status_filter="${1:-}"
 (($#)) && shift
 
-pay remote list --raw |
+_devbox_list |
 	jq -r --arg status "$status_filter" '
 		.[]
 		| select(.type == "remotedevbox" or .type == "remotemydata")

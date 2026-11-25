@@ -1,0 +1,26 @@
+# Usage: _devbox_list [--cached|--clear]
+# Prints `pay remote list --raw` JSON and caches it for tab completion.
+#   --cached  Print the cache instead if it's under 5 minutes old.
+#   --clear   Delete the cache (call after creating, deleting, or starting boxes).
+local cache_file="${XDG_CACHE_HOME:-$HOME/.cache}/devbox/list.json"
+
+case "$1" in
+--clear)
+	rm -f "$cache_file"
+	return 0
+	;;
+--cached)
+	local -a fresh
+	fresh=(${~cache_file}(N.mm-5))
+	if ((${#fresh})); then
+		cat "$cache_file"
+		return 0
+	fi
+	;;
+esac
+
+local list
+list=$(pay remote list --raw) || return 1
+mkdir -p "${cache_file:h}"
+print -r -- "$list" >|"$cache_file"
+print -r -- "$list"

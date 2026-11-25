@@ -9,6 +9,7 @@ echo "Starting devbox $name..."
 while ((attempt < max_attempts)); do
 	if output=$(pay remote start "$name" 2>&1); then
 		echo "Devbox $name is running."
+		_devbox_list --clear
 		return 0
 	fi
 	attempt=$((attempt + 1))

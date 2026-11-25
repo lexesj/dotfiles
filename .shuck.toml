@@ -4,3 +4,4 @@
 "dot_config/exact_bash/dot_bashrc" = "bash"
 "dot_config/exact_zsh/dot_zshrc" = "zsh"
 "dot_config/exact_zsh/exact_functions/*" = "zsh"
+"dot_config/exact_zsh/completions/*" = "zsh"

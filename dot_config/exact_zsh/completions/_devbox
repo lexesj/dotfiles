@@ -1,0 +1,47 @@
+#compdef devbox_ssh devbox_restart devbox_delete devbox_copy_creds
+
+# Completes devbox names with their status and mint branch.
+# Usage: __devbox_names <status|""> [compadd args...]
+__devbox_names() {
+	local status_filter="$1"
+	shift
+
+	local -a boxes
+	boxes=(${(f)"$(
+		_devbox_list --cached 2>/dev/null |
+			jq -r --arg status "$status_filter" '
+				.[]
+				| select(.type == "remotedevbox" or .type == "remotemydata")
+				| select($status == "" or .status == $status)
+				| "\(.name):\(.status)  \((.current_working_copies // []) | map(select(.repo == "mint")) | .[0].branch // "-")"'
+	)"})
+	_describe -t devboxes devbox boxes "$@"
+}
+
+# _arguments calls actions with compadd args (e.g. -M matchers) inserted before
+# any of our own, so each status filter gets its own action function.
+__devbox_all() { __devbox_names "" "$@"; }
+__devbox_running() { __devbox_names running "$@"; }
+
+case "$service" in
+devbox_restart)
+	_arguments \
+		'(--tmux)--ssh[SSH in once started]' \
+		'(--ssh)--tmux[attach to tmux once started]' \
+		'(-h --help)'{-h,--help}'[show help]' \
+		'1:devbox:__devbox_all'
+	;;
+devbox_delete)
+	_arguments \
+		'(-h --help)'{-h,--help}'[show help]' \
+		'*:devbox:__devbox_all'
+	;;
+devbox_copy_creds)
+	_arguments '1:devbox:__devbox_running'
+	;;
+*)
+	_arguments \
+		'(-h --help)'{-h,--help}'[show help]' \
+		'1:devbox:__devbox_all'
+	;;
+esac

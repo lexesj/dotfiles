@@ -55,6 +55,7 @@ cmd+=(--skip-confirm "$name")
 
 echo "${cmd[@]}"
 "${cmd[@]}" || return 1
+_devbox_list --clear
 
 devbox_copy_creds "$name"
 pay remote ssh "$name" --tmux
