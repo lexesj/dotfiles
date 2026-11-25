@@ -7,9 +7,26 @@ if [[ -z "$name" ]]; then
 	return 1
 fi
 
+local auth_db=~/.config/github-copilot/auth.db
+if [[ ! -f "$auth_db" ]]; then
+	echo "No copilot credentials found at $auth_db"
+	return 1
+fi
+
+# auth.db is a live WAL-mode SQLite database, so copying its files directly can
+# capture an inconsistent state. Take a consistent single-file snapshot instead.
+local tmp_dir
+tmp_dir=$(mktemp -d) || return 1
+sqlite3 "$auth_db" ".backup '$tmp_dir/auth.db'" || {
+	rm -rf "$tmp_dir"
+	return 1
+}
+
 echo "Copying copilot credentials to $name..."
-pay remote ssh "$name" -- "mkdir -p ~/.config/github-copilot"
-for file in ~/.config/github-copilot/auth.*; do
-	[[ -f "$file" ]] || continue
-	pay remote copy "$name" "$file" "remote:~/.config/github-copilot/$(basename "$file")"
-done
+# Remove stale WAL files so SQLite doesn't replay them over the new snapshot.
+pay remote ssh "$name" -- "mkdir -p ~/.config/github-copilot && rm -f ~/.config/github-copilot/auth.db-wal ~/.config/github-copilot/auth.db-shm" &&
+	pay remote copy "$name" "$tmp_dir/auth.db" "remote:~/.config/github-copilot/auth.db"
+local exit_code=$?
+
+rm -rf "$tmp_dir"
+return $exit_code
