@@ -1,4 +1,4 @@
-#compdef devbox_ssh devbox_restart devbox_delete devbox_copy_creds
+#compdef devbox_new devbox_ssh devbox_restart devbox_delete devbox_copy_creds
 # vim: set ft=zsh :
 
 # Completes devbox names with their status and mint branch.
@@ -24,7 +24,21 @@ __devbox_names() {
 __devbox_all() { __devbox_names "" "$@"; }
 __devbox_running() { __devbox_names running "$@"; }
 
+# Completes "." (the current branch) plus local branches of the current repo.
+__devbox_branches() {
+	local -a branches
+	branches=('.:current git branch')
+	branches+=(${(f)"$(git for-each-ref --format='%(refname:short)' refs/heads 2>/dev/null)"})
+	_describe -t branches branch branches "$@"
+}
+
 case "$service" in
+devbox_new)
+	_arguments \
+		'(-b --branch)'{-b,--branch}'[check out (or create) a mint branch]:branch:__devbox_branches' \
+		'(-h --help)'{-h,--help}'[show help]' \
+		'1:name (new devbox): '
+	;;
 devbox_restart)
 	_arguments \
 		'(--tmux)--ssh[SSH in once started]' \
