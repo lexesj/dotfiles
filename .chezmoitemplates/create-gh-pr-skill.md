@@ -9,10 +9,10 @@ Use the current Mint branch and its PR template to prepare a draft pull request.
 
 ## Required behavior
 
-- Gather local git context before drafting. Run git as `git -C "$MINT_ROOT" ...` with paths relative to the Mint root.
+- Gather local git context before drafting. Run every git command below as `git -C "$MINT_ROOT" ...` with paths relative to the Mint root.
 - Use available Toolshed/MCP tools for Jira, org user info, and past PR context when useful. Do not invent tickets, teams, or past PR references.
-- If the user asks to generate or draft a description, present the title and body. If the user asks to create a PR, create the draft PR after preparing its title and body; do not require a second approval for the same request.
-- Keep every section of the PR description brief and high level. Reviewers can read the diff, so describe the change in plain language rather than technical detail: do not name files, functions, classes, or flags, do not walk through implementation steps, and do not use bullet lists in Summary or Test plan.
+- If the user asks to generate or draft a description, present the title and body and stop. If the user asks to create a PR, create the draft PR after preparing its title and body; do not require a second approval for the same request.
+- Keep every section of the PR description brief and high level. Reviewers can read the diff, so describe behavior and outcome in plain language: do not name files, functions, classes, or flags, do not walk through implementation steps, and do not use bullet lists in Summary or Test plan.
 - Do not add an LLM disclaimer.
 
 ## Steps
@@ -21,9 +21,9 @@ Use the current Mint branch and its PR template to prepare a draft pull request.
 
 Resolve the Mint root with `MINT_ROOT="$(dirname "$(mint-path-resolver)")"` when the resolver is available. Otherwise resolve the root with `git -C "$PWD" rev-parse --show-toplevel`. On a devbox the root is `/pay/src`; on a laptop it can be elsewhere.
 
-1. Read the current branch and working tree with `git -C "$MINT_ROOT" branch --show-current` and `git -C "$MINT_ROOT" status --short`.
+1. Read the current branch and working tree with `git branch --show-current` and `git status --short`.
 2. For an ordinary Mint PR, use `master` as the base. For a stacked PR, inspect `pay stack show --json` and use the branch directly below the current branch as the base so the branches can be reviewed separately. If stack information is unavailable and the intended parent is unclear, resolve that uncertainty before creating the PR. Never use a `green-*` branch as the base.
-3. Inspect `git -C "$MINT_ROOT" log <base>..HEAD --oneline`, `git -C "$MINT_ROOT" diff <base>...HEAD --stat`, and the full `git -C "$MINT_ROOT" diff <base>...HEAD`. Also inspect staged, unstaged, and untracked changes. Distinguish uncommitted changes from the commits that a pushed PR will contain.
+3. Inspect `git log <base>..HEAD --oneline`, `git diff <base>...HEAD --stat`, and the full `git diff <base>...HEAD`. Also inspect staged, unstaged, and untracked changes. Distinguish uncommitted changes from the commits that a pushed PR will contain.
 4. Confirm the changed file list before looking up ownership or drafting the body.
 
 ### 2. Identify relevant Jira tickets
@@ -49,20 +49,26 @@ Put the actual codeowner group names in the template's `cc` line as `@stripe-int
 Use `$MINT_ROOT/.github/PULL_REQUEST_TEMPLATE.md` as the scaffold. Read its HTML comments as instructions for adjacent blanks and preserve them in the body. Fill the sections with concrete details supported by the branch and user context:
 
 - Title format: `[Project/Feature Name] Short description`. Keep it concise and descriptive.
-- Summary: a short paragraph on what changed and what it affects, describing behavior and outcome rather than implementation.
-- Motivation: one or two sentences on why the change is needed, linking relevant documents or other context. Under the same Motivation heading, insert a blank line after the paragraph and add the Jira references so they can be parsed correctly. Put tickets the PR closes on one line as `Closes [KEY-123](https://jira.corp.stripe.com/browse/KEY-123), [KEY-456](https://jira.corp.stripe.com/browse/KEY-456).` and any other related tickets on their own line as `Relates to [KEY-789](https://jira.corp.stripe.com/browse/KEY-789), [KEY-012](https://jira.corp.stripe.com/browse/KEY-012).`, comma-separated and ending with a full stop. Do not add a separate heading for Jira references.
-- Test plan: reconstruct validation from the diff and available test results even if this session did not make the changes. Keep it to a single short paragraph: retain the template checkboxes, then write one paragraph (at most 2-3 sentences) naming the relevant tests and edge cases, plus any essential manual check. Do not restate routine CI status in the PR body. Tick a box when relevant assertions and a passing applicable test job support its claim; individual test case logs are not required. Do not claim an unverified test run. Leave a box unchecked only for a specific coverage or execution gap, and briefly name that gap. Missing prior agent context alone is not a reason to leave boxes unchecked or remove them. Remove the boxes only when the changes genuinely cannot be tested, as the template instructs, and explain why. Include a screenshot or video for visual changes.
+- Summary: a short paragraph on what changed and what it affects.
+- Motivation: one or two sentences on why the change is needed, linking relevant documents or other context. Follow it, under the same heading, with the Jira references in exactly this shape so they parse (omit a line with no tickets):
+
+  ```markdown
+  <motivation paragraph>
+
+  Closes [KEY-123](https://jira.corp.stripe.com/browse/KEY-123), [KEY-456](https://jira.corp.stripe.com/browse/KEY-456).
+  Relates to [KEY-789](https://jira.corp.stripe.com/browse/KEY-789).
+  ```
+
+- Test plan: reconstruct validation from the diff and available test results, even if this session did not make the changes. Keep the template checkboxes, then write at most 2-3 sentences naming the relevant tests and edge cases plus any essential manual check; do not restate routine CI status. Tick a box when relevant assertions and a passing test job support it (individual test logs are not required), and never claim an unverified run. Leave a box unchecked only for a specific gap, and name it. Remove the boxes only when the change genuinely cannot be tested, and say why.
 - Rollout/revert plan: describe manual steps, how to recognize success, monitoring, and any rollback steps or limits. Keep `Safe to revert.` only when the evidence supports it.
 - Reviewers: fill in the `cc @stripe-internal/` line where the template places it. Do not add an `r?` line.
 - Use relevant past PRs as a reference for tone and level of detail when available.
 
 ### 5. Create the PR when requested
 
-If the user asked for a description or draft text, show the full title and body for review and stop. If they asked to create a PR, proceed with the prepared title and body:
-
 1. Check `gh api user`. If access fails on a devbox (`MINT_ROOT=/pay/src`), run `gh proxy enable` and retry once. If proxy authentication is required, ask the user to authenticate at the URL in the error and resume after they confirm. On a laptop, do not run `gh proxy enable`; refer the user to `https://trailhead.corp.stripe.com/docs/github/users/git-github/gh-cli` if `gh` access fails.
 2. Check whether a PR already exists for the current branch with `gh pr view "<branch>" --repo stripe-internal/mint --json url,baseRefName`. If one exists, report its URL instead of creating another.
-3. Ensure the intended PR commits are on the branch. Push with `git -C "$MINT_ROOT" push -u origin HEAD` when needed. Mint's remote is on `git.corp.stripe.com`.
+3. Ensure the intended PR commits are on the branch. Push with `git push -u origin HEAD` when needed. Mint's remote is on `git.corp.stripe.com`.
 4. Write the body to a temporary file and create the draft PR:
 
    ```bash
