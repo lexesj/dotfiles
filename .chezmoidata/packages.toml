@@ -53,6 +53,7 @@ winget = [
     "Anthropic.ClaudeCode",
     "Bitwarden.Bitwarden",
     "DEVCOM.JetBrainsMonoNerdFont",
+    "Discord.Discord",
     "gerardog.gsudo",
     "Git.Git",
     "GitHub.cli",
