@@ -2,6 +2,11 @@
 	name = {{ .name }}
 	email = {{ .email }}
 [core]
-	autocrlf = false
+	# Keep LF on disk and convert any CRLF to LF on commit, so repos never mix them.
+	autocrlf = input
+{{- if eq .chezmoi.os "windows" }}
+	longpaths = true
+	editor = code --wait
+{{- end }}
 [push]
 	autoSetupRemote = true

@@ -1,0 +1,2 @@
+# Check out LF everywhere, even with core.autocrlf=true on Windows, so scripts run in bash.
+* text=auto eol=lf

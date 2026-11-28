@@ -1,0 +1,58 @@
+{{- /* chezmoi:modify-template */ -}}
+{{- /* Set our keys and keep the state PowerToys writes (version, elevation, new modules). */ -}}
+{{- $s := fromJson (default "{}" .chezmoi.stdin) -}}
+{{- $s = mergeOverwrite $s (fromJson `{
+  "startup": true,
+  "run_elevated": true,
+  "show_tray_icon": true,
+  "theme": "system",
+  "download_updates_automatically": true,
+  "include_prerelease_updates": false,
+  "show_new_updates_toast_notification": true,
+  "show_whats_new_after_updates": true,
+  "enable_experimentation": true,
+  "enable_quick_access": true,
+  "enable_warnings_elevated_apps": true,
+  "enabled": {
+    "AdvancedPaste": true,
+    "AltWindowCycle": false,
+    "AlwaysOnTop": true,
+    "AutoHideCursor": false,
+    "Awake": false,
+    "CmdNotFound": false,
+    "CmdPal": true,
+    "ColorPicker": true,
+    "CropAndLock": true,
+    "CursorWrap": false,
+    "EnvironmentVariables": true,
+    "FancyZones": false,
+    "File Explorer": true,
+    "File Explorer Preview": true,
+    "File Locksmith": true,
+    "FindMyMouse": true,
+    "GrabAndMove": false,
+    "Hosts": true,
+    "Image Resizer": true,
+    "Keyboard Manager": true,
+    "LightSwitch": false,
+    "Measure Tool": true,
+    "MouseButtonLock": false,
+    "MouseHighlighter": false,
+    "MouseJump": false,
+    "MousePointerCrosshairs": false,
+    "MouseWithoutBorders": false,
+    "NewPlus": false,
+    "Peek": true,
+    "PowerDisplay": false,
+    "PowerRename": true,
+    "PowerToys Run": false,
+    "QuickAccent": false,
+    "RegistryPreview": true,
+    "Shortcut Guide": true,
+    "TextExtractor": false,
+    "Workspaces": true,
+    "ZoomIt": false
+  }
+}`) -}}
+{{- /* PowerToys writes this file minified. */ -}}
+{{- toJson $s -}}
