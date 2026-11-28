@@ -60,6 +60,7 @@ winget = [
     "Google.Chrome",
     "jqlang.jq",
     "junegunn.fzf",
+    "Klocman.BulkCrapUninstaller",
     "Microsoft.PowerShell",
     "Microsoft.PowerToys",
     "Microsoft.VisualStudioCode",
