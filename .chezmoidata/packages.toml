@@ -42,3 +42,25 @@ common = ["fd-find", "git-delta", "jq", "ripgrep", "tmux", "unzip", "zoxide"]
 personal = ["build-essential", "gh", "ncdu", "tealdeer", "zsh"]
 devbox = ["gh"]
 server = ["build-essential", "ncdu", "tealdeer", "zsh"]
+
+# Windows machines are always personal, so these are single lists, not per profile.
+[packages]
+# Windows packages (winget install --id). bin/setup.ps1 installs Git, PowerShell
+# and chezmoi first; they're listed here too so they stay installed.
+winget = [
+    "ajeetdsouza.zoxide",
+    "Anthropic.ClaudeCode",
+    "DEVCOM.JetBrainsMonoNerdFont",
+    "gerardog.gsudo",
+    "Git.Git",
+    "GitHub.cli",
+    "jqlang.jq",
+    "junegunn.fzf",
+    "Microsoft.PowerShell",
+    "Microsoft.PowerToys",
+    "Microsoft.WindowsTerminal",
+    "sharkdp.fd",
+    "twpayne.chezmoi",
+]
+# PowerShell modules (Install-Module), used by the PowerShell profile.
+psmodule = ["posh-git", "PSFzf", "PSReadLine"]

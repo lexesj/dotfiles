@@ -1,4 +1,15 @@
-{{- $profile := promptChoiceOnce . "profile" "profile" (list "personal" "work" "devbox" "server") -}}
+{{- /* Windows machines are always personal. */ -}}
+{{- $profile := "personal" -}}
+{{- if ne .chezmoi.os "windows" -}}
+{{-   $profile = promptChoiceOnce . "profile" "profile" (list "personal" "work" "devbox" "server") -}}
+{{- end -}}
 
 [data]
     profile = {{ $profile | quote }}
+{{- if eq .chezmoi.os "windows" }}
+
+# Run .ps1 scripts with PowerShell 7 so modules install for pwsh, not Windows PowerShell.
+[interpreters.ps1]
+    command = "pwsh"
+    args = ["-NoLogo", "-NoProfile", "-ExecutionPolicy", "Bypass"]
+{{- end }}

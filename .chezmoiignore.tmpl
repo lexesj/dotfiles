@@ -51,3 +51,32 @@ CLAUDE.md
 # Only devbox hooks the bash config into ~/.bashrc.
 .bashrc
 {{- end }}
+
+{{- if eq .chezmoi.os "windows" }}
+# Unix-only configs, externals and run_ scripts. `*.sh` only matches top-level
+# names, so .claude/statusline-command.sh is still applied.
+*.sh
+.codex/
+.config/bash/
+.config/ghostty/
+.config/karabiner/
+.config/lazygit/
+.config/mise/
+.config/nvim/
+.config/shell/
+.config/zsh/
+.config/zsh/**
+.local/bin/
+.oh-my-zsh/
+.oh-my-zsh/**
+.ssh/config
+.tmux/
+.tmux/**
+.tmux.conf
+.zshrc
+{{- else }}
+# Windows-only configs and run_ scripts.
+*.ps1
+.config/powershell/
+AppData/
+{{- end }}

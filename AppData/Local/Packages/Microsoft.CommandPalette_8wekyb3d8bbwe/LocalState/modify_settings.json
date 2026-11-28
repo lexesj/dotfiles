@@ -1,0 +1,31 @@
+{{- /* chezmoi:modify-template */ -}}
+{{- /* Set our keys and keep the state Command Palette writes (window position, recents, dock, provider state). */ -}}
+{{- $s := fromJson (default "{}" .chezmoi.stdin) -}}
+{{- $s = mergeOverwrite $s (fromJson `{
+  "Hotkey": { "win": false, "ctrl": false, "alt": true, "shift": false, "code": 32, "key": "" },
+  "CommandHotkeys": [
+    {
+      "CommandId": "com.microsoft.cmdpal.websearch",
+      "Hotkey": { "win": true, "ctrl": true, "alt": true, "shift": true, "code": 83, "key": "" }
+    }
+  ],
+  "Aliases": {
+    "??": { "CommandId": "com.microsoft.cmdpal.websearch", "Alias": "??", "IsDirect": true },
+    ">": { "CommandId": "com.microsoft.cmdpal.run", "Alias": ">", "IsDirect": true },
+    "file ": { "CommandId": "com.microsoft.indexer.fileSearch", "Alias": "file", "IsDirect": false },
+    "<": { "CommandId": "com.microsoft.cmdpal.windowwalker", "Alias": "<", "IsDirect": true },
+    "=": { "CommandId": "com.microsoft.cmdpal.calculator", "Alias": "=", "IsDirect": true },
+    ":": { "CommandId": "com.microsoft.cmdpal.registry", "Alias": ":", "IsDirect": true },
+    ")": { "CommandId": "com.microsoft.cmdpal.timedate", "Alias": ")", "IsDirect": true },
+    "$": { "CommandId": "com.microsoft.cmdpal.windowsSettings", "Alias": "$", "IsDirect": true }
+  },
+  "SummonOn": "ToMouse",
+  "BackspaceGoesBack": false,
+  "HighlightSearchOnActivate": true,
+  "ShowAppDetails": false,
+  "SingleClickActivates": false,
+  "IgnoreShortcutWhenFullscreen": false,
+  "ShowSystemTrayIcon": false,
+  "UseLowLevelGlobalHotkey": false
+}`) -}}
+{{- toPrettyJson $s -}}
