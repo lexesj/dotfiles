@@ -25,7 +25,8 @@
   "ShowAppDetails": false,
   "SingleClickActivates": false,
   "IgnoreShortcutWhenFullscreen": false,
-  "ShowSystemTrayIcon": false,
+  "ShowSystemTrayIcon": true,
+  "DisableAnimations": false,
   "UseLowLevelGlobalHotkey": false
 }`) -}}
 {{- toPrettyJson $s -}}
